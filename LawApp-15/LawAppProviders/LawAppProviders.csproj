@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C50145E6-A244-4F1F-B41F-90D1925B4A00}</ProjectGuid>
+    <ProjectGuid>{E3099EB5-13CB-498A-A7E3-D12F5E9232FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LawAppModel</RootNamespace>
-    <AssemblyName>LawAppModel</AssemblyName>
+    <RootNamespace>LawAppProviders</RootNamespace>
+    <AssemblyName>LawAppProviders</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,50 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.OpenAccess" />
-    <Reference Include="Telerik.OpenAccess.35.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.generated.cs">
-      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
-    </Compile>
-    <Compile Include="EntitiesModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignedWebUser.generated.cs">
-      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
-    </Compile>
-    <Compile Include="UserRole.generated.cs">
-      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
-    </Compile>
-    <Compile Include="WebUser.generated.cs">
-      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
-    </Compile>
+    <Compile Include="ProviderUtils.cs" />
+    <Compile Include="Security\EFMembershipProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <OpenAccessDeploy Include="EntitiesModel.rlinq">
-      <Generator>MetaModelCodeGenerator</Generator>
-      <LastGenOutput>EntitiesModel.cs</LastGenOutput>
-    </OpenAccessDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="EntitiesModel.rlinq.diagram">
-      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
-    </None>
+    <ProjectReference Include="..\LawApp\LawAppModel\LawAppModel.csproj">
+      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
+      <Name>LawAppModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -18,12 +18,13 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using LawAppModel;
 
 namespace LawAppModel	
 {
 	public partial class LawApp : OpenAccessContext, ILawAppUnitOfWork
 	{
-		private static string connectionStringName = @"";
+		private static string connectionStringName = @"LawApp15";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
@@ -49,6 +50,38 @@ namespace LawAppModel
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
+		public IQueryable<SignedWebUser> SignedWebUsers 
+		{
+			get
+			{
+				return this.GetAll<SignedWebUser>();
+			}
+		}
+		
+		public IQueryable<WebUser> WebUsers 
+		{
+			get
+			{
+				return this.GetAll<WebUser>();
+			}
+		}
+		
+		public IQueryable<Application> Applications 
+		{
+			get
+			{
+				return this.GetAll<Application>();
+			}
+		}
+		
+		public IQueryable<UserRole> UserRoles 
+		{
+			get
+			{
+				return this.GetAll<UserRole>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -70,6 +103,22 @@ namespace LawAppModel
 	
 	public interface ILawAppUnitOfWork : IUnitOfWork
 	{
+		IQueryable<SignedWebUser> SignedWebUsers
+		{
+			get;
+		}
+		IQueryable<WebUser> WebUsers
+		{
+			get;
+		}
+		IQueryable<Application> Applications
+		{
+			get;
+		}
+		IQueryable<UserRole> UserRoles
+		{
+			get;
+		}
 	}
 }
 #pragma warning restore 1591
