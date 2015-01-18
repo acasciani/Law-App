@@ -2,12 +2,15 @@
 <DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="LawApp" namespace="LawAppModel" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
   <orm:orm name="LawApp" backend="mssql" xmlns:orm="http://tempuri.org/ORM">
     <orm:namespace name="LawAppModel" default="true">
-      <orm:class name="Application" use-default-mapping="true" uniqueId="939c8105-a015-4119-a811-38fa17841584">
+      <orm:class name="Application" behavior="readonly" use-default-mapping="true" uniqueId="939c8105-a015-4119-a811-38fa17841584">
         <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ApplicationId" />
+          </orm:key-generator>
           <orm:single-field field-name="_applicationId" />
         </orm:identity>
         <orm:field name="_applicationId" property="ApplicationId" uniqueId="86d3f471-bcc8-489c-9725-77bda19c3192" type="System.Int32">
-          <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+          <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_applicationName" property="ApplicationName" uniqueId="7afbcfd5-d08d-4f89-9e1a-a4a472dd1427" type="System.String">
           <orm:column name="ApplicationName" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
@@ -19,13 +22,16 @@
           <orm:collection element-class="LawAppModel.UserRole" inverse-field="_application1" order-by="" uniqueId="a25ae353-ec24-40a7-8c35-9a6ab6d80db2" />
         </orm:field>
       </orm:class>
-      <orm:class name="UserRole" uniqueId="2b03fb7a-5b34-4c30-bd62-f875f4c84cc5">
+      <orm:class name="UserRole" behavior="readwrite" uniqueId="2b03fb7a-5b34-4c30-bd62-f875f4c84cc5">
         <orm:table name="UserRole" />
         <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="UserRoleId" />
+          </orm:key-generator>
           <orm:single-field field-name="_userRoleId" />
         </orm:identity>
         <orm:field name="_userRoleId" property="UserRoleId" uniqueId="3bf3c896-6299-4ee7-8791-122b94f7130e" type="System.Int32">
-          <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+          <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_roleName" property="RoleName" uniqueId="a8209983-0925-45f2-bb4d-75b17321a8b2" type="System.String">
           <orm:column name="RoleName" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
@@ -48,12 +54,15 @@
           </orm:columnMapping>
         </orm:index>
       </orm:class>
-      <orm:class name="SignedWebUser" use-default-mapping="true" uniqueId="83e7d882-26db-4719-8d94-ff3c34f7eaa2">
+      <orm:class name="SignedWebUser" behavior="readwrite" use-default-mapping="true" uniqueId="83e7d882-26db-4719-8d94-ff3c34f7eaa2">
         <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="WebUserId" />
+          </orm:key-generator>
           <orm:single-field field-name="_webUserId" />
         </orm:identity>
         <orm:field name="_webUserId" property="WebUserId" uniqueId="02676b3f-a195-43de-a9c5-fc87fe7aa00c" type="System.Int32">
-          <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+          <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_email" property="Email" uniqueId="4fa9bc0c-9ed7-456b-ab8f-8c976b1a36b7" type="System.String">
           <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
@@ -79,7 +88,7 @@
         <orm:column name="Description" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
       </orm:table>
       <orm:table name="UserRole">
-        <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         <orm:column name="RoleName" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
         <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
         <orm:index name="idx_UserRole_ApplicationId">
@@ -151,7 +160,7 @@
     </BackendConfigurationSettings>
   </ModelSettings>
   <Types>
-    <DomainClass Id="939c8105-a015-4119-a811-38fa17841584" name="Application" namespace="LawAppModel" showPropertiesCompartment="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="939c8105-a015-4119-a811-38fa17841584" name="Application" namespace="LawAppModel" showPropertiesCompartment="true" Kind="ReadOnly" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ApplicationId">
       <Property Id="86d3f471-bcc8-489c-9725-77bda19c3192" name="ApplicationId" type="System.Int32" label="ApplicationId : System.Int32" identity="true" fieldName="_applicationId" />
       <Property Id="7afbcfd5-d08d-4f89-9e1a-a4a472dd1427" name="ApplicationName" label="ApplicationName : String" fieldName="_applicationName" />
       <Property Id="4e938152-0e2b-4c4e-86a7-9f0d3e590fe5" name="Description" label="Description : String" fieldName="_description" />
@@ -161,7 +170,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="2b03fb7a-5b34-4c30-bd62-f875f4c84cc5" name="UserRole" namespace="LawAppModel" showPropertiesCompartment="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="2b03fb7a-5b34-4c30-bd62-f875f4c84cc5" name="UserRole" namespace="LawAppModel" showPropertiesCompartment="true" Kind="ReadWrite" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="UserRoleId">
       <Property Id="3bf3c896-6299-4ee7-8791-122b94f7130e" name="UserRoleId" type="Int32" label="UserRoleId : Int32" identity="true" fieldName="_userRoleId" />
       <Property Id="a8209983-0925-45f2-bb4d-75b17321a8b2" name="RoleName" label="RoleName : String" fieldName="_roleName" />
       <Property Id="235bb89b-7a0e-4565-9d84-f36a05bec03b" name="ApplicationId" type="Int32" label="ApplicationId : Int32" fieldName="_applicationId" />
@@ -202,7 +211,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="83e7d882-26db-4719-8d94-ff3c34f7eaa2" name="SignedWebUser" namespace="LawAppModel" showPropertiesCompartment="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="83e7d882-26db-4719-8d94-ff3c34f7eaa2" name="SignedWebUser" namespace="LawAppModel" showPropertiesCompartment="true" Kind="ReadWrite" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="WebUserId">
       <Property Id="02676b3f-a195-43de-a9c5-fc87fe7aa00c" name="WebUserId" type="Int32" label="WebUserId : Int32" identity="true" fieldName="_webUserId" />
       <Property Id="4fa9bc0c-9ed7-456b-ab8f-8c976b1a36b7" name="Email" label="Email : String" fieldName="_email" />
       <Property Id="dfea40de-c79c-4dbb-94a1-4094d1cc603f" name="UserPassword" label="UserPassword : String" fieldName="_userPassword" />
