@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawApp {
+namespace LawAppWeb {
     
     
     public partial class Site_Mobile {

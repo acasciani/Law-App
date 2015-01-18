@@ -8,7 +8,7 @@ using System.Web.Http;
 using System.Linq;
 using Telerik.OpenAccess;
 
-namespace LawApp
+namespace LawAppWeb
 {
     public abstract partial class OpenAccessBaseApiController<TEntity, TContext> : ApiController
         where TContext : OpenAccessContext, new()

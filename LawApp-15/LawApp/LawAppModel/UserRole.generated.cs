@@ -77,7 +77,7 @@ namespace LawAppModel
 		}
 		
 		private IList<SignedWebUser> _signedWebUsers = new List<SignedWebUser>();
-		public virtual IList<SignedWebUser> SignedWebUser
+		public virtual IList<SignedWebUser> SignedWebUsers
 		{
 			get
 			{

@@ -4,7 +4,7 @@ using System.Linq;
 
 using Microsoft.AspNet.Membership.OpenAuth;
 
-namespace LawApp.Account
+namespace LawAppWeb.Account
 {
     public partial class Manage : System.Web.UI.Page
     {

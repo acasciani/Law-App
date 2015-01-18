@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Http;
 using LawAppModel;
 
-namespace LawApp
+namespace LawAppWeb
 {
     /// <summary>
     /// Web API Controller for UserRoles entity defined in LawAppModel.LawApp data model

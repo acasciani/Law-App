@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using Telerik.OpenAccess;
 using Telerik.OpenAccess.FetchOptimization;
 
-namespace LawApp
+namespace LawAppWeb
 {
     public interface IOpenAccessBaseRepository<TEntity, TContext>
         where TContext : OpenAccessContext, new()

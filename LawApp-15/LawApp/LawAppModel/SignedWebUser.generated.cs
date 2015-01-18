@@ -22,8 +22,21 @@ using LawAppModel;
 
 namespace LawAppModel	
 {
-	public partial class SignedWebUser : WebUser
+	public partial class SignedWebUser
 	{
+		private int _webUserId;
+		public virtual int WebUserId
+		{
+			get
+			{
+				return this._webUserId;
+			}
+			set
+			{
+				this._webUserId = value;
+			}
+		}
+		
 		private string _email;
 		public virtual string Email
 		{
@@ -50,12 +63,38 @@ namespace LawAppModel
 			}
 		}
 		
-		private IList<UserRole> _userRoles1 = new List<UserRole>();
+		private DateTime _creationDate;
+		public virtual DateTime CreationDate
+		{
+			get
+			{
+				return this._creationDate;
+			}
+			set
+			{
+				this._creationDate = value;
+			}
+		}
+		
+		private DateTime? _modificationDate;
+		public virtual DateTime? ModificationDate
+		{
+			get
+			{
+				return this._modificationDate;
+			}
+			set
+			{
+				this._modificationDate = value;
+			}
+		}
+		
+		private IList<UserRole> _userRoles = new List<UserRole>();
 		public virtual IList<UserRole> UserRoles
 		{
 			get
 			{
-				return this._userRoles1;
+				return this._userRoles;
 			}
 		}
 		

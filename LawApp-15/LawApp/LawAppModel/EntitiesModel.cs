@@ -50,22 +50,6 @@ namespace LawAppModel
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<SignedWebUser> SignedWebUsers 
-		{
-			get
-			{
-				return this.GetAll<SignedWebUser>();
-			}
-		}
-		
-		public IQueryable<WebUser> WebUsers 
-		{
-			get
-			{
-				return this.GetAll<WebUser>();
-			}
-		}
-		
 		public IQueryable<Application> Applications 
 		{
 			get
@@ -79,6 +63,14 @@ namespace LawAppModel
 			get
 			{
 				return this.GetAll<UserRole>();
+			}
+		}
+		
+		public IQueryable<SignedWebUser> SignedWebUsers 
+		{
+			get
+			{
+				return this.GetAll<SignedWebUser>();
 			}
 		}
 		
@@ -103,19 +95,15 @@ namespace LawAppModel
 	
 	public interface ILawAppUnitOfWork : IUnitOfWork
 	{
-		IQueryable<SignedWebUser> SignedWebUsers
-		{
-			get;
-		}
-		IQueryable<WebUser> WebUsers
-		{
-			get;
-		}
 		IQueryable<Application> Applications
 		{
 			get;
 		}
 		IQueryable<UserRole> UserRoles
+		{
+			get;
+		}
+		IQueryable<SignedWebUser> SignedWebUsers
 		{
 			get;
 		}

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Routing;
 using System.Web.Security;
-using LawApp;
+using LawAppWeb;
 
-namespace LawApp
+namespace LawAppWeb
 {
     public partial class Global : HttpApplication
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawApp.Account
+namespace LawAppWeb.Account
 {
 
 
@@ -30,6 +30,6 @@ namespace LawApp.Account
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LawApp.Account.OpenAuthProviders OpenAuthLogin;
+        protected global::LawAppWeb.Account.OpenAuthProviders OpenAuthLogin;
     }
 }

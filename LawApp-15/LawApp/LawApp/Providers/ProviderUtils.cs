@@ -4,18 +4,12 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Linq.Expressions;
 using LawAppModel;
+using LawAppWeb;
 
 namespace LawAppProviders
 {
     internal static class ProviderUtils
     {
-        /// <summary>
-        /// A helper function to retrieve config values from the configuration file.
-        /// </summary>
-        /// <param name="config">Provider configuration.</param>
-        /// <param name="configKey">Key of the configuration that should be read.</param>
-        /// <param name="defaultValue">Default value being used if the config does not exist.</param>
-        /// <returns>Configuration value or default value if not exisiting.</returns>
         public static object GetConfigValue(NameValueCollection config, string configKey, object defaultValue)
         {
             object configValue;
@@ -33,21 +27,16 @@ namespace LawAppProviders
             return configValue;
         }
 
-        /// <summary>
-        /// Ensure that application exists. If not -> create new application.
-        /// </summary>
-        /// <param name="applicationName">Application name.</param>
-        /// <param name="context">Entity Framework data context.</param>
-        /// <returns>The application object</returns>
-        public static Application EnsureApplication(string applicationName, LawApp context)
+        public static Application EnsureApplication(string applicationName, LawAppModel.LawApp context)
         {
             Application application = context.Applications.Where(a => a.ApplicationName == applicationName).FirstOrDefault();
             if (application == null)
             {
                 // Create application
-                application = Application.CreateApplication(Guid.NewGuid(), applicationName);
-                context.AddToApplication(application);
-                context.SaveChanges();
+                using (ApplicationsController ac = new ApplicationsController())
+                {
+                    application = ac.CreateApplication(applicationName);
+                }
             }
 
             return application;

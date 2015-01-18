@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawApp.Account
+namespace LawAppWeb.Account
 {
 
 

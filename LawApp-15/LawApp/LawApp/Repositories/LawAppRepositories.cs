@@ -8,7 +8,7 @@ using System.Web.Http;
 using Telerik.OpenAccess;
 using LawAppModel;
 
-namespace LawApp
+namespace LawAppWeb
 {
 	public partial class ApplicationRepository : OpenAccessBaseRepository<LawAppModel.Application, LawAppModel.LawApp>
     {
@@ -21,11 +21,6 @@ namespace LawApp
     }
 
 	public partial class UserRoleRepository : OpenAccessBaseRepository<LawAppModel.UserRole, LawAppModel.LawApp>
-    {
-	
-    }
-
-	public partial class WebUserRepository : OpenAccessBaseRepository<LawAppModel.WebUser, LawAppModel.LawApp>
     {
 	
     }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace LawApp.Account
+namespace LawAppWeb.Account
 {
     public partial class Login : Page
     {

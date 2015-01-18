@@ -6,7 +6,7 @@ using System.Web.Http;
 using System.Web.Routing;
 using Newtonsoft.Json;
 
-namespace LawApp
+namespace LawAppWeb
 {
     public partial class Global
     {
