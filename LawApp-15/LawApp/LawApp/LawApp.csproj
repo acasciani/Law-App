@@ -209,6 +209,9 @@
     <Content Include="OpenAccessTemplates\WebApiBaseRepository.tt">
       <LastGenOutput>WebApiBaseRepository.cs</LastGenOutput>
     </Content>
+    <Content Include="OpenAccessTemplates\Includes\GeneralDsw.ttinclude" />
+    <Content Include="OpenAccessTemplates\Includes\GeneralRest.ttinclude" />
+    <Content Include="OpenAccessTemplates\Includes\GeneralServiceStack.ttinclude" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
