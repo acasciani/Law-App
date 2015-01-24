@@ -13,8 +13,7 @@ namespace LawAppWeb
     {
         public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter)
         {
-            var allEntities = ((LawAppWeb.OpenAccessBaseRepository<TEntity, TContext>)repository).GetWhere(filter);
-
+            var allEntities = repository.GetWhere(filter);
             return allEntities;
         }
 

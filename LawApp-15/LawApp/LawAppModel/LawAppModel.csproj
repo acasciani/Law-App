@@ -73,9 +73,6 @@
     <None Include="EntitiesModel.rlinq.diagram">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </None>
-    <Content Include="OpenAccessTemplates\WebApiBaseRepository.tt">
-      <LastGenOutput>WebApiBaseRepository.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LawApp15%282015-01-24 16-51-52%29.rlinq.sql" />

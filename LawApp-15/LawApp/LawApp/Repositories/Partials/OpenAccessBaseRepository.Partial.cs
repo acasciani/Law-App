@@ -7,6 +7,11 @@ using Telerik.OpenAccess.FetchOptimization;
 
 namespace LawAppWeb
 {
+    public partial interface IOpenAccessBaseRepository<TEntity, TContext> where TContext : OpenAccessContext, new()
+    {
+        IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter);
+    }
+
     public abstract partial class OpenAccessBaseRepository<TEntity, TContext> : IOpenAccessBaseRepository<TEntity, TContext> where TContext : OpenAccessContext, new()
     {
         public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter)
