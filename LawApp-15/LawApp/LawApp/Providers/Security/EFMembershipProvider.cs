@@ -183,9 +183,6 @@ namespace LawAppProviders.Security
                     Email = email,
                     CreationDate = creationDate,
                     UserPassword = EncodePassword(password)
-                    // need to add roles
-
-
                 };
 
                 try

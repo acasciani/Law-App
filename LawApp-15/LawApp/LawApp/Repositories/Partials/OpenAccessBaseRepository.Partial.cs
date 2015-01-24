@@ -10,6 +10,7 @@ namespace LawAppWeb
     public partial interface IOpenAccessBaseRepository<TEntity, TContext> where TContext : OpenAccessContext, new()
     {
         IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter);
+        IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, params Expression<Func<object, IEnumerable<object>>>[] loadWith);
     }
 
     public abstract partial class OpenAccessBaseRepository<TEntity, TContext> : IOpenAccessBaseRepository<TEntity, TContext> where TContext : OpenAccessContext, new()
@@ -18,11 +19,22 @@ namespace LawAppWeb
         {
             if (filter == null) throw new ArgumentNullException("filter");
 
-            List<TEntity> allEntities = dataContext.GetAll<TEntity>().Where<TEntity>(filter).ToList<TEntity>();
-
-            List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(allEntities, fetchStrategy);
-
+            List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(GetAllEntities(filter), fetchStrategy);
             return detachedEntities.AsQueryable();
+        }
+
+        public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, params Expression<Func<object, IEnumerable<object>>>[] loadWith)
+        {
+            FetchStrategy fetch = new FetchStrategy();
+            fetch.LoadWith(loadWith);
+
+            List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(GetAllEntities(filter), fetchStrategy);
+            return detachedEntities.AsQueryable();
+        }
+
+        private List<TEntity> GetAllEntities(Expression<Func<TEntity, bool>> filter)
+        {
+            return dataContext.GetAll<TEntity>().Where<TEntity>(filter).ToList<TEntity>();
         }
     }
 }

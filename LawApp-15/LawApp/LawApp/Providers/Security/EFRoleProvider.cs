@@ -55,18 +55,21 @@ namespace LawAppProviders.Security
             if (roles == null || roles.Count() == 0) return;
 
             // get all users as objects
-            using (SignedWebUsersController swuc = new SignedWebUsersController())
+            using (UserRolesController urc = new UserRolesController())
             {
-                IEnumerable<SignedWebUser> users = swuc.GetWhere(u => emails.Contains(u.Email));
-
-                foreach (SignedWebUser user in users)
+                using (SignedWebUsersController swuc = new SignedWebUsersController())
                 {
+                    IEnumerable<SignedWebUser> users = swuc.GetWhere(u => emails.Contains(u.Email));
+
                     foreach (UserRole role in roles)
                     {
-                        if (!user.UserRoles.Contains(role))
+                        foreach (SignedWebUser user in users)
                         {
-                            user.UserRoles.Add(role);
-                            swuc.Update(user);
+                            if (!role.SignedWebUsers.Contains(user))
+                            {
+                                role.SignedWebUsers.Add(user);
+                                urc.Update(role);                                
+                            }
                         }
                     }
                 }
@@ -146,22 +149,25 @@ namespace LawAppProviders.Security
             IEnumerable<UserRole> roles = GetAllUserRoles().Where(r => roleNames.Contains(r.RoleName));
 
             if (roles == null) return;
-            
-            IEnumerable<SignedWebUser> users;
-            using (SignedWebUsersController swuc = new SignedWebUsersController())
+
+            using (UserRolesController urc = new UserRolesController())
             {
-                users = swuc.GetWhere(u => emails.Contains(u.Email));
-
-                if (users == null) return;
-
-                foreach (SignedWebUser user in users)
+                using (SignedWebUsersController swuc = new SignedWebUsersController())
                 {
-                    foreach (UserRole role in roles) {
-                        if (user.UserRoles.Contains(role))
+                    IEnumerable<SignedWebUser> users = swuc.GetWhere(u => emails.Contains(u.Email));
+
+                    if (users == null) return;
+
+                    foreach (UserRole role in roles)
+                    {
+                        foreach (SignedWebUser user in users)
                         {
-                            user.UserRoles.Remove(role);
-                            swuc.Update(user);
-                        }                    
+                            if (role.SignedWebUsers.Contains(user))
+                            {
+                                role.SignedWebUsers.Remove(user);
+                                urc.Update(role);
+                            }
+                        }
                     }
                 }
             }
@@ -204,8 +210,9 @@ namespace LawAppProviders.Security
             IEnumerable<UserRole> roles;
             using (UserRolesController urc = new UserRolesController())
             {
-                Func<UserRole, bool> func = MatchApplication();
-                roles = urc.GetWhere(r => func(r));
+                Expression<Func<object, IEnumerable<object>>> usersAssociation = r => ((UserRole)r).SignedWebUsers;
+
+                roles = urc.GetWhere(MatchApplicationGetWhere(), usersAssociation);
                 
                 return roles;
             }
@@ -213,7 +220,12 @@ namespace LawAppProviders.Security
 
         private Func<UserRole, bool> MatchApplication()
         {
-            return role => role.Application == Application;
+            return role => role.ApplicationId == Application.ApplicationId;
+        }
+
+        private Expression<Func<UserRole, bool>> MatchApplicationGetWhere()
+        {
+            return role => role.ApplicationId == Application.ApplicationId;
         }
         #endregion
     }

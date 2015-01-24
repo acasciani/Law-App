@@ -6,6 +6,7 @@ using System.Linq;
 using Telerik.OpenAccess;
 using System.Linq.Expressions;
 using System;
+using System.Collections.Generic;
 
 namespace LawAppWeb
 {
@@ -14,6 +15,12 @@ namespace LawAppWeb
         public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter)
         {
             var allEntities = repository.GetWhere(filter);
+            return allEntities;
+        }
+
+        public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, params Expression<Func<object, IEnumerable<object>>>[] loadWith)
+        {
+            var allEntities = repository.GetWhere(filter, loadWith);
             return allEntities;
         }
 

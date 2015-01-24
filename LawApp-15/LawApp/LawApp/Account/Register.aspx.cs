@@ -20,6 +20,12 @@ namespace LawAppWeb.Account
 
         protected void RegisterUser_CreatedUser(object sender, EventArgs e)
         {
+            // add them to initial roles... for now hard code, should have a UserType table that maps types to certain roles
+            if (Roles.RoleExists("LEVEL0"))
+            {
+                Roles.AddUserToRole(RegisterUser.Email, "LEVEL0");
+            }
+
             FormsAuthentication.SetAuthCookie(RegisterUser.Email, createPersistentCookie: false);
 
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
