@@ -183,20 +183,23 @@ namespace LawAppProviders.Security
                     Email = email,
                     CreationDate = creationDate,
                     UserPassword = EncodePassword(password)
+                    // need to add roles
+
+
                 };
 
                 try
                 {
-                    HttpResponseMessage response;
+                    SignedWebUser response;
 
                     using (SignedWebUsersController wuc = new SignedWebUsersController())
                     {
-                        response = wuc.Post(newUser);
+                        response = wuc.AddNew(newUser);
                     }
 
-                    status = (response.IsSuccessStatusCode) ? MembershipCreateStatus.Success : MembershipCreateStatus.ProviderError;
+                    status = (response != null) ? MembershipCreateStatus.Success : MembershipCreateStatus.ProviderError;
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     status = MembershipCreateStatus.UserRejected;
                 }
@@ -337,7 +340,8 @@ namespace LawAppProviders.Security
 
         public override bool ValidateUser(string email, string password)
         {
-            throw new NotImplementedException("Validate user not implemented");
+            SignedWebUser user = GetUser(u => (u.Email == email && u.UserPassword == EncodePassword(password)));
+            return user != null;
         }
 
         public override bool UnlockUser(string username)
@@ -530,8 +534,9 @@ namespace LawAppProviders.Security
             if(app == null){
                 throw new ProviderException("Unable to find the current application.");
             }
-            //todo fix this, for now just one app
-            return user => user.WebUserId == -999;
+
+            // The user should have at least one role for this app. If they don't they don't match the application spec.
+            return user => (user.UserRoles.Where(r => r.Application == app).Count() > 0);
         }
 
         private void UpdateFailureCount(string username, string failureType)

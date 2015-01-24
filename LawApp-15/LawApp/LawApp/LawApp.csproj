@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -45,7 +56,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -62,7 +72,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -81,9 +94,6 @@
     </Reference>
     <Reference Include="AspNet.ScriptManager.jQuery.UI.Combined">
       <HintPath>..\..\packages\AspNet.ScriptManager.jQuery.UI.Combined.1.8.24\lib\net40\AspNet.ScriptManager.jQuery.UI.Combined.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -109,12 +119,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\..\packages\Microsoft.AspNet.Membership.OpenAuth.1.0.2\lib\net40\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.0\lib\net40\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.OpenAccess, Version=2014.3.1209.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
     <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2014.3.1209.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -205,7 +213,9 @@
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\_references.js" />
@@ -271,8 +281,8 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\Partials\ApplicationsControllerPartial.cs" />
-    <Compile Include="Controllers\Partials\OpenAccessBaseApiControllerPartial.cs" />
+    <Compile Include="Controllers\Partials\ApplicationsController.Partial.cs" />
+    <Compile Include="Controllers\Partials\OpenAccessBaseApiController.Partial.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -284,13 +294,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.Routes.cs" />
+    <Compile Include="Providers\Security\EFRoleProvider.cs" />
     <Compile Include="Repositories\LawAppRepositories.cs" />
     <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
     <Compile Include="Repositories\OpenAccessBaseRepository.cs" />
     <Compile Include="Providers\ProviderUtils.cs" />
     <Compile Include="Providers\Security\EFMembershipProvider.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Partials\OpenAccessBaseRepositoryPartial.cs" />
+    <Compile Include="Repositories\Partials\OpenAccessBaseRepository.Partial.cs" />
     <Compile Include="Controllers\SignedWebUsersController.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -317,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -327,6 +338,9 @@
       <Project>{C50145E6-A244-4F1F-B41F-90D1925B4A00}</Project>
       <Name>LawAppModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
