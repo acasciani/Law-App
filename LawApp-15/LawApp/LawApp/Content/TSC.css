@@ -1,0 +1,25 @@
+.container {
+	margin-top: 70px;
+	width: 90%;
+}
+
+.month, .month .table th, .month .table td {
+	text-align: center;
+}
+
+.month .table tr.month-lbl th {
+	background-color: #F0F0F0;
+	border-bottom-width: 2px;
+}
+
+.month .table tr.weekday-lbl th {
+	border-bottom-width: 1px;
+}
+
+.month {
+	border-color: #ddd;
+}
+
+.left { {
+	text-align: left;
+}
