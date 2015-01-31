@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Manage Account" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="LawAppWeb.Account.Manage" %>
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ContentPlaceHolderID="LawAppPlaceHolder" runat="server">
     <hgroup class="title">
         <h1><%: Title %>.</h1>
     </hgroup>
