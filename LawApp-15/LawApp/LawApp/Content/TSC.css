@@ -20,6 +20,26 @@
 	border-color: #ddd;
 }
 
-.left { {
+.left {
 	text-align: left;
+}
+
+.month td.day-checked:after {
+    position: relative;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    bottom: -10px;
+    right: 4px;
+    -moz-osx-font-smoothing: grayscale;
+    width: 0px;
+    height: 0px;
+    content: "\e013";
+}
+
+.month td {
+    cursor: default;
 }

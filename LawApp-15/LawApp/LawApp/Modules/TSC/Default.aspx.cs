@@ -13,5 +13,10 @@ namespace LawAppWeb.Modules.TSC
         {
 
         }
+
+        protected void test_DayClicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

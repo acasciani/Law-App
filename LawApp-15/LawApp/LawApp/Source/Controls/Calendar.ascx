@@ -1,5 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="True" CodeBehind="Calendar.ascx.cs" Inherits="LawAppWeb.Controls.Calendar" %>
+<%@ Register Assembly="LawApp" Namespace="LawAppWeb.Controls" TagPrefix="ui" %>
 
+<script>
+    function CheckMarkDate(parameter) {
+        //__doPostBack('', 'parameter');
+    }
+</script>
+
+<asp:UpdatePanel runat="server" ID="pnlCalendar" UpdateMode="Conditional">
+    <ContentTemplate>
 <div class="panel month">
         <table class="table table-bordered">
             <thead>
@@ -16,20 +25,22 @@
                     <th>S</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody runat="server">
                 <asp:Repeater ID="CalendarWeeks" runat="server">
                     <ItemTemplate>
                         <tr>
-                            <td><%# Eval("Sunday") == null ? "" : ((DateTime)Eval("Sunday")).Day.ToString() %></td>
-                            <td><%# Eval("Monday") == null ? "" : ((DateTime)Eval("Monday")).Day.ToString() %></td>
-                            <td><%# Eval("Tuesday") == null ? "" : ((DateTime)Eval("Tuesday")).Day.ToString() %></td>
-                            <td><%# Eval("Wednesday") == null ? "" : ((DateTime)Eval("Wednesday")).Day.ToString() %></td>
-                            <td><%# Eval("Thursday") == null ? "" : ((DateTime)Eval("Thursday")).Day.ToString() %></td>
-                            <td><%# Eval("Friday") == null ? "" : ((DateTime)Eval("Friday")).Day.ToString() %></td>
-                            <td><%# Eval("Saturday") == null ? "" : ((DateTime)Eval("Saturday")).Day.ToString() %></td>
+                            <ui:CalendarDay runat="server" ID="Sunday" Date='<%# (DateTime?)Eval("Sunday") %>' OnDayClicked="On_DayClicked" />
+                            <ui:CalendarDay runat="server" Date='<%# (DateTime?)Eval("Monday") %>' OnDayClicked="On_DayClicked" />
+                            <ui:CalendarDay runat="server" Date='<%# (DateTime?)Eval("Tuesday") %>' OnDayClicked="On_DayClicked" />
+                            <ui:CalendarDay runat="server" Date='<%# (DateTime?)Eval("Wednesday") %>' OnDayClicked="On_DayClicked" />
+                            <ui:CalendarDay runat="server" Date='<%# (DateTime?)Eval("Thursday") %>' OnDayClicked="On_DayClicked" />
+                            <ui:CalendarDay runat="server" Date='<%# (DateTime?)Eval("Friday") %>' OnDayClicked="On_DayClicked" />
+                            <ui:CalendarDay runat="server" Date='<%# (DateTime?)Eval("Saturday") %>' OnDayClicked="On_DayClicked" />
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
             </tbody>
         </table>
 </div>
+</ContentTemplate>
+    </asp:UpdatePanel>

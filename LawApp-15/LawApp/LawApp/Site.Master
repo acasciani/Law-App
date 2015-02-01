@@ -20,6 +20,10 @@
 </head>
 <body>
     <form runat="server">
+        <asp:ScriptManager runat="server" ID="MainScriptManager" EnablePartialRendering="true" LoadScriptsBeforeUI="true">
+
+        </asp:ScriptManager>
+
         <asp:ContentPlaceHolder runat="server" ID="LawAppPlaceHolder" />
     </form>
 </body>
