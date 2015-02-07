@@ -258,6 +258,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\TSC\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Calendar\Day.cs" />
     <Compile Include="Source\Calendar\Month.cs" />
     <Compile Include="Source\Calendar\Week.cs" />
     <Compile Include="Source\Controls\Calendar.ascx.cs">
@@ -311,9 +315,6 @@
     <Compile Include="Modules\TSC\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Modules\TSC\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modules\TSC\TSC.master.cs">
       <DependentUpon>TSC.master</DependentUpon>

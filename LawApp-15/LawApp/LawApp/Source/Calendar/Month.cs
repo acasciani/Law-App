@@ -4,9 +4,11 @@ using LawAppWeb.Utilities;
 
 namespace LawAppWeb
 {
+    [Serializable]
     public class Month
     {
         public IList<Week> Weeks { get; private set; }
+        public bool IsDirty { get; private set; }
 
         public Month(DateTime reference)
         {
@@ -37,16 +39,65 @@ namespace LawAppWeb
             Weeks = new List<Week>();
 
             decimal totalDays = DateTime.DaysInMonth(month.Year, month.Month);
+            int totalDaysInt = DateTime.DaysInMonth(month.Year, month.Month);
 
-            for (int i = 0; i < totalDays / 7; i++)
+            DateTime refDate = new DateTime(month.Year, month.Month, 1);
+            bool valid = true;
+            while(valid)
             {
-                DateTime refDate = new DateTime(month.Year, month.Month, (i * 7) + 1);
-                Week week = Week.Create(refDate).RemoveDatesNotInMonth(month.Month);
+                Week week = Week.Create(new Day(refDate)).RemoveDatesNotInMonth(month.Month);
                 if (!week.IsNull() && !Contains(week))
                 {
                     Weeks.Add(week);
                 }
+
+                refDate = refDate.AddDays(7);
+                int currentWeekLastDay = week.LastNonNullDay().Date.Day;
+                if (currentWeekLastDay < totalDays && (refDate.Month != month.Month || refDate.Year != month.Year))
+                {
+                    Week specialCaseWeek = Week.Create(new Day(new DateTime(month.Year, month.Month, totalDaysInt))).RemoveDatesNotInMonth(month.Month);
+                    if (!specialCaseWeek.IsNull() && !Contains(specialCaseWeek)) Weeks.Add(specialCaseWeek);
+                    valid = false;
+                    break;
+                }
+                else if (currentWeekLastDay == totalDays)
+                {
+                    valid = false;
+                    break;
+                }
             }
+        }
+
+        public int CalculateDaysChecked()
+        {
+            int total = 0;
+
+            foreach (Week week in Weeks) total += week.CalculateDaysChecked();
+            
+            return total;
+        }
+
+        public int CalculateDaysInMonthNotNull()
+        {
+            int total = 0;
+
+            foreach (Week week in Weeks) total += week.CalculateDaysInWeekNotNull();
+
+            return total;
+        }
+
+        public Day GetActualDay(Day refDay)
+        {
+            Day foundDay = null;
+            foreach (Week week in Weeks)
+            {
+                foundDay = week.GetDay(refDay);
+                if (foundDay != null)
+                {
+                    return foundDay;
+                }
+            }
+            return null;
         }
     }
 }

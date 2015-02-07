@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 
 namespace LawAppWeb.Controls
 {
+    public class CalendarDayEventArgs : EventArgs { } // could do some stuff here for now this is just used so we don't need to use FindControl alot
+
     [DefaultProperty("Text")]
     [ToolboxData("<{0}:CalendarDay runat=server></{0}:CalendarDay>")]
     public class CalendarDay : WebControl, IPostBackEventHandler
@@ -19,25 +21,15 @@ namespace LawAppWeb.Controls
         [Category("Appearance")]
         [DefaultValue("")]
         [Localizable(true)]
-        public DateTime? Date
+        public Day Date
         {
-            get { return (ViewState["Date"] == null) ? (DateTime?)null : (DateTime?)ViewState["Date"]; }
+            get { return (ViewState["Date"] == null) ? null : (Day)ViewState["Date"]; }
             set { ViewState["Date"] = value; }
-        }
-
-        [Bindable(true)]
-        [Category("Appearance")]
-        [DefaultValue("")]
-        [Localizable(true)]
-        public bool IsChecked
-        {
-            get { return (ViewState["IsChecked"] == null) ? false : (bool)ViewState["IsChecked"]; }
-            set { ViewState["IsChecked"] = value; }
         }
 
         protected override void RenderContents(HtmlTextWriter output)
         {
-            output.Write(Date.HasValue ? Date.Value.Day.ToString() : "");
+            output.Write(Date != null ? Date.Date.Day.ToString() : "");
             output.BeginRender();
 
             output.EndRender();
@@ -62,7 +54,7 @@ namespace LawAppWeb.Controls
 
         protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
-            if (Date.HasValue)
+            if (Date != null)
             {
                 writer.AddAttribute(HtmlTextWriterAttribute.Onclick, clientPostBackScript);
             }
@@ -71,7 +63,7 @@ namespace LawAppWeb.Controls
 
         public void RaisePostBackEvent(string eventArgument)
         {
-            OnClicked(EventArgs.Empty);
+            OnClicked(new CalendarDayEventArgs());
         }
 
         protected virtual void OnClicked(EventArgs e)
@@ -80,6 +72,14 @@ namespace LawAppWeb.Controls
             {
                 DayClicked(this, e);
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            Day day = obj as Day;
+            if (day != null) return day.Date == Date.Date;
+
+            return base.Equals(obj);
         }
     }
 }

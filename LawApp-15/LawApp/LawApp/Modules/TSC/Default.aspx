@@ -1,76 +1,45 @@
-﻿<%@ Page Title="Time Sharing Calendar" Language="C#" MasterPageFile="~/Modules/TSC/TSC.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="LawAppWeb.Modules.TSC.Default" %>
+﻿<%@ Page Title="Time Sharing Calendar" Language="C#" MasterPageFile="~/Modules/TSC/TSC.master" AutoEventWireup="True" CodeBehind="Default.aspx.cs" Inherits="LawAppWeb.Modules.TSC.Default" %>
 <%@ Register TagPrefix="ui" TagName="Calendar" Src="~/Source/Controls/Calendar.ascx" %>
 <%@ Register TagPrefix="ui" Assembly="LawApp" Namespace="LawAppWeb.Controls" %>
 
 <asp:Content ID="TSCProduct_Page" ContentPlaceHolderID="TSCProduct_Holder" runat="server">
-    <script type="text/javascript">
-        $(window).resize(function () {
-            resizeCalendarMonthColumns();
-        });
+        <script type="text/javascript">
+            $(window).resize(function () {
+                resizeCalendarMonthColumns();
+            });
 
-        $(function () {
-            resizeCalendarMonthColumns();
-        });
+            $(function () {
+                resizeCalendarMonthColumns();
+            });
 
-        function resizeCalendarMonthColumns() {
-            var maxCalendarMonthHeight = Math.max.apply(null, $(".column-calendar-month").map(function () {
-                return $(this).height();
-            }).get());
+            function resizeCalendarMonthColumns() {
+                var maxCalendarMonthHeight = Math.max.apply(null, $(".column-calendar-month").map(function () {
+                    return $(this).height();
+                }).get());
 
-            $('.column-calendar-month').height(maxCalendarMonthHeight);
-        }
-    </script>
+                $('.column-calendar-month').height(maxCalendarMonthHeight);
+            }
 
-    <div class="row clearfix">
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-01-01" />
-        </div>
+            function pageLoad() {
+                $('#tsc-calendar-days-selected-count').text($('.day-checked').length.toString());
+                $('#tsc-calendar-days-total-count').text($('.CalendarDay').length.toString());
+            }
+        </script>
 
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-02-01" />
-        </div>
+    <asp:UpdatePanel runat="server" ID="pnlDaysClickedUpdate" UpdateMode="Conditional">
+        <ContentTemplate>
 
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-03-01" />
-        </div>
+    
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    You have selected <span id="tsc-calendar-days-selected-count">0</span> of <span id="tsc-calendar-days-total-count">0</span> days.
+                </div>
+            </div>
+    </ContentTemplate>
+    </asp:UpdatePanel>
 
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-04-01" />
-        </div>
 
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-05-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-06-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-07-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-08-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-09-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-10-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-11-01" />
-        </div>
-
-        <div class="col-lg-4 col-sm-6 column column-calendar-month">
-            <ui:Calendar runat="server" MonthReference="2015-12-01" />
-        </div>
-
-     </div>
-
+            <div class="row clearfix" id="CalendarsHolder" runat="server"></div>
+        
 
 </asp:Content>
