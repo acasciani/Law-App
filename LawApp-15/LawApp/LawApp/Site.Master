@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="LawAppWeb.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - Law-App 15</title>
+    <link href="~/Content/Site.css" rel="stylesheet" /> 
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" /> 
+
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <asp:PlaceHolder runat="server">        
+        <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-2.1.3.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-ui-1.11.2.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
+    </asp:PlaceHolder>
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server" ID="MainScriptManager" EnablePartialRendering="true" LoadScriptsBeforeUI="true">
+
+        </asp:ScriptManager>
+
+        <asp:ContentPlaceHolder runat="server" ID="LawAppPlaceHolder" />
+    </form>
+</body>
+</html>

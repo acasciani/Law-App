@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="LawApp" namespace="LawAppModel" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="LawApp" backend="mssql" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="LawAppModel" default="true">
+      <orm:class name="Application" behavior="readonly" use-default-mapping="true" uniqueId="939c8105-a015-4119-a811-38fa17841584">
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ApplicationId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_applicationId" />
+        </orm:identity>
+        <orm:field name="_applicationId" property="ApplicationId" uniqueId="86d3f471-bcc8-489c-9725-77bda19c3192" type="System.Int32">
+          <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_applicationName" property="ApplicationName" uniqueId="7afbcfd5-d08d-4f89-9e1a-a4a472dd1427" type="System.String">
+          <orm:column name="ApplicationName" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_description" property="Description" uniqueId="4e938152-0e2b-4c4e-86a7-9f0d3e590fe5" type="System.String">
+          <orm:column name="Description" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_userRoles1" property="UserRoles" behavior="readwrite" uniqueId="364f0df5-741b-4736-b2a5-58a0e7e9f368" type="LawAppModel.UserRole" default-fetch-group="true">
+          <orm:collection element-class="LawAppModel.UserRole" inverse-field="_application1" order-by="" uniqueId="a25ae353-ec24-40a7-8c35-9a6ab6d80db2" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="UserRole" behavior="readwrite" uniqueId="2b03fb7a-5b34-4c30-bd62-f875f4c84cc5">
+        <orm:table name="UserRole" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="UserRoleId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_userRoleId" />
+        </orm:identity>
+        <orm:field name="_userRoleId" property="UserRoleId" uniqueId="3bf3c896-6299-4ee7-8791-122b94f7130e" type="System.Int32">
+          <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_roleName" property="RoleName" uniqueId="a8209983-0925-45f2-bb4d-75b17321a8b2" type="System.String">
+          <orm:column name="RoleName" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_applicationId" property="ApplicationId" uniqueId="235bb89b-7a0e-4565-9d84-f36a05bec03b" type="System.Int32">
+          <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_application1" property="Application" behavior="readwrite" uniqueId="b2876e2f-7644-4d4a-b488-0346bafef787" type="LawAppModel.Application" default-fetch-group="true">
+          <orm:reference uniqueId="a25ae353-ec24-40a7-8c35-9a6ab6d80db2" association-name="UserRoleHasApplication">
+            <orm:sharedfield name="_applicationId" target-class="LawAppModel.Application" target-field="_applicationId" />
+            <orm:constraint name="ref_UserRole_Application" delete-action="dbdefaultrule" destination-table="Application" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_signedWebUsers" property="SignedWebUsers" behavior="readwrite" uniqueId="802ce117-2bb5-46be-9923-606b8f1c4f84" type="LawAppModel.SignedWebUser">
+          <orm:join-table uniqueId="d1144235-49ad-416f-b621-cec006a0344a" association-name="UserRolesHaveSignedWebUsers" />
+        </orm:field>
+        <orm:index name="idx_UserRole_ApplicationId">
+          <orm:columnMapping>
+            <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="SignedWebUser" behavior="readwrite" use-default-mapping="true" uniqueId="83e7d882-26db-4719-8d94-ff3c34f7eaa2">
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="WebUserId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_webUserId" />
+        </orm:identity>
+        <orm:field name="_webUserId" property="WebUserId" uniqueId="02676b3f-a195-43de-a9c5-fc87fe7aa00c" type="System.Int32">
+          <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_email" property="Email" uniqueId="4fa9bc0c-9ed7-456b-ab8f-8c976b1a36b7" type="System.String">
+          <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_userPassword" property="UserPassword" uniqueId="dfea40de-c79c-4dbb-94a1-4094d1cc603f" type="System.String">
+          <orm:column name="UserPassword" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_creationDate" property="CreationDate" uniqueId="f4461513-29ea-4ee2-a566-c52b3dddb85d" type="System.DateTime">
+          <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_modificationDate" property="ModificationDate" uniqueId="6723770d-a197-4cca-9ec2-c5e82e4dd419" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_userRoles" property="UserRoles" behavior="readwrite" uniqueId="e1b0e633-f5e4-4d21-89cb-a82aa09c9f9f" type="LawAppModel.UserRole" default-fetch-group="true">
+          <orm:collection element-class="LawAppModel.UserRole" inverse-field="_signedWebUsers" order-by="" uniqueId="d1144235-49ad-416f-b621-cec006a0344a" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="Application">
+        <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="ApplicationName" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Description" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="UserRole">
+        <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="RoleName" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:index name="idx_UserRole_ApplicationId">
+          <orm:columnMapping>
+            <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="ref_UserRole_Application" delete-action="dbdefaultrule" destination-table="Application">
+          <orm:column name="ApplicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="SignedWebUser">
+        <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="UserPassword" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="WebUser">
+        <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="voa_class" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="SignedWebUser_UserRole">
+        <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:constraint name="ref_SgndWbUsr_UsrRl_U_FD2AE9E2" delete-action="dbdefaultrule" destination-table="UserRole">
+          <orm:column name="UserRoleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="ref_SgndWbUsr_UsrRl_S_DAF4F192" delete-action="dbdefaultrule" destination-table="SignedWebUser">
+          <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>LawApp15</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>data source=ALEX;initial catalog=Core;integrated security=True</AppConfigConnectionString>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules />
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings>
+      <ExecuteScript>true</ExecuteScript>
+      <DeploymentProject>LawAppModel</DeploymentProject>
+      <UpdateDatabaseOperation>Migrate</UpdateDatabaseOperation>
+      <ShowAllTables>true</ShowAllTables>
+    </SchemaUpdateSettings>
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MsSql</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="939c8105-a015-4119-a811-38fa17841584" name="Application" namespace="LawAppModel" showPropertiesCompartment="true" Kind="ReadOnly" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ApplicationId">
+      <Property Id="86d3f471-bcc8-489c-9725-77bda19c3192" name="ApplicationId" type="System.Int32" label="ApplicationId : System.Int32" identity="true" fieldName="_applicationId" />
+      <Property Id="7afbcfd5-d08d-4f89-9e1a-a4a472dd1427" name="ApplicationName" label="ApplicationName : String" fieldName="_applicationName" />
+      <Property Id="4e938152-0e2b-4c4e-86a7-9f0d3e590fe5" name="Description" label="Description : String" fieldName="_description" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="e1f4b11a-1f23-41cd-a4e4-cc90f5d33c92">
+          <NavigationalProperty Id="364f0df5-741b-4736-b2a5-58a0e7e9f368" name="UserRoles" type="IList&lt;UserRole&gt;" label="UserRoles : IList&lt;UserRole&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_userRoles1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="2b03fb7a-5b34-4c30-bd62-f875f4c84cc5" name="UserRole" namespace="LawAppModel" showPropertiesCompartment="true" Kind="ReadWrite" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="UserRoleId">
+      <Property Id="3bf3c896-6299-4ee7-8791-122b94f7130e" name="UserRoleId" type="Int32" label="UserRoleId : Int32" identity="true" fieldName="_userRoleId" />
+      <Property Id="a8209983-0925-45f2-bb4d-75b17321a8b2" name="RoleName" label="RoleName : String" fieldName="_roleName" />
+      <Property Id="235bb89b-7a0e-4565-9d84-f36a05bec03b" name="ApplicationId" type="Int32" label="ApplicationId : Int32" fieldName="_applicationId" />
+      <AssociationTargets>
+        <Association Id="a25ae353-ec24-40a7-8c35-9a6ab6d80db2" SourceMultiplicity="One" name="UserRoleHasApplication">
+          <DomainClassMoniker name="/LawApp/Application" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="b2afc3a1-aa4e-4777-947d-f50790c9e898">
+              <NavigationalPropertyMoniker name="/LawApp/Application/UserRoles" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="db2f0a9d-804a-40a6-88a7-670674ae28a9">
+              <NavigationalPropertyMoniker name="/LawApp/UserRole/Application" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="d1144235-49ad-416f-b621-cec006a0344a" name="UserRolesHaveSignedWebUsers">
+          <DomainClassMoniker name="/LawApp/SignedWebUser" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="d88bd9af-90da-46b9-be78-0c11a6eb9ab6">
+              <NavigationalPropertyMoniker name="/LawApp/SignedWebUser/UserRoles" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="0b83ef9d-4c36-4a4b-9248-bafd19516d79">
+              <NavigationalPropertyMoniker name="/LawApp/UserRole/SignedWebUsers" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="3efa3df8-a19e-493e-aa29-b068170d1328">
+          <NavigationalProperty Id="b2876e2f-7644-4d4a-b488-0346bafef787" name="Application" type="Application" label="Application : Application" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_application1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="5d836472-1c65-40ce-b352-c17cb512f1ca">
+          <NavigationalProperty Id="802ce117-2bb5-46be-9923-606b8f1c4f84" name="SignedWebUsers" type="IList&lt;SignedWebUser&gt;" label="SignedWebUsers : IList&lt;SignedWebUser&gt;" nullable="true" kind="Persistent" fieldName="_signedWebUsers" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="83e7d882-26db-4719-8d94-ff3c34f7eaa2" name="SignedWebUser" namespace="LawAppModel" showPropertiesCompartment="true" Kind="ReadWrite" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="WebUserId">
+      <Property Id="02676b3f-a195-43de-a9c5-fc87fe7aa00c" name="WebUserId" type="Int32" label="WebUserId : Int32" identity="true" fieldName="_webUserId" />
+      <Property Id="4fa9bc0c-9ed7-456b-ab8f-8c976b1a36b7" name="Email" label="Email : String" fieldName="_email" />
+      <Property Id="dfea40de-c79c-4dbb-94a1-4094d1cc603f" name="UserPassword" label="UserPassword : String" fieldName="_userPassword" />
+      <Property Id="f4461513-29ea-4ee2-a566-c52b3dddb85d" name="CreationDate" type="DateTime" label="CreationDate : DateTime" fieldName="_creationDate" />
+      <Property Id="6723770d-a197-4cca-9ec2-c5e82e4dd419" name="ModificationDate" type="DateTime" label="ModificationDate : DateTime" nullable="true" fieldName="_modificationDate" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="2a75a81d-2bfe-4e11-a5a9-50be68e3f5e8">
+          <NavigationalProperty Id="e1b0e633-f5e4-4d21-89cb-a82aa09c9f9f" name="UserRoles" type="IList&lt;UserRole&gt;" label="UserRoles : IList&lt;UserRole&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_userRoles" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="700b6438-42c2-4324-a582-ef893682055d">
+      <domainContainer name="LawApp" namespace="LawAppModel" showPropertiesCompartment="true">
+        <entitySetProperty name="Applications" namespace="LawAppModel" type="Application" label="Applications : IQueryable&lt;LawAppModel.Application&gt;" />
+        <entitySetProperty name="UserRoles" namespace="LawAppModel" type="UserRole" label="UserRoles : IQueryable&lt;LawAppModel.UserRole&gt;" />
+        <entitySetProperty name="SignedWebUsers" namespace="LawAppModel" type="SignedWebUser" label="SignedWebUsers : IQueryable&lt;LawAppModel.SignedWebUser&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>

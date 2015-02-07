@@ -1,0 +1,45 @@
+﻿.container {
+	margin-top: 70px;
+	width: 90%;
+}
+
+.month, .month .table th, .month .table td {
+	text-align: center;
+}
+
+.month .table tr.month-lbl th {
+	background-color: #F0F0F0;
+	border-bottom-width: 2px;
+}
+
+.month .table tr.weekday-lbl th {
+	border-bottom-width: 1px;
+}
+
+.month {
+	border-color: #ddd;
+}
+
+.left {
+	text-align: left;
+}
+
+.month td.day-checked:after {
+    position: relative;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    bottom: -10px;
+    right: 4px;
+    -moz-osx-font-smoothing: grayscale;
+    width: 0px;
+    height: 0px;
+    content: "\e013";
+}
+
+.month td {
+    cursor: default;
+}
