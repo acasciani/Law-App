@@ -1,7 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TSC.master.cs" Inherits="LawAppWeb.Modules.TSC.TSC" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%: ResolveUrl("~/Content/TSC.css") %>" rel="stylesheet" /> 
+    <link href="<%: ResolveUrl("~/Content/Modules/TSC/Main.css") %>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Content/slider.css") %>" rel="stylesheet" />
+
 </asp:Content>
 
 <asp:Content ID="TSCProduct_Content" ContentPlaceHolderID="LawAppPlaceHolder" runat="server">
@@ -48,6 +50,7 @@
 
 
     <div class="container">
+
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <div class="alert alert-dismissable alert-success">
@@ -56,34 +59,8 @@
                 </div>
             </div>
         </div>
-        <div class="row clearfix">
-            <div class="col-md-4 column">
-                <div class="panel-group" id="panel-300013">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                             <a class="panel-title" data-toggle="collapse" data-parent="#panel-300013" href="#panel-element-233857">Weekend Overnights</a>
-                        </div>
-                        <div id="panel-element-233857" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                         <a class="panel-title" data-toggle="collapse" data-parent="#panel-300013" href="#panel-element-338022">Individual Overnights</a>
-                    </div>
-                    <div id="panel-element-338022" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Anim pariatur cliche...
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8 column">
-                <asp:ContentPlaceHolder ID="TSCProduct_Holder" runat="server"></asp:ContentPlaceHolder>
-            </div>
+        <div class="row clearfix" id="TSC_MASTER_HOLDER">
+            <asp:ContentPlaceHolder ID="TSCProduct_Holder" runat="server"></asp:ContentPlaceHolder>
         </div>
     </div>
 

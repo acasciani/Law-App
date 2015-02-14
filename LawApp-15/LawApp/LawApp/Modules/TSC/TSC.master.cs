@@ -11,7 +11,13 @@ namespace LawAppWeb.Modules.TSC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (!Page.ClientScript.IsClientScriptIncludeRegistered(this.GetType(), "TSC_Main"))
+                {
+                    Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "TSC_Drawer", "../../Scripts/slider.js");
+                }
+            }
         }
     }
 }

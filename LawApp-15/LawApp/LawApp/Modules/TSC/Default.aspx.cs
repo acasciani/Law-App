@@ -27,26 +27,10 @@ namespace LawAppWeb.Modules.TSC
         {
             if (!IsPostBack)
             {
-                string script = "$('.CalendarDay').click(function(){alert();});";
-
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "UpdateClicks", script, true);
-            }
-        }
-
-        private void CalculateDaysClicked()
-        {
-            if (calendars != null)
-            {
-                int totalClicked = 0;
-                int totalDays = 0;
-
-                foreach (Calendar calendar in calendars)
+                if (!Page.ClientScript.IsClientScriptIncludeRegistered(this.GetType(), "TSC_Main"))
                 {
-                    totalClicked += calendar.Month.CalculateDaysChecked();
-                    totalDays += calendar.Month.CalculateDaysInMonthNotNull();
+                    Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "TSC_Main", "../../Scripts/Modules/TSC/Main.js");
                 }
-                
-                txtDaysClicked.Text = string.Format("You have selected {0} days out of {1} total days for Parent B.", totalClicked, totalDays);
             }
         }
     }

@@ -3,6 +3,7 @@
 
 <asp:UpdatePanel runat="server" ID="pnlCalendar" UpdateMode="Conditional">
     <ContentTemplate>
+<div class="col-md-4 column-calendar-month">
 <div class="panel month">
         <table class="table table-bordered">
             <thead>
@@ -23,18 +24,19 @@
                 <asp:Repeater ID="CalendarWeeks" runat="server">
                     <ItemTemplate>
                         <tr>
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Sunday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Sunday")==null ? "" : "CalendarDay" %>' />
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Monday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Monday")==null ? "" : "CalendarDay" %>' />
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Tuesday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Tuesday")==null ? "" : "CalendarDay" %>' />
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Wednesday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Wednesday")==null ? "" : "CalendarDay" %>' />
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Thursday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Thursday")==null ? "" : "CalendarDay" %>' />
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Friday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Friday")==null ? "" : "CalendarDay" %>' />
-                            <ui:CalendarDay runat="server" Date='<%# (LawAppWeb.Day)Eval("Saturday") %>' OnDayClicked="On_DayClicked" CssClass='<%#Eval("Saturday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Sunday" Date='<%# (LawAppWeb.Day)Eval("Sunday") %>' CssClass='<%#Eval("Sunday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Monday" Date='<%# (LawAppWeb.Day)Eval("Monday") %>' CssClass='<%#Eval("Monday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Tuesday" Date='<%# (LawAppWeb.Day)Eval("Tuesday") %>' CssClass='<%#Eval("Tuesday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Wednesday" Date='<%# (LawAppWeb.Day)Eval("Wednesday") %>' CssClass='<%#Eval("Wednesday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Thursday" Date='<%# (LawAppWeb.Day)Eval("Thursday") %>' CssClass='<%#Eval("Thursday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Friday" Date='<%# (LawAppWeb.Day)Eval("Friday") %>' CssClass='<%#Eval("Friday")==null ? "" : "CalendarDay" %>' />
+                            <ui:CalendarDay runat="server" ID="Saturday" Date='<%# (LawAppWeb.Day)Eval("Saturday") %>' CssClass='<%#Eval("Saturday")==null ? "" : "CalendarDay" %>' />
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
             </tbody>
         </table>
+</div>
 </div>
 </ContentTemplate>
     </asp:UpdatePanel>

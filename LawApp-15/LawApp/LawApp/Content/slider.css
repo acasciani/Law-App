@@ -1,0 +1,38 @@
+﻿.collapsible button {
+    border: none;
+    background: #242424;
+    color: #CECECE;
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+    -webkit-transition: opacity .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+    -ms-transition: opacity .15s ease-in-out;
+    -o-transition: opacity .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+}
+.collapsible button:hover {
+    background: #242424;
+    border: none;
+    zoom: 1;
+    filter: alpha(opacity=100);
+    opacity: 1.0;
+    -webkit-transition: opacity .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+    -ms-transition: opacity .15s ease-in-out;
+    -o-transition: opacity .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+}
+.collapsible button:focus {
+    background: #242424;
+    border: none;
+    outline: none;
+}
+.collapsible {
+    text-align:center;
+}
+
+@media (max-width: 991px) {
+    .col-sm-0 { display: none; }
+    .col-xs-0 { display: none; }
+}

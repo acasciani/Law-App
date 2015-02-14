@@ -56,7 +56,7 @@ namespace LawAppWeb.Controls
         {
             if (Date != null)
             {
-                writer.AddAttribute(HtmlTextWriterAttribute.Onclick, clientPostBackScript);
+                //writer.AddAttribute(HtmlTextWriterAttribute.Onclick, clientPostBackScript);
             }
             base.AddAttributesToRender(writer);
         }
