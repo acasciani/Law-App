@@ -12,11 +12,13 @@ $(window).scroll(function () {
         offset = $sidebar.offset(),
         topPadding = 0;
 
-    $sidebar.stop().animate({
-        marginTop: $window.scrollTop() + topPadding
-    });
+    if ($(drawer + ' .panel-group').height() < maxDrawerHeight()) {
+        $sidebar.stop().animate({
+            marginTop: $window.scrollTop() + topPadding
+        });
+    }
 
-    if ($sidebar2.outerWidth() < $sidebar2.parent().outerWidth()) {
+    if ($sidebar2.outerWidth() < $sidebar2.parent().outerWidth() && $(drawer + ' .panel-group').height() < maxDrawerHeight()) {
         $sidebar2.stop().animate({
             marginTop: $window.scrollTop() + topPadding
         });
@@ -38,8 +40,15 @@ $(window).resize(function () {
     resizeDrawer();
 });
 
+function maxDrawerHeight() {
+    return $(window).innerHeight() - 71 - 20;
+}
+
 function resizeDrawer() {
-    $(workpane + ' .collapsible button').animate({ height: $(drawer + ' .panel-group').height() + 'px' }, { duration: 100 });
+    var panelGroupHeight = $(drawer + ' .panel-group').height();
+    var drawerHeight = panelGroupHeight > maxDrawerHeight() ? maxDrawerHeight() : panelGroupHeight;
+
+    $(workpane + ' .collapsible button').animate({ height: drawerHeight + 'px' }, { duration: 100 });
 }
 
 function resizeWorkpane() {

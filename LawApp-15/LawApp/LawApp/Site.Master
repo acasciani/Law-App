@@ -7,6 +7,7 @@
     <title><%: Page.Title %> - Law-App 15</title>
     <link href="~/Content/Site.css" rel="stylesheet" /> 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" /> 
+    <link href="~/Content/datepicker3.css" rel="stylesheet" /> 
 
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <asp:PlaceHolder runat="server">        
@@ -15,6 +16,9 @@
         <script src="<%: ResolveUrl("~/Scripts/jquery-ui-1.11.2.min.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/lodash.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/bootstrap-datepicker.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/Datepicker.js") %>"></script>
     </asp:PlaceHolder>
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />

@@ -55,3 +55,19 @@
     font-style: italic;
     margin-bottom: 15px;
 }
+
+.checkbox-list td label {
+    padding-left: 7px;
+    margin-top: 0px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.alert-container.container {
+    position: fixed;
+    z-index: 1000;
+    margin-top: 0px;
+}
