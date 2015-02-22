@@ -7,7 +7,7 @@
     <div class="col-md-4 collapsed" id="drawer">
                 <div class="row clearfix">
                     <div class="col-sm-12 days-selected">
-                        You have selected <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> days.
+                        <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> overnights selected (<span class="tsc-calendar-days-selected-percentage">0</span>%)
                     </div>
                 </div>
 
@@ -19,10 +19,10 @@
                         <strong>Weekend overnights</strong> for purposes of this calendar is every other weekend (Friday overnight and Saturday overnight) spent with Parent B.
                         <hr />
                         <div class="form-horizontal">
-                            <div class="col-sm-12 checkbox form-group"><label><asp:CheckBox runat="server" /> Every other weekend Choose first Friday</label></div>
+                            <div class="col-sm-12 checkbox form-group"><label><asp:CheckBox runat="server" CssClass="checkbox-weekend" data-toggle="radio" /> Every other weekend Choose first Friday</label></div>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
-                                <div class="input-group date monday-only">
-                                    <asp:TextBox CssClass="form-control" runat="server" data-provide="datepicker" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <div class="input-group date friday-only">
+                                    <asp:TextBox CssClass="form-control WeekendDateStart" runat="server" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
             
             <div class="panel panel-default">
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-individual-overnights">Individual Overnights</a></div>
-                <div id="criteria-individual-overnights" class="panel-collapse collapse in">
+                <div id="criteria-individual-overnights" class="panel-collapse collapse">
                     <div class="panel-body">
                         Select any overnights spent with Parent B that may apply.
                         <hr />
@@ -67,7 +67,7 @@
                                 <asp:ListItem Value="2">Every other WE, starting</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
-                                <div class="input-group date">
+                                <div class="input-group date wednesday-only">
                                     <asp:TextBox CssClass="form-control IndividualDateStart" runat="server" ID="IndividualWednesdayDate" ClientIDMode="Static" Enabled="false" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <asp:ListItem Value="2">Every other TR, starting</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
-                                <div class="input-group date">
+                                <div class="input-group date thursday-only">
                                     <asp:TextBox CssClass="form-control IndividualDateStart" runat="server" ID="IndividualThursdayDate" ClientIDMode="Static" Enabled="false" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                 <asp:ListItem Value="2">Every other FR, starting</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
-                                <div class="input-group date">
+                                <div class="input-group date friday-only">
                                     <asp:TextBox CssClass="form-control IndividualDateStart" runat="server" ID="IndividualFridayDate" ClientIDMode="Static" Enabled="false" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 <asp:ListItem Value="2">Every other SA, starting</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
-                                <div class="input-group date">
+                                <div class="input-group date saturday-only">
                                     <asp:TextBox CssClass="form-control IndividualDateStart" runat="server" ID="IndividualSaturdayDate" ClientIDMode="Static" Enabled="false" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
@@ -115,10 +115,27 @@
                                 <asp:ListItem Value="2">Every other SU, starting</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
-                                <div class="input-group date">
+                                <div class="input-group date sunday-only">
                                     <asp:TextBox CssClass="form-control IndividualDateStart" runat="server" ID="IndividualSundayDate" ClientIDMode="Static" Enabled="false" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-holidays">Holidays</a></div>
+                <div id="criteria-holidays" class="panel-collapse collapse ">
+                    <div class="panel-body">
+                        Holidays are displayed on the calendar as colored dots. The holiday markers can be hidden by toggling the checkbox below.
+                        <hr />
+                        <div class="form-horizontal clearfix">
+                            <div class="col-sm-12 checkbox form-group"><label><asp:CheckBox runat="server" CssClass="checkbox-holidays" data-toggle="radio" /> Display holidays on calendar</label></div>
+                        </div>
+                        <hr />
+                        <div class="col-sm-12" id="holiday-key-container">
+                            <div class="holiday-key">No holidays were loaded.</div>
                         </div>
                     </div>
                 </div>
@@ -135,7 +152,18 @@
             <div class="col-md-11 col-sm-12 col-xs-12">
                 <div class="row clearfix">
                     <div class="col-sm-12 days-selected">
-                        You have selected <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> days.
+                        <div class="clearfix" style="width:50%; margin-left: auto; margin-right: auto;">
+                            <div class="pull-left" style="line-height:34px;">
+                                <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> overnights selected (<span class="tsc-calendar-days-selected-percentage">0</span>%)
+                            </div>
+                            <div class="pull-right">
+                                <div class="btn-group pull-right" aria-label="Calendar Options" role="group">
+                                    <asp:button runat="server" UseSubmitBehavior="false" Text="Save" ToolTip="Save calendar to your account" CssClass="btn btn-default disabled" aria-label="Save Calendar For Later Access"></asp:button>
+                                    <asp:button runat="server" UseSubmitBehavior="false" Text="Print" ToolTip="Print calendar to a PDF" CssClass="btn btn-default disabled" aria-label="Print Calendar to a PDF"></asp:button>
+                                    <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Clear" ToolTip="Clear selected dates and options in toolbar" CssClass="btn btn-danger" aria-label="Clear Selected Dates and Toolbar" id="btnClearCalendar" ClientIDMode="Static"></asp:button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
     

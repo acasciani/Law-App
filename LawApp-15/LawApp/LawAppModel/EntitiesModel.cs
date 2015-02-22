@@ -74,6 +74,14 @@ namespace LawAppModel
 			}
 		}
 		
+		public IQueryable<Holiday> Holidays 
+		{
+			get
+			{
+				return this.GetAll<Holiday>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -104,6 +112,10 @@ namespace LawAppModel
 			get;
 		}
 		IQueryable<SignedWebUser> SignedWebUsers
+		{
+			get;
+		}
+		IQueryable<Holiday> Holidays
 		{
 			get;
 		}

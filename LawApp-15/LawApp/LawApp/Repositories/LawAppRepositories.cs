@@ -15,6 +15,11 @@ namespace LawAppWeb
 	
     }
 
+	public partial class HolidayRepository : OpenAccessBaseRepository<LawAppModel.Holiday, LawAppModel.LawApp>
+    {
+	
+    }
+
 	public partial class SignedWebUserRepository : OpenAccessBaseRepository<LawAppModel.SignedWebUser, LawAppModel.LawApp>
     {
 	

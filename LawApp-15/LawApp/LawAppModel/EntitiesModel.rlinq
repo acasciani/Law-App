@@ -80,6 +80,29 @@
           <orm:collection element-class="LawAppModel.UserRole" inverse-field="_signedWebUsers" order-by="" uniqueId="d1144235-49ad-416f-b621-cec006a0344a" />
         </orm:field>
       </orm:class>
+      <orm:class name="Holiday" use-default-mapping="true" uniqueId="715dbf03-79f1-4ae8-b29f-2d9d4b799342">
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="HolidayId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_holidayId" />
+        </orm:identity>
+        <orm:field name="_holidayId" property="HolidayId" uniqueId="0b0bfac3-9a2f-43a2-a817-c3fafbc72388" type="System.Int32">
+          <orm:column name="HolidayId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_name" property="Name" uniqueId="a34b8b21-6375-46ff-bc3b-cb2158ed43e3" type="System.String">
+          <orm:column name="nme" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_description" property="Description" uniqueId="94b65946-6692-4004-9330-eb5be6ef1992" type="System.String">
+          <orm:column name="Description" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_holidayDate" property="HolidayDate" uniqueId="1f508914-b160-43e2-9117-aac043c123ba" type="System.DateTime">
+          <orm:column name="HolidayDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_backgroundClass" property="BackgroundClass" uniqueId="ec07adda-8df6-451b-993a-8b626b2af07e" type="System.String">
+          <orm:column name="BackgroundClass" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="Application">
@@ -223,6 +246,13 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="715dbf03-79f1-4ae8-b29f-2d9d4b799342" name="Holiday" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="HolidayId">
+      <Property Id="0b0bfac3-9a2f-43a2-a817-c3fafbc72388" name="HolidayId" type="Int32" label="HolidayId : Int32" identity="true" fieldName="_holidayId" />
+      <Property Id="a34b8b21-6375-46ff-bc3b-cb2158ed43e3" name="Name" label="Name : String" fieldName="_name" />
+      <Property Id="94b65946-6692-4004-9330-eb5be6ef1992" name="Description" label="Description : String" nullable="true" fieldName="_description" />
+      <Property Id="1f508914-b160-43e2-9117-aac043c123ba" name="HolidayDate" type="DateTime" label="HolidayDate : DateTime" fieldName="_holidayDate" />
+      <Property Id="ec07adda-8df6-451b-993a-8b626b2af07e" name="BackgroundClass" label="BackgroundClass : String" fieldName="_backgroundClass" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="700b6438-42c2-4324-a582-ef893682055d">
@@ -230,6 +260,7 @@
         <entitySetProperty name="Applications" namespace="LawAppModel" type="Application" label="Applications : IQueryable&lt;LawAppModel.Application&gt;" />
         <entitySetProperty name="UserRoles" namespace="LawAppModel" type="UserRole" label="UserRoles : IQueryable&lt;LawAppModel.UserRole&gt;" />
         <entitySetProperty name="SignedWebUsers" namespace="LawAppModel" type="SignedWebUser" label="SignedWebUsers : IQueryable&lt;LawAppModel.SignedWebUser&gt;" />
+        <entitySetProperty name="Holidays" namespace="LawAppModel" type="Holiday" label="Holidays : IQueryable&lt;LawAppModel.Holiday&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

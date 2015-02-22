@@ -71,3 +71,9 @@
     z-index: 1000;
     margin-top: 0px;
 }
+
+.datepicker-day-selectable {
+    background-color:#eee599;
+}
+
+
