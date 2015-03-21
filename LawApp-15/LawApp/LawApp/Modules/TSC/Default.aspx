@@ -40,7 +40,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Monday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualMondayDate" data-day="Monday">
                                 <asp:ListItem Value="1">Every Monday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other MO, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other MO, starting (select date) (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date monday-only">
@@ -52,7 +52,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Tuesday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualTuesdayDate" data-day="Tuesday">
                                 <asp:ListItem Value="1">Every Tuesday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other TU, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other TU, starting (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date tuesday-only">
@@ -64,7 +64,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Wednesday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualWednesdayDate" data-day="Wednesday">
                                 <asp:ListItem Value="1">Every Wednesday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other WE, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other WE, starting (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date wednesday-only">
@@ -76,7 +76,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Thursday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualThursdayDate" data-day="Thursday">
                                 <asp:ListItem Value="1">Every Thursday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other TR, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other TR, starting (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date thursday-only">
@@ -88,7 +88,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Friday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualFridayDate" data-day="Friday">
                                 <asp:ListItem Value="1">Every Friday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other FR, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other FR, starting (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date friday-only">
@@ -100,7 +100,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Saturday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualSaturdayDate" data-day="Saturday">
                                 <asp:ListItem Value="1">Every Saturday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other SA, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other SA, starting (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date saturday-only">
@@ -112,7 +112,7 @@
                         <div class="form-horizontal">
                             <asp:CheckBoxList ID="Sunday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualSundayDate" data-day="Sunday">
                                 <asp:ListItem Value="1">Every Sunday</asp:ListItem>
-                                <asp:ListItem Value="2">Every other SU, starting</asp:ListItem>
+                                <asp:ListItem Value="2">Every other SU, starting (select date)</asp:ListItem>
                             </asp:CheckBoxList>
                             <div class="col-sm-offset-1 col-sm-12 form-group">
                                 <div class="input-group date sunday-only">
