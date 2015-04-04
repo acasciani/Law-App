@@ -139,6 +139,87 @@ namespace LawAppWeb.Modules.TSC {
         protected global::System.Web.UI.WebControls.TextBox IndividualSundayDate;
         
         /// <summary>
+        /// SpringBreakStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SpringBreakStart;
+        
+        /// <summary>
+        /// SpringBreakEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SpringBreakEnd;
+        
+        /// <summary>
+        /// SpringBreakPresentation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList SpringBreakPresentation;
+        
+        /// <summary>
+        /// SummerBreakStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SummerBreakStart;
+        
+        /// <summary>
+        /// SummerBreakEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SummerBreakEnd;
+        
+        /// <summary>
+        /// SummerBreakPresentation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList SummerBreakPresentation;
+        
+        /// <summary>
+        /// WinterBreakStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox WinterBreakStart;
+        
+        /// <summary>
+        /// WinterBreakEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox WinterBreakEnd;
+        
+        /// <summary>
+        /// WinterBreakPresentation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList WinterBreakPresentation;
+        
+        /// <summary>
         /// btnClearCalendar control.
         /// </summary>
         /// <remarks>

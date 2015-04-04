@@ -126,7 +126,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-holidays">Holidays</a></div>
-                <div id="criteria-holidays" class="panel-collapse collapse ">
+                <div id="criteria-holidays" class="panel-collapse collapse">
                     <div class="panel-body">
                         Holidays are displayed on the calendar as colored dots. The holiday markers can be hidden by toggling the checkbox below.
                         <hr />
@@ -141,6 +141,131 @@
                 </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-breaks-spring">Spring Break</a></div>
+                <div id="criteria-breaks-spring" class="panel-collapse collapse criteria-breaks" data-break-color="green">
+                    <div class="panel-body">
+                        If dates input, then Spring Break will show in green on the calendar if one of the selections below is chosen. Please note that weekend and weekday nights previously selected will be overridden and controlled by the choice selected below.
+                        <hr />
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <label class="control-label" for="<%=SpringBreakStart.ClientID %>">First night</label>
+                                    <div class="input-group date">
+                                        <asp:TextBox CssClass="form-control BreakStart" runat="server" ID="SpringBreakStart" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <label class="control-label" for="<%=SpringBreakEnd.ClientID %>">Last night</label>
+                                    <div class="input-group date">
+                                        <asp:TextBox CssClass="form-control BreakEnd" runat="server" ID="SpringBreakEnd" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <asp:CheckBoxList ID="SpringBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SpringBreakStart" data-end-date="#SpringBreakEnd">
+                                        <asp:ListItem Value="1">Show color only</asp:ListItem>
+                                        <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
+                                        <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr />
+                        If time period is an odd number of nights and the holiday is split in 1/2, then the default listing for this calendar is to give Parent B the extra night. If this is not the desired outcome, then User must deselect the extra night.
+                    </div>    
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-breaks-summer">Summer Break</a></div>
+                <div id="criteria-breaks-summer" class="panel-collapse collapse criteria-breaks" data-break-color="orange">
+                    <div class="panel-body">
+                        If dates input, then Summer Break will show in orange on the calendar if one of the selections below is chosen. Please note that weekend and weekday nights previously selected will be overridden and controlled by the choice selected below.
+                        <hr />
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <label class="control-label" for="<%=SummerBreakStart.ClientID %>">First night</label>
+                                    <div class="input-group date">
+                                        <asp:TextBox CssClass="form-control BreakStart" runat="server" ID="SummerBreakStart" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <label class="control-label" for="<%=SummerBreakEnd.ClientID %>">Last night</label>
+                                    <div class="input-group date">
+                                        <asp:TextBox CssClass="form-control BreakEnd" runat="server" ID="SummerBreakEnd" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <asp:CheckBoxList ID="SummerBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SummerBreakStart" data-end-date="#SummerBreakEnd">
+                                        <asp:ListItem Value="1">Show color only</asp:ListItem>
+                                        <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
+                                        <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr />
+                        If time period is an odd number of nights and the holiday is split in 1/2, then the default listing for this calendar is to give Parent B the extra night. If this is not the desired outcome, then User must deselect the extra night.
+                    </div>    
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-breaks-winter">Winter Break</a></div>
+                <div id="criteria-breaks-winter" class="panel-collapse collapse criteria-breaks" data-break-color="red">
+                    <div class="panel-body">
+                        If dates input, then Winter Break will show in red on the calendar if one of the selections below is chosen. Please note that weekend and weekday nights previously selected will be overridden and controlled by the choice selected below.
+                        <hr />
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <label class="control-label" for="<%=WinterBreakStart.ClientID %>">First night</label>
+                                    <div class="input-group date">
+                                        <asp:TextBox CssClass="form-control BreakStart" runat="server" ID="WinterBreakStart" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-12 col-lg-6">
+                                    <label class="control-label" for="<%=WinterBreakEnd.ClientID %>">Last night</label>
+                                    <div class="input-group date">
+                                        <asp:TextBox CssClass="form-control BreakEnd" runat="server" ID="WinterBreakEnd" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <asp:CheckBoxList ID="WinterBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#WinterBreakStart" data-end-date="#WinterBreakEnd">
+                                        <asp:ListItem Value="1">Show color only</asp:ListItem>
+                                        <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
+                                        <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr />
+                        If time period is an odd number of nights and the holiday is split in 1/2, then the default listing for this calendar is to give Parent B the extra night. If this is not the desired outcome, then User must deselect the extra night.
+                    </div>    
+                </div>
+            </div>
         </div>
     </div>
     
@@ -152,7 +277,7 @@
             <div class="col-md-11 col-sm-12 col-xs-12">
                 <div class="row clearfix">
                     <div class="col-sm-12 days-selected">
-                        <div class="clearfix" style="width:50%; margin-left: auto; margin-right: auto;">
+                        <div class="clearfix">
                             <div class="pull-left" style="line-height:34px;">
                                 <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> overnights selected (<span class="tsc-calendar-days-selected-percentage">0</span>%)
                             </div>

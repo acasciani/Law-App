@@ -89,6 +89,8 @@
     <Content Include="LawApp15%282015-02-21 19-40-13%29.rlinq.sql" />
     <Content Include="LawApp15%282015-02-21 19-44-42%29.rlinq.sql" />
     <Content Include="LawApp15%282015-02-21 19-53-06%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-02 18-06-06%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-02 18-08-43%29.rlinq.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />

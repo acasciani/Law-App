@@ -29,6 +29,7 @@ function pageLoad() {
     getHolidaysFromServer();
     holidayCheckboxes();
     weekendOvernightCheckboxes();
+    breakOvernightCheckboxes();
 
 	$('td.CalendarDay').on('click', function () {
 	    if(!$(this)) return; // The this selector should never be null, but if it is then just return
@@ -46,7 +47,7 @@ function pageLoad() {
 	        daysClicked.push(dayId);
 	    }
 
-	    updateSelectedLabel(daysClicked.length);
+	    updateSelectedLabel($('.CalendarDay.day-checked').length);
 	});
 
 	$('.panel a.panel-title').on('click', function () {
@@ -198,6 +199,219 @@ function weekendOvernightCheckboxes() {
 
 
 /*
+ * used for holiday break checkbox logic
+ */
+function breakOvernightCheckboxes() {
+    $('#btnClearCalendar').click(function () {
+        _.forEach($('.criteria-breaks'), function (element) {
+            var color = $(element).data().breakColor;
+            UncheckAll(color);
+            RemoveDots(color);
+            updateSelectedLabel($('.CalendarDay.day-checked').length);
+        });
+    });
+
+    function getTextboxColor(txt) { return $(txt).parent().parent().parent().parent().parent().parent().data().breakColor; }
+    function getCheckboxColor(txt) { return $(txt).parent().parent().parent().parent().parent().parent().parent().parent().parent().data().breakColor; }
+
+    $('.BreakStart').change(function () {
+        var color = getTextboxColor(this);
+        refreshChecks($(this).parent(), null, color);
+        refreshDots($(this).parent(), null, color);
+    });
+
+    $('.BreakEnd').change(function () {
+        var color = getTextboxColor(this);
+        refreshChecks(null, $(this).parent(), color);
+        refreshDots(null, $(this).parent(), color);
+    });
+
+    $('.checkbox-breaks :checkbox').change(function () {
+        var StartDOY = GetStartDOY(this);
+        var EndDOY = GetEndDOY(this);
+        if (!StartDOY || !EndDOY) return;
+
+        var color = getCheckboxColor(this);
+        UncheckAll(color);
+        updateSelectedLabel($('.CalendarDay.day-checked').length);
+
+        if (isAtLeastOneChecked()) {
+            dotHelper(StartDOY, EndDOY, color);
+        } else {
+            RemoveDots(color);
+        }
+    });
+
+    function refreshDots(startTxt, endTxt, color) {
+        if (!startTxt && !endTxt) return;
+
+        var startDate, endDate;
+        if (!startTxt) {
+            endDate = endTxt.datepicker('getDate');
+            startDate = endTxt.parent().parent().parent().find('.BreakStart').parent().datepicker('getDate');
+        }
+
+        if (!endTxt) {
+            startDate = startTxt.datepicker('getDate');
+            endDate = startTxt.parent().parent().parent().find('.BreakEnd').parent().datepicker('getDate');
+        }
+
+        if (startTxt && endTxt) {
+            startDate = startTxt.datepicker('getDate');
+            endDate = endTxt.datepicker('getDate');
+        }
+
+        RemoveDots(color);
+        if (isAtLeastOneChecked()) dotHelper(startDate.getDOY(), endDate.getDOY(), color);
+    }
+
+    function refreshChecks(startTxt, endTxt, color) {
+        if (!startTxt && !endTxt) return;
+
+        var startDate, endDate;
+        if (!startTxt) {
+            endDate = endTxt.datepicker('getDate');
+            startDate = endTxt.parent().parent().parent().find('.BreakStart').parent().datepicker('getDate');
+        }
+
+        if (!endTxt) {
+            startDate = startTxt.datepicker('getDate');
+            endDate = startTxt.parent().parent().parent().find('.BreakEnd').parent().datepicker('getDate');
+        }
+
+        if (startTxt && endTxt) {
+            startDate = startTxt.datepicker('getDate');
+            endDate = endTxt.datepicker('getDate');
+        }
+
+        UncheckAll(color);
+
+        var checkedVal = $('.checkbox-breaks [type=checkbox]:checked').val();
+
+        switch (checkedVal) {
+            case '2': logicParentBFirst(startDate.getDOY(), endDate.getDOY()); break;
+            case '3': logicParentBSecond(startDate.getDOY(), endDate.getDOY()); break;
+            case '4': logicParentBAll(startDate.getDOY(), endDate.getDOY()); break;
+            default: break;
+        }
+    }
+
+    function isAtLeastOneChecked() {
+        return $('.checkbox-breaks [type=checkbox]:checked').length > 0;
+    }
+
+    $('.checkbox-breaks [value=1]:checkbox').change(function () {
+        var StartDOY = GetStartDOY(this);
+        var EndDOY = GetEndDOY(this);
+        if (!IsChecked(this) || !StartDOY || !EndDOY) return;
+    });
+
+    $('.checkbox-breaks [value=2]:checkbox').change(function () {
+        // parent B gets 1st 1/2, parent a gets 2nd
+        var StartDOY = GetStartDOY(this);
+        var EndDOY = GetEndDOY(this);
+        if (!IsChecked(this) || !StartDOY || !EndDOY) return;
+
+        var color = getCheckboxColor(this);
+        UncheckAll(color);
+        logicParentBFirst(StartDOY, EndDOY);
+    });
+
+    $('.checkbox-breaks [value=3]:checkbox').change(function () {
+        // parent B gets 2nd 1/2, parent a gets first
+        var StartDOY = GetStartDOY(this);
+        var EndDOY = GetEndDOY(this);
+        if (!IsChecked(this) || !StartDOY || !EndDOY) return;
+
+        var color = getCheckboxColor(this);
+        UncheckAll(color);
+        logicParentBSecond(StartDOY, EndDOY);
+    });
+
+    $('.checkbox-breaks [value=4]:checkbox').change(function () {
+        // parent B gets 100%
+        var StartDOY = GetStartDOY(this);
+        var EndDOY = GetEndDOY(this);
+        if (!IsChecked(this) || !StartDOY || !EndDOY) return;
+
+        var color = getCheckboxColor(this);
+        UncheckAll(color);
+        logicParentBAll(StartDOY, EndDOY);
+    });
+
+    function logicParentBFirst(startDOY, endDOY) {
+        var length = endDOY - startDOY + 1;
+        var isOdd = length % 2 == 1;
+        var parentBDays = isOdd ? Math.ceil(length / 2) : (length / 2);
+
+        for (var i = startDOY; i < startDOY + parentBDays; i++) Check('Day' + i);
+        updateSelectedLabel($('.CalendarDay.day-checked').length);
+    }
+
+    function logicParentBSecond(startDOY, endDOY) {
+        var length = endDOY - startDOY + 1;
+        var isOdd = length % 2 == 1;
+        var parentBDays = isOdd ? Math.ceil(length / 2) : (length / 2);
+
+        for (var i = endDOY - parentBDays + 1; i <= endDOY; i++) Check('Day' + i);
+        updateSelectedLabel($('.CalendarDay.day-checked').length);
+    }
+
+    function logicParentBAll(startDOY, endDOY) {
+        for (var i = startDOY; i <= endDOY; i++) Check('Day' + i);
+        updateSelectedLabel($('.CalendarDay.day-checked').length);
+    }
+
+    function dotHelper(startDOY, endDOY, color) {
+        for (var i = startDOY; i <= endDOY; i++) {
+            AddDot('Day' + i, color);
+        }
+    }
+
+    function GetStartDOY(checkbox) {
+        var Parent = $(checkbox).parent().parent().parent().parent();
+        var StartDate = $(Parent.data().startDate).parent().datepicker("getDate");
+
+        if (isNaN(StartDate)) return null;
+        return StartDate.getDOY();
+    }
+
+    function GetEndDOY(checkbox) {
+        var Parent = $(checkbox).parent().parent().parent().parent();
+        var EndDate = $(Parent.data().endDate).parent().datepicker("getDate");
+
+        if (isNaN(EndDate)) return null;
+        return EndDate.getDOY();
+    }
+
+    function AddDot(day, color) {
+        _.forEach($('.CalendarDay.' + day + ':not(.holiday.holiday-color' + color + ')'), function (dayColored) { $(dayColored).addClass('holiday holiday-color-' + color); });
+    }
+
+    function RemoveDots(color) {
+        _.forEach($('.CalendarDay.holiday.holiday-color-' + color), function (dayColored) {
+            $(dayColored).removeClass('holiday holiday-color-' + color);
+        });
+    }
+
+    function UncheckAll(color) {
+        _.forEach($('.CalendarDay.day-checked.HolidayDate.holiday-color-' + color), function (dayCheck) {
+            $(dayCheck).removeClass('day-checked HolidayDate');
+        });
+    }
+
+    function Check(day) {
+        _.forEach($('.CalendarDay.' + day + ':not(.day-checked)'), function (dayCheck) { $(dayCheck).addClass('day-checked HolidayDate'); });
+    }
+
+    function IsChecked(checkbox) {
+        return $(checkbox).prop("checked");
+    }
+}
+
+
+
+/*
  * Holidays toolbar logic
  */
 function getHolidaysFromServer() {
@@ -292,6 +506,11 @@ function btnClearCalendar() {
         $('#criteria-individual-overnights input[type="checkbox"]').prop('checked', false);
         $('.IndividualDateStart').val('');
         $('.IndividualDateStart').attr('disabled', true);
+
+        // reset all break toolbars
+        $('.checkbox-breaks input[type="checkbox"]').prop('checked', false);
+        $('.BreakStart').val('');
+        $('.BreakEnd').val('');
     }
 
     function resetReportingNumbers() {

@@ -56,7 +56,7 @@
     margin-bottom: 15px;
 }
 
-.checkbox-list td label {
+.checkbox-list td label, .checkbox-breaks td label {
     padding-left: 7px;
     margin-top: 0px;
     margin-bottom: 0;
@@ -77,3 +77,14 @@
 }
 
 
+#workpane .days-selected > .clearfix {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+    /** small devices and larger */
+    #workpane .days-selected > .clearfix {
+        width:500px; 
+    }
+}
