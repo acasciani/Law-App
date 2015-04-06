@@ -24,19 +24,6 @@ namespace LawAppModel
 {
 	public partial class SignedWebUser
 	{
-		private int _webUserId;
-		public virtual int WebUserId
-		{
-			get
-			{
-				return this._webUserId;
-			}
-			set
-			{
-				this._webUserId = value;
-			}
-		}
-		
 		private string _email;
 		public virtual string Email
 		{
@@ -63,6 +50,19 @@ namespace LawAppModel
 			}
 		}
 		
+		private int _webUserId;
+		public virtual int WebUserId
+		{
+			get
+			{
+				return this._webUserId;
+			}
+			set
+			{
+				this._webUserId = value;
+			}
+		}
+		
 		private DateTime _creationDate;
 		public virtual DateTime CreationDate
 		{
@@ -86,6 +86,28 @@ namespace LawAppModel
 			set
 			{
 				this._modificationDate = value;
+			}
+		}
+		
+		private Person _person;
+		public virtual Person Person
+		{
+			get
+			{
+				return this._person;
+			}
+			set
+			{
+				this._person = value;
+			}
+		}
+		
+		private IList<Permission> _permissions = new List<Permission>();
+		public virtual IList<Permission> Permissions
+		{
+			get
+			{
+				return this._permissions;
 			}
 		}
 		

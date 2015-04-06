@@ -20,5 +20,10 @@ namespace LawAppWeb.Account
                 RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
             }
         }
+
+        protected void Unnamed_LoggedIn(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Modules/TSC/Default.aspx");
+        }
     }
 }

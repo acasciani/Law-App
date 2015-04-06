@@ -20,6 +20,16 @@ namespace LawAppWeb
 	
     }
 
+	public partial class PermissionRepository : OpenAccessBaseRepository<LawAppModel.Permission, LawAppModel.LawApp>
+    {
+	
+    }
+
+	public partial class PersonRepository : OpenAccessBaseRepository<LawAppModel.Person, LawAppModel.LawApp>
+    {
+	
+    }
+
 	public partial class SignedWebUserRepository : OpenAccessBaseRepository<LawAppModel.SignedWebUser, LawAppModel.LawApp>
     {
 	

@@ -18,79 +18,47 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using LawAppModel;
 
 namespace LawAppModel	
 {
-	public partial class UserRole
+	public partial class Person
 	{
-		private int _userRoleId;
-		public virtual int UserRoleId
+		private int _personId;
+		public virtual int PersonId
 		{
 			get
 			{
-				return this._userRoleId;
+				return this._personId;
 			}
 			set
 			{
-				this._userRoleId = value;
+				this._personId = value;
 			}
 		}
 		
-		private string _roleName;
-		public virtual string RoleName
+		private string _fName;
+		public virtual string FName
 		{
 			get
 			{
-				return this._roleName;
+				return this._fName;
 			}
 			set
 			{
-				this._roleName = value;
+				this._fName = value;
 			}
 		}
 		
-		private int _applicationId;
-		public virtual int ApplicationId
+		private string _lName;
+		public virtual string LName
 		{
 			get
 			{
-				return this._applicationId;
+				return this._lName;
 			}
 			set
 			{
-				this._applicationId = value;
-			}
-		}
-		
-		private Application _application1;
-		public virtual Application Application
-		{
-			get
-			{
-				return this._application1;
-			}
-			set
-			{
-				this._application1 = value;
-			}
-		}
-		
-		private IList<Permission> _permissions = new List<Permission>();
-		public virtual IList<Permission> Permissions
-		{
-			get
-			{
-				return this._permissions;
-			}
-		}
-		
-		private IList<SignedWebUser> _signedWebUsers = new List<SignedWebUser>();
-		public virtual IList<SignedWebUser> SignedWebUsers
-		{
-			get
-			{
-				return this._signedWebUsers;
+				this._lName = value;
 			}
 		}
 		

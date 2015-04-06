@@ -162,6 +162,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\BetaComplete.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
@@ -171,6 +172,7 @@
     <Content Include="Content\datepicker3.css" />
     <Content Include="Content\Modules\TSC\Holidays.css" />
     <Content Include="Content\slider.css" />
+    <Content Include="Default.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\Datepicker.js" />
@@ -339,16 +341,36 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\BetaComplete.aspx.cs">
+      <DependentUpon>BetaComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\BetaComplete.aspx.designer.cs">
+      <DependentUpon>BetaComplete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\HolidaysController.cs" />
+    <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
     <Compile Include="Controllers\Partials\HolidaysController.Partial.cs" />
+    <Compile Include="Controllers\Partials\SignedWebUsersController.Partial.cs" />
+    <Compile Include="Controllers\Partials\UserRolesController.Partial.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\PermissionsController.cs" />
+    <Compile Include="Controllers\SignedWebUsersController.cs" />
+    <Compile Include="Controllers\UserRolesController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TSC\PermissionHelper.cs" />
     <Compile Include="Repositories\LawAppRepositories.cs" />
     <Compile Include="Modules\TSC\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
     <Compile Include="Repositories\OpenAccessBaseRepository.cs" />
-    <Compile Include="Controllers\SignedWebUsersController.cs" />
     <Compile Include="Source\Calendar\Day.cs" />
     <Compile Include="Source\Calendar\Month.cs" />
     <Compile Include="Source\Calendar\Week.cs" />
@@ -432,7 +454,7 @@
       <DependentUpon>Calendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Source\Controls\CalendarDay.cs" />
-    <Compile Include="Controllers\UserRolesController.cs" />
+    <Compile Include="Utilities\Authorization.cs" />
     <Compile Include="Utilities\CalendarUtilities.cs" />
     <Compile Include="Utilities\UIUtilities.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">

@@ -13,15 +13,15 @@ namespace LawAppWeb
         public void ConfigureWebApi()
         {
 			//useful when serializing graph of objects
-            GlobalConfiguration.Configuration.Formatters.Clear();
+            //GlobalConfiguration.Configuration.Formatters.Clear();
 
-            var jsonSerializerSettings = new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            };
-            GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter() { SerializerSettings = jsonSerializerSettings });
-			
+            //var jsonSerializerSettings = new JsonSerializerSettings
+            //{
+            //    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            //};
+            //GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter() { SerializerSettings = jsonSerializerSettings });
+			//
 
             RouteTable.Routes.MapHttpRoute(name: "DefaultApi",
                                            routeTemplate: "api/{controller}/{id}",

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.UI;
+using LawAppWeb.Utilities;
 
 namespace LawAppWeb.Modules.TSC
 {
@@ -14,6 +15,8 @@ namespace LawAppWeb.Modules.TSC
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            this.AuthorizePage(PermissionHelper.AddNew);
+            
             for (int i = 1; i <= 12; i++)
             {
                 Calendar control = (Calendar)LoadControl("~/Source/Controls/Calendar.ascx");

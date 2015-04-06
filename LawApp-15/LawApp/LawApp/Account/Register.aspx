@@ -2,11 +2,12 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="LawAppPlaceHolder">
     <hgroup class="title">
-        <h1><%: Title %>.</h1>
-        <h2>Use the form below to create a new account.</h2>
+        <h1><%: Title %> to be a BETA Tester</h1>
+        <h3>After filling out the following, you will need to send an email to <a href="mailto:lawapp15@gmail.com" target="_blank">lawapp15@gmail.com</a> with the following subject: "Request BETA Access for TSC: {put login email address here}". 
+            Once we receive that email, you will be granted full BETA access and will receive a confirmation email within 48 hours.</h3>
     </hgroup>
 
-    <asp:CreateUserWizard runat="server" ID="RegisterUser" ViewStateMode="Disabled" OnCreatedUser="RegisterUser_CreatedUser">
+    <asp:CreateUserWizard runat="server" ID="RegisterUser" ViewStateMode="Disabled" OnCreatedUser="RegisterUser_CreatedUser" RequireEmail="false">
         <LayoutTemplate>
             <asp:PlaceHolder runat="server" ID="wizardStepPlaceholder" />
             <asp:PlaceHolder runat="server" ID="navigationPlaceholder" />
@@ -26,16 +27,10 @@
                         <legend>Registration Form</legend>
                         <ol>
                             <li>
-                                <asp:Label runat="server" AssociatedControlID="UserName">User name</asp:Label>
-                                <asp:TextBox runat="server" ID="UserName" />
+                                <asp:Label runat="server" AssociatedControlID="UserName">Email</asp:Label>
+                                <asp:TextBox runat="server" ID="UserName" TextMode="Email" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
-                                    CssClass="field-validation-error" ErrorMessage="The user name field is required." />
-                            </li>
-                            <li>
-                                <asp:Label runat="server" AssociatedControlID="Email">Email address</asp:Label>
-                                <asp:TextBox runat="server" ID="Email" TextMode="Email" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                                    CssClass="field-validation-error" ErrorMessage="The email address field is required." />
+                                    CssClass="field-validation-error" ErrorMessage="The email field is required." />
                             </li>
                             <li>
                                 <asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>

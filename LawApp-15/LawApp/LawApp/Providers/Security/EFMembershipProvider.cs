@@ -68,12 +68,12 @@ namespace LawAppProviders.Security
             maxInvalidPasswordAttempts = Convert.ToInt32(ProviderUtils.GetConfigValue(config, "maxInvalidPasswordAttempts", "5"));
             passwordAttemptWindow = Convert.ToInt32(ProviderUtils.GetConfigValue(config, "passwordAttemptWindow", "10"));
             minRequiredNonAlphanumericCharacters = Convert.ToInt32(ProviderUtils.GetConfigValue(config, "minRequiredNonAlphanumericCharacters", "1"));
-            minRequiredPasswordLength = Convert.ToInt32(ProviderUtils.GetConfigValue(config, "minRequiredPasswordLength", "7"));
+            minRequiredPasswordLength = Convert.ToInt32(ProviderUtils.GetConfigValue(config, "minRequiredPasswordLength", "6"));
             passwordStrengthRegularExpression = Convert.ToString(ProviderUtils.GetConfigValue(config, "passwordStrengthRegularExpression", string.Empty));
             enablePasswordReset = Convert.ToBoolean(ProviderUtils.GetConfigValue(config, "enablePasswordReset", "true"));
             enablePasswordRetrieval = Convert.ToBoolean(ProviderUtils.GetConfigValue(config, "enablePasswordRetrieval", "false"));
             requiresQuestionAndAnswer = Convert.ToBoolean(ProviderUtils.GetConfigValue(config, "requiresQuestionAndAnswer", "true"));
-            requiresUniqueEmail = Convert.ToBoolean(ProviderUtils.GetConfigValue(config, "requiresUniqueEmail", "true"));
+            requiresUniqueEmail = Convert.ToBoolean(ProviderUtils.GetConfigValue(config, "requiresUniqueEmail", "false"));
 
             if (!string.IsNullOrEmpty(passwordStrengthRegularExpression))
             {
@@ -138,7 +138,7 @@ namespace LawAppProviders.Security
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
             // Validate email/password
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(email, password, true);
+            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, password, true);
             OnValidatingPassword(args);
 
             if (args.Cancel)
@@ -157,7 +157,7 @@ namespace LawAppProviders.Security
             MembershipUser user;
             try
             {
-                user = GetUser(email, false);
+                user = GetUser(username, false);
             }
             catch (ProviderException)
             {
@@ -180,7 +180,7 @@ namespace LawAppProviders.Security
                 // Need to add roles
                 SignedWebUser newUser = new SignedWebUser
                 {
-                    Email = email,
+                    Email = username,
                     CreationDate = creationDate,
                     UserPassword = EncodePassword(password)
                 };
@@ -200,8 +200,8 @@ namespace LawAppProviders.Security
                 {
                     status = MembershipCreateStatus.UserRejected;
                 }
-                
-                return GetUser(email, false);
+
+                return GetUser(username, false);
             }
 
             status = MembershipCreateStatus.DuplicateUserName;
@@ -214,7 +214,7 @@ namespace LawAppProviders.Security
             throw new NotImplementedException("Not currently able to change password question and answer");
         }
 
-        public override string GetPassword(string email, string answer)
+        public override string GetPassword(string username, string answer)
         {
             if (!EnablePasswordRetrieval)
             {
@@ -229,7 +229,7 @@ namespace LawAppProviders.Security
             string password = string.Empty;
             using (SignedWebUsersController wuc = new SignedWebUsersController())
             {
-                SignedWebUser user = wuc.GetWhere(swu => swu.Email.Equals(email)).FirstOrDefault();
+                SignedWebUser user = wuc.GetWhere(swu => swu.Email.Equals(username)).FirstOrDefault();
 
                 if (PasswordFormat == MembershipPasswordFormat.Encrypted)
                 {
@@ -240,16 +240,16 @@ namespace LawAppProviders.Security
             return password;
         }
 
-        public override bool ChangePassword(string email, string oldPassword, string newPassword)
+        public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             // Check if user is authenticated
-            if (!ValidateUser(email, oldPassword))
+            if (!ValidateUser(username, oldPassword))
             {
                 return false;
             }
 
             // Notify that password is going to change
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(email, newPassword, true);
+            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
             OnValidatingPassword(args);
 
             if (args.Cancel)
@@ -264,7 +264,7 @@ namespace LawAppProviders.Security
 
             using (SignedWebUsersController swuc = new SignedWebUsersController())
             {
-                SignedWebUser user = swuc.GetWhere(u => u.Email == email).FirstOrDefault();
+                SignedWebUser user = swuc.GetWhere(u => u.Email == username).FirstOrDefault();
 
                 user.UserPassword = EncodePassword(newPassword);
 
@@ -280,7 +280,7 @@ namespace LawAppProviders.Security
             }
         }
 
-        public override string ResetPassword(string email, string answer)
+        public override string ResetPassword(string username, string answer)
         {
             if (!EnablePasswordReset)
             {
@@ -294,7 +294,7 @@ namespace LawAppProviders.Security
 
             string newPassword = Membership.GeneratePassword(NEWPASSWORDLENGTH, MinRequiredNonAlphanumericCharacters);
 
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(email, newPassword, true);
+            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
             OnValidatingPassword(args);
 
             if (args.Cancel)
@@ -309,7 +309,7 @@ namespace LawAppProviders.Security
 
             using (SignedWebUsersController swuc = new SignedWebUsersController())
             {
-                SignedWebUser user = swuc.GetWhere(u => u.Email == email).FirstOrDefault();
+                SignedWebUser user = swuc.GetWhere(u => u.Email == username).FirstOrDefault();
 
                 try
                 {
@@ -329,15 +329,15 @@ namespace LawAppProviders.Security
         {
             using (SignedWebUsersController swuc = new SignedWebUsersController())
             {
-                SignedWebUser user = swuc.GetWhere(u => u.Email == membershipUser.Email).FirstOrDefault();
-                user.Email = membershipUser.Email;
+                SignedWebUser user = swuc.GetWhere(u => u.Email == membershipUser.UserName).FirstOrDefault();
+                user.Email = membershipUser.UserName;
                 swuc.Put(user.WebUserId, user);
             }
         }
 
-        public override bool ValidateUser(string email, string password)
+        public override bool ValidateUser(string username, string password)
         {
-            SignedWebUser user = GetUser(u => (u.Email == email && u.UserPassword == EncodePassword(password)));
+            SignedWebUser user = GetUser(u => (u.Email == username && u.UserPassword == EncodePassword(password)));
             return user != null;
         }
 
@@ -352,13 +352,13 @@ namespace LawAppProviders.Security
             return GetUser(search, userIsOnline);
         }
 
-        public override MembershipUser GetUser(string email, bool userIsOnline)
+        public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            Expression<Func<SignedWebUser, bool>> search = user => (user.Email == email);
+            Expression<Func<SignedWebUser, bool>> search = user => (user.Email == username);
             return GetUser(search, userIsOnline);
         }
 
-        public override bool DeleteUser(string email, bool deleteAllRelatedData)
+        public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
             try
             {
@@ -367,7 +367,7 @@ namespace LawAppProviders.Security
                     SignedWebUser user;
                     try
                     {
-                        user = swuc.GetWhere(u => u.Email == email).FirstOrDefault();
+                        user = swuc.GetWhere(u => u.Email == username).FirstOrDefault();
                         if (user == null)
                         {
                             return false;
@@ -533,7 +533,7 @@ namespace LawAppProviders.Security
             }
 
             // The user should have at least one role for this app. If they don't they don't match the application spec.
-            return user => (user.UserRoles.Where(r => r.Application == app).Count() > 0);
+            return user => (user.UserRoles.Where(r => r.Application.ApplicationId == app.ApplicationId).Count() > 0);
         }
 
         private void UpdateFailureCount(string username, string failureType)

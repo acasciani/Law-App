@@ -82,6 +82,22 @@ namespace LawAppModel
 			}
 		}
 		
+		public IQueryable<Person> People 
+		{
+			get
+			{
+				return this.GetAll<Person>();
+			}
+		}
+		
+		public IQueryable<Permission> Permissions 
+		{
+			get
+			{
+				return this.GetAll<Permission>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -116,6 +132,14 @@ namespace LawAppModel
 			get;
 		}
 		IQueryable<Holiday> Holidays
+		{
+			get;
+		}
+		IQueryable<Person> People
+		{
+			get;
+		}
+		IQueryable<Permission> Permissions
 		{
 			get;
 		}

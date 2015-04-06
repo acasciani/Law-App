@@ -7,7 +7,7 @@
     </hgroup>
     <section id="loginForm">
         <h2>Use a local account to log in.</h2>
-        <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false">
+        <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="Unnamed_LoggedIn">
             <LayoutTemplate>
                 <p class="validation-summary-errors">
                     <asp:Literal runat="server" ID="FailureText" />
@@ -16,9 +16,9 @@
                     <legend>Log in Form</legend>
                     <ol>
                         <li>
-                            <asp:Label runat="server" AssociatedControlID="UserName">User name</asp:Label>
+                            <asp:Label runat="server" AssociatedControlID="UserName">EMail</asp:Label>
                             <asp:TextBox runat="server" ID="UserName" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" CssClass="field-validation-error" ErrorMessage="The user name field is required." />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" CssClass="field-validation-error" ErrorMessage="The EMail field is required." />
                         </li>
                         <li>
                             <asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>
@@ -40,7 +40,7 @@
         </p>
     </section>
 
-    <section id="socialLoginForm">
+    <section id="socialLoginForm" runat="server" visible="false">
         <h2>Use another service to log in.</h2>
         <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
     </section>

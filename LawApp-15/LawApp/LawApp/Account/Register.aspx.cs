@@ -23,17 +23,17 @@ namespace LawAppWeb.Account
             // add them to initial roles... for now hard code, should have a UserType table that maps types to certain roles
             if (Roles.RoleExists("LEVEL0"))
             {
-                Roles.AddUserToRole(RegisterUser.Email, "LEVEL0");
+                Roles.AddUserToRole(RegisterUser.UserName, "LEVEL0");
             }
 
-            FormsAuthentication.SetAuthCookie(RegisterUser.Email, createPersistentCookie: false);
+            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, createPersistentCookie: false);
 
             string continueUrl = RegisterUser.ContinueDestinationPageUrl;
             if (!OpenAuth.IsLocalUrl(continueUrl))
             {
                 continueUrl = "~/";
             }
-            Response.Redirect(continueUrl);
+            Response.Redirect("~/Account/BetaComplete.aspx");
         }
     }
 }
