@@ -145,8 +145,8 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-breaks-spring">Spring Break</a></div>
                 <div id="criteria-breaks-spring" class="panel-collapse collapse criteria-breaks" data-break-color="green">
                     <div class="panel-body">
-                        If dates input, then Spring Break will show in green on the calendar if one of the selections below is chosen. Please note that weekend and weekday nights previously selected will be overridden and controlled by the choice selected below.
-                        <hr />
+                        <h4>Step 1</h4>
+                        If dates are input below, then each night of Spring Break will display with a green dot on the calendar if the “Show Spring Break on Calendar” box is checked.
 
                         <div class="form-horizontal">
                             <div class="form-group">
@@ -167,8 +167,23 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
+                                    <asp:CheckBoxList runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SpringBreakStart" data-end-date="#SpringBreakEnd">
+                                        <asp:ListItem Value="1">Show Spring Break on Calendar</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        Number of nights during Spring Break is <span id="springBreakNightsCount"></span> *
+                        <hr />
+                        <h4>Step 2</h4>
+                        Please note if a selection is made below, then weekend and weekday nights previously selected and now showing on the calendar during Spring Break will be overridden and controlled by the choice made below.
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
                                     <asp:CheckBoxList ID="SpringBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SpringBreakStart" data-end-date="#SpringBreakEnd">
-                                        <asp:ListItem Value="1">Show color only</asp:ListItem>
+                                        <asp:ListItem Value="5">Clear existing check marks for Spring Break and manually input on calendar</asp:ListItem>
                                         <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
                                         <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
                                         <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
@@ -177,8 +192,8 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <hr />
-                        If time period is an odd number of nights and the holiday is split in 1/2, then the default listing for this calendar is to give Parent B the extra night. If this is not the desired outcome, then User must deselect the extra night.
+                        
+                        * Note: If time period is an odd number of nights and the holiday is split in 1/2, then Parent B will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
                     </div>    
                 </div>
             </div>
@@ -187,8 +202,8 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-breaks-summer">Summer Break</a></div>
                 <div id="criteria-breaks-summer" class="panel-collapse collapse criteria-breaks" data-break-color="orange">
                     <div class="panel-body">
-                        If dates input, then Summer Break will show in orange on the calendar if one of the selections below is chosen. Please note that weekend and weekday nights previously selected will be overridden and controlled by the choice selected below.
-                        <hr />
+                        <h4>Step 1</h4>
+                        If dates are input below, then each night of Summer Break will display with an orange dot on the calendar if the “Show Summer Break on Calendar” box is checked.
 
                         <div class="form-horizontal">
                             <div class="form-group">
@@ -209,8 +224,24 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
+                                    <asp:CheckBoxList runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SummerBreakStart" data-end-date="#SummerBreakEnd">
+                                        <asp:ListItem Value="1">Show Summer Break on Calendar</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        Number of nights during Summer Break is <span id="summerBreakNightsCount"></span> *
+                        <hr />
+                        <h4>Step 2</h4>
+                        Please note if a selection is made below, then weekend and weekday nights previously selected and now showing on the calendar during Summer Break will be overridden and controlled by the choice made below.
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
                                     <asp:CheckBoxList ID="SummerBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SummerBreakStart" data-end-date="#SummerBreakEnd">
-                                        <asp:ListItem Value="1">Show color only</asp:ListItem>
+                                        <asp:ListItem Value="5">Clear existing check marks for Summer Break and manually input on calendar</asp:ListItem>
                                         <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
                                         <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
                                         <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
@@ -219,8 +250,8 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <hr />
-                        If time period is an odd number of nights and the holiday is split in 1/2, then the default listing for this calendar is to give Parent B the extra night. If this is not the desired outcome, then User must deselect the extra night.
+
+                        * Note: If time period is an odd number of nights and the holiday is split in 1/2, then Parent B will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
                     </div>    
                 </div>
             </div>
@@ -229,8 +260,8 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-breaks-winter">Winter Break</a></div>
                 <div id="criteria-breaks-winter" class="panel-collapse collapse criteria-breaks" data-break-color="red">
                     <div class="panel-body">
-                        If dates input, then Winter Break will show in red on the calendar if one of the selections below is chosen. Please note that weekend and weekday nights previously selected will be overridden and controlled by the choice selected below.
-                        <hr />
+                        <h4>Step 1</h4>
+                        If dates are input below, then each night of Winter Break will display with a red dot on the calendar if the “Show Winter Break on Calendar” box is checked.
 
                         <div class="form-horizontal">
                             <div class="form-group">
@@ -251,8 +282,24 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
+                                    <asp:CheckBoxList runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#WinterBreakStart" data-end-date="#WinterBreakEnd">
+                                        <asp:ListItem Value="1">Show Winter Break on Calendar</asp:ListItem>
+                                    </asp:CheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        Number of nights during Winter Break is <span id="winterBreakNightsCount"></span> *
+                        <hr />
+                        <h4>Step 2</h4>
+                        Please note if a selection is made below, then weekend and weekday nights previously selected and now showing on the calendar during Winter Break will be overridden and controlled by the choice made below.
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
                                     <asp:CheckBoxList ID="WinterBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#WinterBreakStart" data-end-date="#WinterBreakEnd">
-                                        <asp:ListItem Value="1">Show color only</asp:ListItem>
+                                        <asp:ListItem Value="5">Clear existing check marks for Winter Break and manually input on calendar</asp:ListItem>
                                         <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
                                         <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
                                         <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
@@ -261,8 +308,8 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <hr />
-                        If time period is an odd number of nights and the holiday is split in 1/2, then the default listing for this calendar is to give Parent B the extra night. If this is not the desired outcome, then User must deselect the extra night.
+
+                         * Note: If time period is an odd number of nights and the holiday is split in 1/2, then Parent B will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
                     </div>    
                 </div>
             </div>

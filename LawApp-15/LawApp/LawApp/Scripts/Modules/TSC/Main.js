@@ -30,6 +30,7 @@ function pageLoad() {
     holidayCheckboxes();
     weekendOvernightCheckboxes();
     breakOvernightCheckboxes();
+    displayBreakDaysInToolbox();
 
 	$('td.CalendarDay').on('click', function () {
 	    if(!$(this)) return; // The this selector should never be null, but if it is then just return
@@ -201,6 +202,28 @@ function weekendOvernightCheckboxes() {
 /*
  * used for holiday break checkbox logic
  */
+function displayBreakDaysInToolbox() {
+    $('#SpringBreakStart').change(function () { $('#springBreakNightsCount').text(daysDiff('#SpringBreakStart', '#SpringBreakEnd')); });
+    $('#SpringBreakEnd').change(function () { $('#springBreakNightsCount').text(daysDiff('#SpringBreakStart', '#SpringBreakEnd')); });
+
+    $('#SummerBreakStart').change(function () { $('#summerBreakNightsCount').text(daysDiff('#SummerBreakStart', '#SummerBreakEnd')); });
+    $('#SummerBreakEnd').change(function () { $('#summerBreakNightsCount').text(daysDiff('#SummerBreakStart', '#SummerBreakEnd')); });
+
+    $('#WinterBreakStart').change(function () { $('#winterBreakNightsCount').text(daysDiff('#WinterBreakStart', '#WinterBreakEnd')); });
+    $('#WinterBreakEnd').change(function () { $('#winterBreakNightsCount').text(daysDiff('#WinterBreakStart', '#WinterBreakEnd')); });
+
+    function daysDiff(startTextBox, endTextBox) {
+        var startDate = $(startTextBox).parent().datepicker('getDate');
+        var endDate = $(endTextBox).parent().datepicker('getDate');
+        if (isNaN(startDate) || isNaN(endDate)) return 0;
+
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        return endDate.getDOY() - startDate.getDOY() + 1;
+    }
+}
+
 function breakOvernightCheckboxes() {
     $('#btnClearCalendar').click(function () {
         _.forEach($('.criteria-breaks'), function (element) {
@@ -339,6 +362,18 @@ function breakOvernightCheckboxes() {
         logicParentBAll(StartDOY, EndDOY);
     });
 
+    $('.checkbox-breaks [value=5]:checkbox').change(function () {
+        // parent B gets 0%
+        var StartDOY = GetStartDOY(this);
+        var EndDOY = GetEndDOY(this);
+        if (!IsChecked(this) || !StartDOY || !EndDOY) return;
+
+        var color = getCheckboxColor(this);
+        UncheckAll(color);
+
+        logicParentBZero(StartDOY, EndDOY, color);
+    });
+
     function logicParentBFirst(startDOY, endDOY) {
         var length = endDOY - startDOY + 1;
         var isOdd = length % 2 == 1;
@@ -359,6 +394,13 @@ function breakOvernightCheckboxes() {
 
     function logicParentBAll(startDOY, endDOY) {
         for (var i = startDOY; i <= endDOY; i++) Check('Day' + i);
+        updateSelectedLabel($('.CalendarDay.day-checked').length);
+    }
+
+    function logicParentBZero(startDOY, endDOY, color) {
+        for (var i = startDOY; i <= endDOY; i++){
+            _.forEach($('.CalendarDay.Day' + i), function (dayCheck) { $(dayCheck).removeClass('day-checked HolidayDate'); });
+        }
         updateSelectedLabel($('.CalendarDay.day-checked').length);
     }
 
@@ -390,7 +432,7 @@ function breakOvernightCheckboxes() {
 
     function RemoveDots(color) {
         _.forEach($('.CalendarDay.holiday.holiday-color-' + color), function (dayColored) {
-            $(dayColored).removeClass('holiday holiday-color-' + color);
+            $(dayColored).removeClass('holiday-color-' + color);
         });
     }
 
