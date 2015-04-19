@@ -26,6 +26,7 @@ function pageLoad() {
     resizeDrawer();
     individualOvernightCheckboxes();
     btnClearCalendar();
+    btnPrintCalendar();
     getHolidaysFromServer();
     holidayCheckboxes();
     weekendOvernightCheckboxes();
@@ -491,7 +492,7 @@ function getHolidaysFromServer() {
             var tempElement = document.createElement('div');
             tempElement.classList.add(holiday.CssClass);
             tempElement.classList.add('holiday-key');
-            tempElement.innerText = holiday.Name;
+            tempElement.innerHTML = holiday.Name;
             $('#holiday-key-container').append(tempElement);
         });
     }
@@ -520,6 +521,17 @@ function holidayCheckboxes() {
             $('.CalendarDay.Day' + dayOfYear).addClass('holiday ' + holiday.CssClass);
         });
     }
+}
+
+
+
+/*
+ * Adds print functionality for button group on calendar page
+ */
+function btnPrintCalendar() {
+    $('#btnPrintCalendar').click(function () {
+        window.print();
+    });
 }
 
 
@@ -661,7 +673,7 @@ function caseInformation() {
         displayContent(this, '.CaseNumberDisplay');
     });
 
-    $("#Exhibit").on("input", function (e) {
+    $("#Exhibit").change(function () {
         displayContent(this, '.ExhibitDisplay');
     });
 

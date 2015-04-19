@@ -75,7 +75,7 @@
                         Select any overnights spent with Parent B that may apply.
                         <hr />
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Monday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualMondayDate" data-day="Monday">
                                 <asp:ListItem Value="1">Every Monday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other MO, starting (select date) (select date)</asp:ListItem>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Tuesday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualTuesdayDate" data-day="Tuesday">
                                 <asp:ListItem Value="1">Every Tuesday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other TU, starting (select date)</asp:ListItem>
@@ -99,7 +99,7 @@
                             </div>
                         </div>
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Wednesday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualWednesdayDate" data-day="Wednesday">
                                 <asp:ListItem Value="1">Every Wednesday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other WE, starting (select date)</asp:ListItem>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Thursday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualThursdayDate" data-day="Thursday">
                                 <asp:ListItem Value="1">Every Thursday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other TR, starting (select date)</asp:ListItem>
@@ -123,7 +123,7 @@
                             </div>
                         </div>
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Friday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualFridayDate" data-day="Friday">
                                 <asp:ListItem Value="1">Every Friday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other FR, starting (select date)</asp:ListItem>
@@ -135,7 +135,7 @@
                             </div>
                         </div>
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Saturday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualSaturdayDate" data-day="Saturday">
                                 <asp:ListItem Value="1">Every Saturday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other SA, starting (select date)</asp:ListItem>
@@ -147,7 +147,7 @@
                             </div>
                         </div>
 
-                        <div class="form-horizontal">
+                        <div class="form-horizontal clearfix">
                             <asp:CheckBoxList ID="Sunday" runat="server" CssClass="checkbox-list" data-toggle="radio" data-start-date="#IndividualSundayDate" data-day="Sunday">
                                 <asp:ListItem Value="1">Every Sunday</asp:ListItem>
                                 <asp:ListItem Value="2">Every other SU, starting (select date)</asp:ListItem>
@@ -369,7 +369,7 @@
                             <div class="pull-right">
                                 <div class="btn-group pull-right" aria-label="Calendar Options" role="group">
                                     <asp:button runat="server" UseSubmitBehavior="false" Text="Save" ToolTip="Save calendar to your account" CssClass="btn btn-default disabled" aria-label="Save Calendar For Later Access"></asp:button>
-                                    <asp:button runat="server" UseSubmitBehavior="false" Text="Print" ToolTip="Print calendar to a PDF" CssClass="btn btn-default disabled" aria-label="Print Calendar to a PDF"></asp:button>
+                                    <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Print" ToolTip="Print calendar" CssClass="btn btn-default" aria-label="Print Calendar" id="btnPrintCalendar" ClientIDMode="Static"></asp:button>
                                     <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Clear" ToolTip="Clear selected dates and options in toolbar" CssClass="btn btn-danger" aria-label="Clear Selected Dates and Toolbar" id="btnClearCalendar" ClientIDMode="Static"></asp:button>
                                 </div>
                             </div>
