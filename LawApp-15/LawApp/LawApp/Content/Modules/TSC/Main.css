@@ -82,9 +82,22 @@
     margin-right: auto;
 }
 
+.text-center { text-align: center; }
+
 @media screen and (min-width: 768px) {
     /** small devices and larger */
     #workpane .days-selected > .clearfix {
         width:500px; 
+    }
+
+    .column-calendar-month {
+        /* set min height for floats */
+        min-height: 325px;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .column-calendar-month{
+        min-height: initial;
     }
 }

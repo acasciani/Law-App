@@ -171,6 +171,7 @@
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker3.css" />
     <Content Include="Content\Modules\TSC\Holidays.css" />
+    <Content Include="Content\Modules\TSC\Print.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Default.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.js" />

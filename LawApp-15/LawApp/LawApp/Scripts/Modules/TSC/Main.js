@@ -31,6 +31,7 @@ function pageLoad() {
     weekendOvernightCheckboxes();
     breakOvernightCheckboxes();
     displayBreakDaysInToolbox();
+    caseInformation();
 
 	$('td.CalendarDay').on('click', function () {
 	    if(!$(this)) return; // The this selector should never be null, but if it is then just return
@@ -258,7 +259,7 @@ function breakOvernightCheckboxes() {
         UncheckAll(color);
         updateSelectedLabel($('.CalendarDay.day-checked').length);
 
-        if (isAtLeastOneChecked()) {
+        if (isAtLeastOneChecked(color)) {
             dotHelper(StartDOY, EndDOY, color);
         } else {
             RemoveDots(color);
@@ -285,7 +286,7 @@ function breakOvernightCheckboxes() {
         }
 
         RemoveDots(color);
-        if (isAtLeastOneChecked()) dotHelper(startDate.getDOY(), endDate.getDOY(), color);
+        if (isAtLeastOneChecked(color)) dotHelper(startDate.getDOY(), endDate.getDOY(), color);
     }
 
     function refreshChecks(startTxt, endTxt, color) {
@@ -309,7 +310,7 @@ function breakOvernightCheckboxes() {
 
         UncheckAll(color);
 
-        var checkedVal = $('.checkbox-breaks [type=checkbox]:checked').val();
+        var checkedVal = $('[data-break-color='+color+'] .checkbox-breaks [type=checkbox]:checked').val();
 
         switch (checkedVal) {
             case '2': logicParentBFirst(startDate.getDOY(), endDate.getDOY()); break;
@@ -319,8 +320,8 @@ function breakOvernightCheckboxes() {
         }
     }
 
-    function isAtLeastOneChecked() {
-        return $('.checkbox-breaks [type=checkbox]:checked').length > 0;
+    function isAtLeastOneChecked(color) {
+        return $('[data-break-color=' + color + '] .checkbox-breaks [type=checkbox]:checked').length > 0;
     }
 
     $('.checkbox-breaks [value=1]:checkbox').change(function () {
@@ -337,6 +338,7 @@ function breakOvernightCheckboxes() {
 
         var color = getCheckboxColor(this);
         UncheckAll(color);
+        logicParentBZero(StartDOY, EndDOY, color);
         logicParentBFirst(StartDOY, EndDOY);
     });
 
@@ -348,6 +350,7 @@ function breakOvernightCheckboxes() {
 
         var color = getCheckboxColor(this);
         UncheckAll(color);
+        logicParentBZero(StartDOY, EndDOY, color);
         logicParentBSecond(StartDOY, EndDOY);
     });
 
@@ -495,8 +498,8 @@ function getHolidaysFromServer() {
 }
 
 function holidayCheckboxes() {
-    $('.checkbox-holidays :checkbox').prop('checked', true); // the check box will be checked on pageload, if this is not desired remove this line
-    applyDots(); // holidays will be marked on page load, if this isn't desired remove this line.
+    //$('.checkbox-holidays :checkbox').prop('checked', true); // the check box will be checked on pageload, if this is not desired remove this line
+    //applyDots(); // holidays will be marked on page load, if this isn't desired remove this line.
 
     $('.checkbox-holidays :checkbox').change(function () {
         var IsChecked = $(this).prop('checked') === true;
@@ -581,7 +584,7 @@ function updateTotalDaysLabel(daysChecked) {
 /**
  * Resize window functions
  */
-$(window).resize(function () { resizeCalendarMonthColumns(); });
+/* $(window).resize(function () { resizeCalendarMonthColumns(); });
 $(function () { resizeCalendarMonthColumns(); });
 
 function resizeCalendarMonthColumns() {
@@ -590,7 +593,7 @@ function resizeCalendarMonthColumns() {
     }).get());
 
     $('.column-calendar-month').height(maxCalendarMonthHeight);
-}
+}*/
 
 
 
@@ -636,5 +639,40 @@ function HandleBiWeekly(DateString, Checkbox, Day, UncheckCB, CheckCB) {
     // Check all the days less than the selected one
     for (var i = DateValue.getDOY() ; i >= 1; i -= 14) {
         CheckCB(Day, i);
+    }
+}
+
+
+
+/**
+ * Handle case information 
+ */
+function caseInformation() {
+    // Initially hide case info unless user types something
+    $('.CaseNameDisplay').hide();
+    $('.CaseNumberDisplay').hide();
+    $('.ExhibitDisplay').hide();
+
+    $("#CaseName").on("input", function (e) {
+        displayContent(this, '.CaseNameDisplay');
+    });
+
+    $("#CaseNumber").on("input", function (e) {
+        displayContent(this, '.CaseNumberDisplay');
+    });
+
+    $("#Exhibit").on("input", function (e) {
+        displayContent(this, '.ExhibitDisplay');
+    });
+
+    function displayContent(inputElement, targetContainer) {
+        var NewValString = $(inputElement).val();
+        var target = $(targetContainer);
+        $(targetContainer + ' > .Value').text(NewValString);
+        if (NewValString == '') {
+            $(targetContainer).hide();
+        } else {
+            $(targetContainer).show();
+        }
     }
 }

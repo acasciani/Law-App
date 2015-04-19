@@ -4,14 +4,52 @@
 
 <asp:Content ID="TSCProduct_Page" ContentPlaceHolderID="TSCProduct_Holder" runat="server">
 
-    <div class="col-md-4 collapsed" id="drawer">
-                <div class="row clearfix">
-                    <div class="col-sm-12 days-selected">
-                        <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> overnights selected (<span class="tsc-calendar-days-selected-percentage">0</span>%)
-                    </div>
-                </div>
+    <div class="col-md-4 collapsed hidden-print" id="drawer">
+        <div class="row clearfix">
+            <div class="col-sm-12 days-selected">
+                <span class="tsc-calendar-days-selected-count">0</span> of <span class="tsc-calendar-days-total-count">0</span> overnights selected (<span class="tsc-calendar-days-selected-percentage">0</span>%)
+            </div>
+        </div>
 
         <div class="panel-group" id="criteria">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-case-information">Case Information</a></div>
+                <div id="criteria-case-information" class="panel-collapse collapse ">
+                    <div class="panel-body">
+                        The case information is optional. If entered, it will display when the populated calendar is printed.
+                        <hr />
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="<%=Exhibit.ClientID %>">Exhibit</label>
+                                    <asp:DropDownList runat="server" ID="Exhibit" CssClass="form-control" ClientIDMode="Static">
+                                        <asp:ListItem Text="" Value="" />
+                                        <asp:ListItem Text="A" />
+                                        <asp:ListItem Text="B" />
+                                        <asp:ListItem Text="C" />
+                                        <asp:ListItem Text="D" />
+                                        <asp:ListItem Text="E" />
+                                        <asp:ListItem Text="1" />
+                                        <asp:ListItem Text="2" />
+                                        <asp:ListItem Text="3" />
+                                        <asp:ListItem Text="4" />
+                                        <asp:ListItem Text="5" />
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="<%=CaseName.ClientID %>">Case Name</label>
+                                    <asp:TextBox runat="server" ID="CaseName" MaxLength="75" CssClass="form-control" ClientIDMode="Static" />
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="<%=CaseNumber.ClientID %>">Case Number</label>
+                                    <asp:TextBox runat="server" ID="CaseNumber" MaxLength="40" CssClass="form-control" ClientIDMode="Static" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-weekend-overnights">Weekend Overnights</a></div>
                 <div id="criteria-weekend-overnights" class="panel-collapse collapse ">
@@ -125,7 +163,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-holidays">Holidays</a></div>
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-holidays">Federal Holidays</a></div>
                 <div id="criteria-holidays" class="panel-collapse collapse">
                     <div class="panel-body">
                         Holidays are displayed on the calendar as colored dots. The holiday markers can be hidden by toggling the checkbox below.
@@ -184,8 +222,8 @@
                                 <div class="col-xs-12">
                                     <asp:CheckBoxList ID="SpringBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SpringBreakStart" data-end-date="#SpringBreakEnd">
                                         <asp:ListItem Value="5">Clear existing check marks for Spring Break and manually input on calendar</asp:ListItem>
-                                        <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
-                                        <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="2">Parent B gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="3">Parent B gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
                                         <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
@@ -242,8 +280,8 @@
                                 <div class="col-xs-12">
                                     <asp:CheckBoxList ID="SummerBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SummerBreakStart" data-end-date="#SummerBreakEnd">
                                         <asp:ListItem Value="5">Clear existing check marks for Summer Break and manually input on calendar</asp:ListItem>
-                                        <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
-                                        <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="2">Parent B gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="3">Parent B gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
                                         <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
@@ -300,8 +338,8 @@
                                 <div class="col-xs-12">
                                     <asp:CheckBoxList ID="WinterBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#WinterBreakStart" data-end-date="#WinterBreakEnd">
                                         <asp:ListItem Value="5">Clear existing check marks for Winter Break and manually input on calendar</asp:ListItem>
-                                        <asp:ListItem Value="2">Parent B gets 1st ½</asp:ListItem>
-                                        <asp:ListItem Value="3">Parent B gets 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="2">Parent B gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="3">Parent B gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
                                         <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
@@ -316,13 +354,13 @@
         </div>
     </div>
     
-    <div class="col-md-8" id="workpane">
+    <div class="col-md-8 col-print-12" id="workpane">
         <div class="row">
-            <div class="col-md-1 col-sm-0 col-xs-0 collapsible">
+            <div class="col-md-1 col-sm-0 col-xs-0 collapsible hidden-print">
                 <button type="button" onclick="javascript:collapse('#drawer', '#workpane', $(this));">&laquo;</button>
             </div>
-            <div class="col-md-11 col-sm-12 col-xs-12">
-                <div class="row clearfix">
+            <div class="col-md-11 col-sm-12 col-xs-12 col-print-12">
+                <div class="row clearfix hidden-print">
                     <div class="col-sm-12 days-selected">
                         <div class="clearfix">
                             <div class="pull-left" style="line-height:34px;">
@@ -338,9 +376,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row clearfix text-center visible-print-block"><strong>2015 Time-sharing Calendar</strong></div>
+                <div class="row clearfix text-center visible-print-block margin-bottom-10">Parent B has <span class="tsc-calendar-days-selected-count">0</span> nights (<span class="tsc-calendar-days-selected-percentage">0</span>%) of time-sharing.</div>
     
                 <div class="row clearfix" id="CalendarsHolder" runat="server"></div>
 
+                <div class="row text-center visible-print-block"><span class="ExhibitDisplay"><strong>Exhibit:</strong> <asp:Label runat="server" id="ExhibitDisplay" CssClass="Value" /></span></div>
+                <div class="row text-center visible-print-block"><span class="CaseNameDisplay"><strong>Case:</strong> <asp:Label runat="server" id="CaseNameDisplay" CssClass="Value" /> </span><span class="CaseNumberDisplay"><strong>Number:</strong> <asp:Label runat="server" id="CaseNumberDisplay" CssClass="Value" /></span></div>
+                <div class="row text-center visible-print-block">This time-sharing calendar was prepared using <strong>TimesharingCalendar.com</strong>.</div>
             </div>
         </div>
     </div>

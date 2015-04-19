@@ -16,7 +16,12 @@ namespace LawAppWeb.Modules.TSC
         protected void Page_Init(object sender, EventArgs e)
         {
             this.AuthorizePage(PermissionHelper.AddNew);
-            
+
+            if (IsPostBack)
+            {
+                return;
+            }
+
             for (int i = 1; i <= 12; i++)
             {
                 Calendar control = (Calendar)LoadControl("~/Source/Controls/Calendar.ascx");
@@ -35,6 +40,21 @@ namespace LawAppWeb.Modules.TSC
                     Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "TSC_Main", "../../Scripts/Modules/TSC/Main.js");
                 }
             }
+        }
+
+        protected void Exhibit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void CaseName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void CaseNumber_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

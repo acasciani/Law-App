@@ -4,6 +4,7 @@
     <link href="<%: ResolveUrl("~/Content/Modules/TSC/Main.css") %>" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Content/slider.css") %>" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Content/Modules/TSC/Holidays.css") %>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Content/Modules/TSC/Print.css") %>" rel="stylesheet" />
 
 </asp:Content>
 
