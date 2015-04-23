@@ -89,6 +89,9 @@
         <orm:field name="_userRoles" property="UserRoles" behavior="readwrite" uniqueId="e1b0e633-f5e4-4d21-89cb-a82aa09c9f9f" type="LawAppModel.UserRole" default-fetch-group="true">
           <orm:collection element-class="LawAppModel.UserRole" inverse-field="_signedWebUsers" order-by="" uniqueId="d1144235-49ad-416f-b621-cec006a0344a" />
         </orm:field>
+        <orm:field name="_tSC_Calendars" property="TSC_Calendars" behavior="readwrite" uniqueId="7778c2ee-e579-4093-98a9-341465a48179" type="LawAppModel.TSC_Calendar">
+          <orm:collection element-class="LawAppModel.TSC_Calendar" inverse-field="_signedWebUser" order-by="" uniqueId="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" />
+        </orm:field>
       </orm:class>
       <orm:class name="Holiday" use-default-mapping="true" uniqueId="715dbf03-79f1-4ae8-b29f-2d9d4b799342">
         <orm:identity>
@@ -148,6 +151,171 @@
           <orm:column name="RequiresLogin" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
         </orm:field>
       </orm:class>
+      <orm:class name="TSC_Calendar" uniqueId="7eb8dad2-ad92-4ff5-ab26-1d57681a20db">
+        <orm:table name="TSC_Calendar" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="CalendarId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_calendarId" />
+        </orm:identity>
+        <orm:field name="_calendarId" property="CalendarId" uniqueId="d9116399-0a28-41b7-82b1-205b19d696ff" type="System.Int64">
+          <orm:column name="CalendarId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_year" property="Year" uniqueId="740d9418-0829-4a3b-8a05-21a5fdefee7a" type="System.Int16">
+          <orm:column name="yr" sql-type="smallint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.SmallInt2Int16Converter" ado-type="Int16" />
+        </orm:field>
+        <orm:field name="_exhibit" property="Exhibit" uniqueId="ddde2a2f-5219-4b0f-84d1-bb8dc96f3444" type="System.String">
+          <orm:column name="Exhibit" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_caseName" property="CaseName" uniqueId="ebbae20b-3904-4dd0-a5f0-404ca814928c" type="System.String">
+          <orm:column name="CaseName" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_caseNumber" property="CaseNumber" uniqueId="07a96473-1b1a-4d25-84cb-ab27f12ae9d3" type="System.String">
+          <orm:column name="CaseNumber" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_weekendsActive" property="WeekendsActive" uniqueId="32fa9df2-8abe-4d73-835b-2848d21e457a" type="System.Boolean">
+          <orm:column name="WeekendsActive" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_weekendsStart" property="WeekendsStart" uniqueId="54e1cdc9-7553-451f-8df1-4d4e4f6c5210" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="WeekendsStart" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_displayHolidays" property="DisplayHolidays" uniqueId="564ce223-f3ca-495f-bada-cb3ffa94e8fa" type="System.Boolean">
+          <orm:column name="DisplayHolidays" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_lastSaved" property="LastSaved" uniqueId="3e0aebdc-a77c-4946-bbc7-6b752f1c16d3" type="System.DateTime">
+          <orm:column name="LastSaved" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_createDate" property="CreateDate" uniqueId="5e47068e-c20b-49c7-bbab-69c62b4dbc72" type="System.DateTime">
+          <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_webUserId" property="WebUserId" uniqueId="c2367252-7446-4870-9100-fcb53d2e50d0" type="System.Int32" />
+        <orm:field name="_signedWebUser" property="SignedWebUser" behavior="readwrite" uniqueId="9dd832bf-c76c-4ddf-afea-968de31490d5" type="LawAppModel.SignedWebUser" default-fetch-group="false">
+          <orm:reference uniqueId="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" association-name="TSC_CalendarHasSignedWebUser">
+            <orm:sharedfield name="_webUserId" target-class="LawAppModel.SignedWebUser" target-field="_webUserId" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_tSC_IndividualOvernights" property="TSC_IndividualOvernights" behavior="readwrite" uniqueId="695db222-1280-4335-8764-9be13e9fd9f3" type="LawAppModel.TSC_IndividualOvernight" default-fetch-group="true" dependent="true">
+          <orm:collection element-class="LawAppModel.TSC_IndividualOvernight" inverse-field="_tSC_Calendar" managed="true" order-by="" uniqueId="35ac13bf-a06b-4cc5-a846-b52d71ed872e" />
+        </orm:field>
+        <orm:field name="_tSC_Breaks" property="TSC_Breaks" behavior="readwrite" uniqueId="4c2a2cec-7160-48b2-bd7a-3679a6badcb6" type="LawAppModel.TSC_Break" default-fetch-group="true" dependent="true">
+          <orm:collection element-class="LawAppModel.TSC_Break" inverse-field="_tSC_Calendar" managed="true" order-by="" uniqueId="4b8a9602-68b6-4633-afdc-4fb099495e2c" />
+        </orm:field>
+        <orm:field name="_tSC_UniqueDays" property="TSC_UniqueDays" behavior="readwrite" uniqueId="15cbdff2-c15c-4c57-ba9e-825fc37b5bbd" type="LawAppModel.TSC_UniqueDays" default-fetch-group="true">
+          <orm:collection element-class="LawAppModel.TSC_UniqueDays" inverse-field="_tSC_Calendar" managed="true" order-by="" uniqueId="293b950c-f54e-4b46-ac7f-6d30fe527e9b" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="TSC_UniqueDays" uniqueId="7b1dd672-d1d9-4fec-97c8-54bd27ded4f1">
+        <orm:table name="TSC_UniqueDays" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="UniqueDayId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_uniqueDayId" />
+        </orm:identity>
+        <orm:field name="_uniqueDayId" property="UniqueDayId" uniqueId="025d5352-1522-49f6-9b3b-435c1237a4d4" type="System.Int64">
+          <orm:column name="UniqueDayId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_date" property="Date" uniqueId="122a3bf3-3b26-4838-bcc2-9cb46621d7b2" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="dte" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_day" property="Day" uniqueId="4178ea68-8d91-48c8-8310-90e8a1a9865e" type="System.Int16">
+          <orm:column name="dy" sql-type="smallint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.SmallInt2Int16Converter" ado-type="Int16" />
+        </orm:field>
+        <orm:field name="_dayClass" property="DayClass" uniqueId="6ac5959e-d3cf-4289-aca8-6c2032ec0c21" type="System.String">
+          <orm:column name="DayClass" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_calendarId" property="CalendarId" uniqueId="6b026f3f-35a0-42d2-9a1c-80cd60e6f09d" type="System.Int64" />
+        <orm:field name="_webUserId" property="WebUserId" uniqueId="e8523e3d-96e0-47cc-a1eb-b545dda202ea" type="System.Int32" />
+        <orm:field name="_signedWebUser" property="SignedWebUser" behavior="readwrite" uniqueId="3755af83-e631-41b8-838a-2111b288f3eb" type="LawAppModel.SignedWebUser">
+          <orm:reference uniqueId="7729fbd4-7021-4ab4-99cb-e17a4d1a9dd8" association-name="TSC_UniqueDaysHasSignedWebUser">
+            <orm:sharedfield name="_webUserId" target-class="LawAppModel.SignedWebUser" target-field="_webUserId" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_tSC_Calendar" property="TSC_Calendar" behavior="readwrite" uniqueId="cf916005-e630-467e-854d-44d0210b21cc" type="LawAppModel.TSC_Calendar" default-fetch-group="false">
+          <orm:reference uniqueId="293b950c-f54e-4b46-ac7f-6d30fe527e9b" association-name="TSC_UniqueDaysHasTSC_Calendar">
+            <orm:sharedfield name="_calendarId" target-class="LawAppModel.TSC_Calendar" target-field="_calendarId" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="TSC_IndividualOvernight" use-default-mapping="true" uniqueId="328fc865-7323-4e4a-a85a-c379d3287e6a">
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="IndividualOvernightId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_individualOvernightId" />
+        </orm:identity>
+        <orm:field name="_individualOvernightId" property="IndividualOvernightId" uniqueId="b3a16129-4172-49d5-a3c0-4d69af2bbcd9" type="System.Int64">
+          <orm:column name="IndividualOvernightId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_dayOfWeek" property="DayOfWeek" uniqueId="ac6c76db-d75e-440d-bfef-c187d367be19" type="LawAppModel.DayOfWeek, LawAppModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <orm:column name="DayOfWeek" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_everyActive" property="EveryActive" uniqueId="1db771f5-dc8b-440a-bba4-f7672da2334b" type="System.Boolean">
+          <orm:column name="EveryActive" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_everyOtherActive" property="EveryOtherActive" uniqueId="b2df9dfa-e740-43c3-8327-ecaa6e8b5d1d" type="System.Boolean">
+          <orm:column name="EveryOtherActive" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_startDate" property="StartDate" uniqueId="7ff124f5-5579-4453-b1cf-f9b5aaa4ec1d" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="StartDate" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_tSC_Calendar" property="TSC_Calendar" behavior="readwrite" uniqueId="d05b9182-ae3f-4d53-a65d-0bd7abaa422f" type="LawAppModel.TSC_Calendar" default-fetch-group="false">
+          <orm:reference uniqueId="35ac13bf-a06b-4cc5-a846-b52d71ed872e" association-name="TSC_IndividualOvernightHasTSC_Calendar" />
+        </orm:field>
+        <orm:index name="idx_TSC_IndvdlOvrnght_ClndarId">
+          <orm:columnMapping>
+            <orm:column name="CalendarId" sql-type="bigint" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="TSC_Break" uniqueId="83fae927-d3a9-4454-8ab4-8f970eb80a80">
+        <orm:table name="TSC_Break" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="BreakId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_breakId" />
+        </orm:identity>
+        <orm:field name="_breakId" property="BreakId" uniqueId="2cfe3e3a-eb30-406e-a9c3-1510e0a5a32f" type="System.Int64">
+          <orm:column name="BreakId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_break" property="Break" uniqueId="7ced1fac-e741-4f6e-87ec-0e4e934fd754" type="LawAppModel.HolidayBreak, LawAppModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <orm:column name="brak" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_firstNight" property="FirstNight" uniqueId="d624dde9-07fa-491f-b1a9-c254e4b56d28" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="FirstNight" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_lastNight" property="LastNight" uniqueId="963347f4-3668-4b7b-ab48-637176517afa" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="LastNight" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_showBreak" property="ShowBreak" uniqueId="68cfa2b9-2859-4f04-947a-51ff73bbcee4" type="System.Boolean">
+          <orm:column name="ShowBreak" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_clearExisting" property="ClearExisting" uniqueId="177e132e-bac9-4976-891a-4fb1c898214c" type="System.Boolean">
+          <orm:column name="ClearExisting" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_parentBFirst" property="ParentBFirst" uniqueId="259e9d63-7d51-43da-b003-faca36a1589d" type="System.Boolean">
+          <orm:column name="ParentBFirst" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_parentBSecond" property="ParentBSecond" uniqueId="81b5712e-4c38-43e6-989d-7e820168b125" type="System.Boolean">
+          <orm:column name="ParentBSecond" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_parentBFull" property="ParentBFull" uniqueId="0b160355-512f-46e3-9b3f-2b2da5b31f09" type="System.Boolean">
+          <orm:column name="ParentBFull" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_calendarId" property="CalendarId" uniqueId="1e4c1ca6-bfed-427e-a7bb-34d40d5ff636" type="System.Int64" />
+        <orm:field name="_tSC_Calendar" property="TSC_Calendar" behavior="readwrite" uniqueId="d106f386-4cf8-4847-b123-07d2b22f4d00" type="LawAppModel.TSC_Calendar" default-fetch-group="false">
+          <orm:reference uniqueId="4b8a9602-68b6-4633-afdc-4fb099495e2c" association-name="TSC_BreakHasTSC_Calendar">
+            <orm:sharedfield name="_calendarId" target-class="LawAppModel.TSC_Calendar" target-field="_calendarId" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="idx_TSC_Break_CalendarId">
+          <orm:columnMapping>
+            <orm:column name="CalendarId" sql-type="bigint" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="UserRole">
@@ -175,6 +343,42 @@
         <orm:column name="PermissionId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
         <orm:column name="PermissionName" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
         <orm:column name="RequiresLogin" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="TSC_Calendar">
+        <orm:column name="CalendarId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="yr" sql-type="smallint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.SmallInt2Int16Converter" ado-type="Int16" />
+        <orm:column name="Exhibit" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        <orm:column name="CaseName" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        <orm:column name="CaseNumber" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        <orm:column name="WeekendsActive" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="WeekendsStart" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        <orm:column name="DisplayHolidays" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="LastSaved" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+      </orm:table>
+      <orm:table name="TSC_UniqueDays">
+        <orm:column name="UniqueDayId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="dte" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        <orm:column name="dy" sql-type="smallint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.SmallInt2Int16Converter" ado-type="Int16" />
+        <orm:column name="DayClass" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+        <orm:column name="CalendarId" sql-type="bigint" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+      </orm:table>
+      <orm:table name="TSC_Break">
+        <orm:column name="BreakId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="brak" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+        <orm:column name="FirstNight" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        <orm:column name="LastNight" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+        <orm:column name="ShowBreak" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="ClearExisting" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="ParentBFirst" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="ParentBSecond" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="ParentBFull" sql-type="tinyint" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.OneZero2BooleanConverter" ado-type="Bit" />
+        <orm:column name="CalendarId" sql-type="bigint" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        <orm:index name="idx_TSC_Break_CalendarId">
+          <orm:columnMapping>
+            <orm:column name="CalendarId" sql-type="bigint" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+          </orm:columnMapping>
+        </orm:index>
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -312,6 +516,9 @@
         <classHasNavigationalProperties Id="3fc057d1-0e60-406e-8769-1adb0be2e41d">
           <NavigationalProperty Id="3cdf6673-388f-4e1e-a18b-1a116627a875" name="Permissions" type="IList&lt;Permission&gt;" label="Permissions : IList&lt;Permission&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_permissions" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="dd225a2d-ebd7-4dd1-a325-a513f056f038">
+          <NavigationalProperty Id="7778c2ee-e579-4093-98a9-341465a48179" name="TSC_Calendars" type="IList&lt;TSC_Calendar&gt;" label="TSC_Calendars : IList&lt;TSC_Calendar&gt;" nullable="true" kind="Persistent" fieldName="_tSC_Calendars" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
     <DomainClass Id="715dbf03-79f1-4ae8-b29f-2d9d4b799342" name="Holiday" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="HolidayId">
@@ -331,6 +538,146 @@
       <Property Id="7a7d23ef-b033-4125-83ab-b53a3f95b6b3" name="PermissionName" label="PermissionName : String" fieldName="_permissionName" />
       <Property Id="f010b4ad-e9b7-4b99-a6ce-88732474fa1d" name="RequiresLogin" type="bool" label="RequiresLogin : bool" fieldName="_requiresLogin" />
     </DomainClass>
+    <DomainClass Id="7eb8dad2-ad92-4ff5-ab26-1d57681a20db" name="TSC_Calendar" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="CalendarId">
+      <Property Id="d9116399-0a28-41b7-82b1-205b19d696ff" name="CalendarId" type="Int64" label="CalendarId : Int64" identity="true" fieldName="_calendarId" />
+      <Property Id="740d9418-0829-4a3b-8a05-21a5fdefee7a" name="Year" type="Int16" label="Year : Int16" fieldName="_year" />
+      <Property Id="ddde2a2f-5219-4b0f-84d1-bb8dc96f3444" name="Exhibit" label="Exhibit : String" nullable="true" fieldName="_exhibit" />
+      <Property Id="ebbae20b-3904-4dd0-a5f0-404ca814928c" name="CaseName" label="CaseName : String" nullable="true" fieldName="_caseName" />
+      <Property Id="07a96473-1b1a-4d25-84cb-ab27f12ae9d3" name="CaseNumber" label="CaseNumber : String" nullable="true" fieldName="_caseNumber" />
+      <Property Id="32fa9df2-8abe-4d73-835b-2848d21e457a" name="WeekendsActive" type="Boolean" label="WeekendsActive : Boolean" fieldName="_weekendsActive" />
+      <Property Id="54e1cdc9-7553-451f-8df1-4d4e4f6c5210" name="WeekendsStart" type="DateTime" label="WeekendsStart : DateTime" nullable="true" fieldName="_weekendsStart" />
+      <Property Id="564ce223-f3ca-495f-bada-cb3ffa94e8fa" name="DisplayHolidays" type="Boolean" label="DisplayHolidays : Boolean" fieldName="_displayHolidays" />
+      <Property Id="3e0aebdc-a77c-4946-bbc7-6b752f1c16d3" name="LastSaved" type="DateTime" label="LastSaved : DateTime" fieldName="_lastSaved" />
+      <Property Id="5e47068e-c20b-49c7-bbab-69c62b4dbc72" name="CreateDate" type="DateTime" label="CreateDate : DateTime" fieldName="_createDate" />
+      <Property Id="c2367252-7446-4870-9100-fcb53d2e50d0" name="WebUserId" type="System.Int32" label="WebUserId : System.Int32" fieldName="_webUserId" />
+      <AssociationTargets>
+        <Association Id="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" SourceMultiplicity="ZeroOne" name="TSC_CalendarHasSignedWebUser">
+          <DomainClassMoniker name="/LawApp/SignedWebUser" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e1ea4e85-94d6-4b43-a8ab-24d3e7e4b04f">
+              <NavigationalPropertyMoniker name="/LawApp/SignedWebUser/TSC_Calendars" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="16b42798-7d4d-4dd9-b14c-9a7b57731907">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_Calendar/SignedWebUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="ac2df458-d04c-466f-8e68-3f7063159b64">
+          <NavigationalProperty Id="695db222-1280-4335-8764-9be13e9fd9f3" name="TSC_IndividualOvernights" type="IList&lt;TSC_IndividualOvernight&gt;" label="TSC_IndividualOvernights : IList&lt;TSC_IndividualOvernight&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_tSC_IndividualOvernights" isDependent="true" isManaged="true" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="4db462d2-a965-4343-8077-71495a8eee22">
+          <NavigationalProperty Id="4c2a2cec-7160-48b2-bd7a-3679a6badcb6" name="TSC_Breaks" type="IList&lt;TSC_Break&gt;" label="TSC_Breaks : IList&lt;TSC_Break&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_tSC_Breaks" isDependent="true" isManaged="true" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="d77ceabd-1ff1-4f63-903a-ca7a255521d6">
+          <NavigationalProperty Id="15cbdff2-c15c-4c57-ba9e-825fc37b5bbd" name="TSC_UniqueDays" type="IList&lt;TSC_UniqueDays&gt;" label="TSC_UniqueDays : IList&lt;TSC_UniqueDays&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_tSC_UniqueDays" isDependent="false" isManaged="true" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="54660851-d429-403b-8a1b-60818a57226c">
+          <NavigationalProperty Id="9dd832bf-c76c-4ddf-afea-968de31490d5" name="SignedWebUser" type="SignedWebUser" label="SignedWebUser : SignedWebUser" nullable="true" kind="Persistent" loadBehavior="Lazy" fieldName="_signedWebUser" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="7b1dd672-d1d9-4fec-97c8-54bd27ded4f1" name="TSC_UniqueDays" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="UniqueDayId">
+      <Property Id="025d5352-1522-49f6-9b3b-435c1237a4d4" name="UniqueDayId" type="Int64" label="UniqueDayId : Int64" identity="true" fieldName="_uniqueDayId" />
+      <Property Id="122a3bf3-3b26-4838-bcc2-9cb46621d7b2" name="Date" type="DateTime" label="Date : DateTime" nullable="true" fieldName="_date" />
+      <Property Id="4178ea68-8d91-48c8-8310-90e8a1a9865e" name="Day" type="Int16" label="Day : Int16" fieldName="_day" />
+      <Property Id="6ac5959e-d3cf-4289-aca8-6c2032ec0c21" name="DayClass" label="DayClass : String" fieldName="_dayClass" />
+      <Property Id="6b026f3f-35a0-42d2-9a1c-80cd60e6f09d" name="CalendarId" type="Int64" label="CalendarId : Int64" fieldName="_calendarId" />
+      <Property Id="e8523e3d-96e0-47cc-a1eb-b545dda202ea" name="WebUserId" type="Int32" label="WebUserId : Int32" fieldName="_webUserId" />
+      <AssociationTargets>
+        <Association Id="293b950c-f54e-4b46-ac7f-6d30fe527e9b" SourceMultiplicity="ZeroOne" name="TSC_UniqueDaysHasTSC_Calendar">
+          <DomainClassMoniker name="/LawApp/TSC_Calendar" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="73de0f73-33b0-40b2-b449-cb5b14853593">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_Calendar/TSC_UniqueDays" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e7feaea9-bc78-43be-afeb-7528543f8f6e">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_UniqueDays/TSC_Calendar" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="7729fbd4-7021-4ab4-99cb-e17a4d1a9dd8" SourceMultiplicity="ZeroOne" name="TSC_UniqueDaysHasSignedWebUser">
+          <DomainClassMoniker name="/LawApp/SignedWebUser" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ad79c672-7583-439d-951e-d8a0df6dcd51">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_UniqueDays/SignedWebUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="a212ed30-9aa0-44a3-892e-3d1f083ac3dd">
+          <NavigationalProperty Id="cf916005-e630-467e-854d-44d0210b21cc" name="TSC_Calendar" type="TSC_Calendar" label="TSC_Calendar : TSC_Calendar" nullable="true" kind="Persistent" loadBehavior="Lazy" fieldName="_tSC_Calendar" isDependent="false" isManaged="true" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="57a12655-9c1b-4a52-affd-4d14e5b5ef3f">
+          <NavigationalProperty Id="3755af83-e631-41b8-838a-2111b288f3eb" name="SignedWebUser" type="SignedWebUser" label="SignedWebUser : SignedWebUser" nullable="true" kind="Persistent" fieldName="_signedWebUser" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="328fc865-7323-4e4a-a85a-c379d3287e6a" name="TSC_IndividualOvernight" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="IndividualOvernightId">
+      <Property Id="b3a16129-4172-49d5-a3c0-4d69af2bbcd9" name="IndividualOvernightId" type="Int64" label="IndividualOvernightId : Int64" identity="true" fieldName="_individualOvernightId" />
+      <Property Id="ac6c76db-d75e-440d-bfef-c187d367be19" name="DayOfWeek" type="LawAppModel.DayOfWeek" label="DayOfWeek : LawAppModel.DayOfWeek" fieldName="_dayOfWeek" />
+      <Property Id="1db771f5-dc8b-440a-bba4-f7672da2334b" name="EveryActive" type="Boolean" label="EveryActive : Boolean" fieldName="_everyActive" />
+      <Property Id="b2df9dfa-e740-43c3-8327-ecaa6e8b5d1d" name="EveryOtherActive" type="Boolean" label="EveryOtherActive : Boolean" fieldName="_everyOtherActive" />
+      <Property Id="7ff124f5-5579-4453-b1cf-f9b5aaa4ec1d" name="StartDate" type="DateTime" label="StartDate : DateTime" nullable="true" fieldName="_startDate" />
+      <AssociationTargets>
+        <Association Id="35ac13bf-a06b-4cc5-a846-b52d71ed872e" SourceMultiplicity="ZeroOne" name="TSC_IndividualOvernightHasTSC_Calendar">
+          <DomainClassMoniker name="/LawApp/TSC_Calendar" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="fef0a86e-b903-4f31-a28b-dfec0d80def9">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_Calendar/TSC_IndividualOvernights" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="811ef7c3-e1a2-4fa4-a7ca-459499687bbb">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_IndividualOvernight/TSC_Calendar" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="93f3f04d-bdf0-455e-9878-678cc3da8ff0">
+          <NavigationalProperty Id="d05b9182-ae3f-4d53-a65d-0bd7abaa422f" name="TSC_Calendar" type="TSC_Calendar" label="TSC_Calendar : TSC_Calendar" nullable="true" kind="Persistent" loadBehavior="Lazy" fieldName="_tSC_Calendar" isDependent="false" isManaged="true" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="83fae927-d3a9-4454-8ab4-8f970eb80a80" name="TSC_Break" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="BreakId">
+      <Property Id="2cfe3e3a-eb30-406e-a9c3-1510e0a5a32f" name="BreakId" type="Int64" label="BreakId : Int64" identity="true" fieldName="_breakId" />
+      <Property Id="7ced1fac-e741-4f6e-87ec-0e4e934fd754" name="Break" type="LawAppModel.HolidayBreak" label="Break : LawAppModel.HolidayBreak" fieldName="_break" />
+      <Property Id="d624dde9-07fa-491f-b1a9-c254e4b56d28" name="FirstNight" type="DateTime" label="FirstNight : DateTime" nullable="true" fieldName="_firstNight" />
+      <Property Id="963347f4-3668-4b7b-ab48-637176517afa" name="LastNight" type="DateTime" label="LastNight : DateTime" nullable="true" fieldName="_lastNight" />
+      <Property Id="68cfa2b9-2859-4f04-947a-51ff73bbcee4" name="ShowBreak" type="Boolean" label="ShowBreak : Boolean" fieldName="_showBreak" />
+      <Property Id="177e132e-bac9-4976-891a-4fb1c898214c" name="ClearExisting" type="Boolean" label="ClearExisting : Boolean" fieldName="_clearExisting" />
+      <Property Id="259e9d63-7d51-43da-b003-faca36a1589d" name="ParentBFirst" type="Boolean" label="ParentBFirst : Boolean" fieldName="_parentBFirst" />
+      <Property Id="81b5712e-4c38-43e6-989d-7e820168b125" name="ParentBSecond" type="Boolean" label="ParentBSecond : Boolean" fieldName="_parentBSecond" />
+      <Property Id="0b160355-512f-46e3-9b3f-2b2da5b31f09" name="ParentBFull" type="Boolean" label="ParentBFull : Boolean" fieldName="_parentBFull" />
+      <Property Id="1e4c1ca6-bfed-427e-a7bb-34d40d5ff636" name="CalendarId" type="Int64" label="CalendarId : Int64" fieldName="_calendarId" />
+      <AssociationTargets>
+        <Association Id="4b8a9602-68b6-4633-afdc-4fb099495e2c" SourceMultiplicity="ZeroOne" name="TSC_BreakHasTSC_Calendar">
+          <DomainClassMoniker name="/LawApp/TSC_Calendar" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="9212c8c4-ccc3-4f03-af8d-acc367fbc96d">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_Calendar/TSC_Breaks" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="5d5f50d2-7b56-4a3e-80d7-64961b25560f">
+              <NavigationalPropertyMoniker name="/LawApp/TSC_Break/TSC_Calendar" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="55ddcb93-b0cd-4033-9460-996c98e931bf">
+          <NavigationalProperty Id="d106f386-4cf8-4847-b123-07d2b22f4d00" name="TSC_Calendar" type="TSC_Calendar" label="TSC_Calendar : TSC_Calendar" nullable="true" kind="Persistent" loadBehavior="Lazy" fieldName="_tSC_Calendar" isDependent="false" isManaged="true" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="700b6438-42c2-4324-a582-ef893682055d">
@@ -341,6 +688,10 @@
         <entitySetProperty name="Holidays" namespace="LawAppModel" type="Holiday" label="Holidays : IQueryable&lt;LawAppModel.Holiday&gt;" />
         <entitySetProperty name="People" namespace="LawAppModel" type="Person" label="People : IQueryable&lt;LawAppModel.Person&gt;" />
         <entitySetProperty name="Permissions" namespace="LawAppModel" type="Permission" label="Permissions : IQueryable&lt;LawAppModel.Permission&gt;" />
+        <entitySetProperty name="TSC_Calendars" namespace="LawAppModel" type="TSC_Calendar" label="TSC_Calendars : IQueryable&lt;LawAppModel.TSC_Calendar&gt;" />
+        <entitySetProperty name="TSC_UniqueDays" namespace="LawAppModel" type="TSC_UniqueDays" label="TSC_UniqueDays : IQueryable&lt;LawAppModel.TSC_UniqueDays&gt;" />
+        <entitySetProperty name="TSC_IndividualOvernights" namespace="LawAppModel" type="TSC_IndividualOvernight" label="TSC_IndividualOvernights : IQueryable&lt;LawAppModel.TSC_IndividualOvernight&gt;" />
+        <entitySetProperty name="TSC_Breaks" namespace="LawAppModel" type="TSC_Break" label="TSC_Breaks : IQueryable&lt;LawAppModel.TSC_Break&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

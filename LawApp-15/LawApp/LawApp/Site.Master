@@ -19,6 +19,7 @@
         <script src="<%: ResolveUrl("~/Scripts/bootstrap-datepicker.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/Datepicker.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery.cookie.js") %>"></script>
     </asp:PlaceHolder>
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />

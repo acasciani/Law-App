@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDiagrams>
-  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11, 10.375" name="LawApp" isDefault="true">
+  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 19.625, 10.375" name="LawApp" isDefault="true">
     <DomainModelMoniker name="/LawApp" />
     <nestedChildShapes>
       <classShape Id="795fc741-22ad-45f5-9816-b05c3125aa2f" absoluteBounds="2.875, 1.5, 2.5, 2.1473746744791673">
@@ -27,15 +27,15 @@
           <classShapeMoniker Id="795fc741-22ad-45f5-9816-b05c3125aa2f" />
         </nodes>
       </associationConnector>
-      <classShape Id="af34439e-768e-45dd-a71d-615369bfac1a" absoluteBounds="7.75, 4, 2.375, 2.9165804036458329">
+      <classShape Id="af34439e-768e-45dd-a71d-615369bfac1a" absoluteBounds="7.75, 4, 2.375, 3.108881835937499">
         <DomainClassMoniker name="/LawApp/SignedWebUser" />
         <nestedChildShapes>
           <elementListCompartment Id="b5a94e02-fb74-40ec-ad5c-276f5b9f9261" absoluteBounds="7.765, 4.51, 2.3449999999999998, 1.2108968098958333" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
           <elementListCompartment Id="69e13058-73b4-4390-a391-b4cbbc86be76" absoluteBounds="7.765, 5.7308968098958335, 2.3449999999999998, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
-          <elementListCompartment Id="e6cba026-8dd5-4bd9-af03-4b1e538ba014" absoluteBounds="7.765, 5.9902864583333333, 2.3449999999999998, 0.8262939453125" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="e6cba026-8dd5-4bd9-af03-4b1e538ba014" absoluteBounds="7.765, 5.9902864583333333, 2.3449999999999998, 1.0185953776041665" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
-      <associationConnector edgePoints="[(5 : 5.70829020182292); (7.75 : 5.70829020182292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <associationConnector edgePoints="[(5 : 5.76598876953125); (7.75 : 5.76598876953125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
         <AssociationMoniker Id="d1144235-49ad-416f-b621-cec006a0344a" />
         <relativeChildShapes />
         <nodes>
@@ -59,7 +59,7 @@
           <elementListCompartment Id="372e5525-421b-4b82-b813-7d29a67e21ef" absoluteBounds="8.39, 9.73068359375, 2.2199999999999998, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
-      <associationConnector edgePoints="[(9.25 : 6.91658040364583); (9.25 : 8.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <associationConnector edgePoints="[(9.25 : 7.1088818359375); (9.25 : 8.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
         <AssociationMoniker Id="0daff697-c58c-48d1-9049-220975779c68" />
         <relativeChildShapes />
         <nodes>
@@ -83,12 +83,84 @@
           <classShapeMoniker Id="8719ec87-b8bf-4c8f-883d-e7323699f725" />
         </nodes>
       </associationConnector>
-      <associationConnector edgePoints="[(8.03125 : 6.91658040364583); (8.03125 : 7.90625); (4.875 : 7.90625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <associationConnector edgePoints="[(8.03125 : 7.1088818359375); (8.03125 : 7.90625); (4.875 : 7.90625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
         <AssociationMoniker Id="1640fc60-b493-47fe-9049-64401c99409e" />
         <relativeChildShapes />
         <nodes>
           <classShapeMoniker Id="af34439e-768e-45dd-a71d-615369bfac1a" />
           <classShapeMoniker Id="8719ec87-b8bf-4c8f-883d-e7323699f725" />
+        </nodes>
+      </associationConnector>
+      <classShape Id="ec240587-8589-4870-bc7a-4212a590748b" absoluteBounds="11.25, 2.125, 2.125, 4.262690429687499">
+        <DomainClassMoniker name="/LawApp/TSC_Calendar" />
+        <nestedChildShapes>
+          <elementListCompartment Id="8633f7c1-1f3a-4fee-8be6-28a8e8382a65" absoluteBounds="11.265, 2.635, 2.0949999999999998, 2.364705403645833" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="32a9e357-dfff-4a36-8a56-b43ef0771b51" absoluteBounds="11.265, 5.0097054036458326, 2.0949999999999998, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="e23f2591-8a01-495a-869a-e856569ee240" absoluteBounds="11.265, 5.2690950520833324, 2.0949999999999998, 1.018595377604167" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <classShape Id="2a4bae59-4734-423d-9750-5554dcfc3fac" absoluteBounds="14.625, 0.5, 2.25, 2.9165804036458334">
+        <DomainClassMoniker name="/LawApp/TSC_UniqueDays" />
+        <nestedChildShapes>
+          <elementListCompartment Id="45b0f5c4-ab5b-4579-bb09-98620310c2e4" absoluteBounds="14.64, 1.0099999999999998, 2.2199999999999998, 1.4031982421875" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="87587ef9-a30c-49f6-a526-4810ec028006" absoluteBounds="14.64, 2.4231982421875, 2.2199999999999998, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="58b066f5-a478-407a-b944-cfe3c8c937c6" absoluteBounds="14.64, 2.682587890625, 2.2199999999999998, 0.63399251302083326" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <classShape Id="73252936-9000-46fa-b77f-709ca0d08cf4" absoluteBounds="17.375, 3.25, 2, 2.531977539062499">
+        <DomainClassMoniker name="/LawApp/TSC_IndividualOvernight" />
+        <nestedChildShapes>
+          <elementListCompartment Id="d9f99298-1985-4e5d-9807-23f43af558c7" absoluteBounds="17.39, 3.76, 1.9700000000000002, 1.2108968098958333" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="625542fd-2fab-4c67-af03-dc91a7388f78" absoluteBounds="17.39, 4.9808968098958335, 1.9700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="e937c23e-8d06-4419-8aba-d650118c8c85" absoluteBounds="17.39, 5.2402864583333333, 1.9700000000000002, 0.44169108072916663" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <classShape Id="273fd460-34fd-4250-8f9d-14cb3fd0c5a7" absoluteBounds="14.625, 5.875, 2.125, 3.4934847005208312">
+        <DomainClassMoniker name="/LawApp/TSC_Break" />
+        <nestedChildShapes>
+          <elementListCompartment Id="8ac22da8-cf21-49c8-82d5-5a0469059d0e" absoluteBounds="14.64, 6.385, 2.0949999999999998, 2.1724039713541665" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="27b015f3-0283-4040-b75f-3db2f0c7037f" absoluteBounds="14.64, 8.5674039713541674, 2.0949999999999998, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="6efb64ed-5d83-4295-8784-8adf09613e18" absoluteBounds="14.64, 8.8267936197916654, 2.0949999999999998, 0.44169108072916652" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <associationConnector edgePoints="[(17.375 : 4.63052897135417); (13.375 : 4.63052897135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+        <AssociationMoniker Id="35ac13bf-a06b-4cc5-a846-b52d71ed872e" />
+        <relativeChildShapes />
+        <nodes>
+          <classShapeMoniker Id="73252936-9000-46fa-b77f-709ca0d08cf4" />
+          <classShapeMoniker Id="ec240587-8589-4870-bc7a-4212a590748b" />
+        </nodes>
+      </associationConnector>
+      <associationConnector edgePoints="[(14.625 : 6.13134521484375); (13.375 : 6.13134521484375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+        <AssociationMoniker Id="4b8a9602-68b6-4633-afdc-4fb099495e2c" />
+        <relativeChildShapes />
+        <nodes>
+          <classShapeMoniker Id="273fd460-34fd-4250-8f9d-14cb3fd0c5a7" />
+          <classShapeMoniker Id="ec240587-8589-4870-bc7a-4212a590748b" />
+        </nodes>
+      </associationConnector>
+      <associationConnector edgePoints="[(14.625 : 2.77079020182292); (13.375 : 2.77079020182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+        <AssociationMoniker Id="293b950c-f54e-4b46-ac7f-6d30fe527e9b" />
+        <relativeChildShapes />
+        <nodes>
+          <classShapeMoniker Id="2a4bae59-4734-423d-9750-5554dcfc3fac" />
+          <classShapeMoniker Id="ec240587-8589-4870-bc7a-4212a590748b" />
+        </nodes>
+      </associationConnector>
+      <associationConnector edgePoints="[(11.25 : 5.19384521484375); (10.125 : 5.19384521484375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+        <AssociationMoniker Id="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" />
+        <relativeChildShapes />
+        <nodes>
+          <classShapeMoniker Id="ec240587-8589-4870-bc7a-4212a590748b" />
+          <classShapeMoniker Id="af34439e-768e-45dd-a71d-615369bfac1a" />
+        </nodes>
+      </associationConnector>
+      <associationConnector edgePoints="[(14.625 : 1.2812505); (9.875 : 1.2812505); (9.875 : 3.08967610677083); (8.9375 : 3.08967610677083); (8.9375 : 4)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+        <AssociationMoniker Id="7729fbd4-7021-4ab4-99cb-e17a4d1a9dd8" />
+        <relativeChildShapes />
+        <nodes>
+          <classShapeMoniker Id="2a4bae59-4734-423d-9750-5554dcfc3fac" />
+          <classShapeMoniker Id="af34439e-768e-45dd-a71d-615369bfac1a" />
         </nodes>
       </associationConnector>
     </nestedChildShapes>

@@ -3,7 +3,6 @@
 <%@ Register TagPrefix="ui" Assembly="LawApp" Namespace="LawAppWeb.Controls" %>
 
 <asp:Content ID="TSCProduct_Page" ContentPlaceHolderID="TSCProduct_Holder" runat="server">
-
     <div class="col-md-4 collapsed hidden-print" id="drawer">
         <div class="row clearfix">
             <div class="col-sm-12 days-selected">
@@ -166,7 +165,7 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-holidays">Federal Holidays</a></div>
                 <div id="criteria-holidays" class="panel-collapse collapse">
                     <div class="panel-body">
-                        Holidays are displayed on the calendar as colored dots. The holiday markers can be hidden by toggling the checkbox below.
+                        Holidays are displayed on the calendar as black dots. The holiday markers can be hidden by toggling the checkbox below.
                         <hr />
                         <div class="form-horizontal clearfix">
                             <div class="col-sm-12 checkbox form-group"><label><asp:CheckBox runat="server" CssClass="checkbox-holidays" data-toggle="radio" /> Display holidays on calendar</label></div>
@@ -368,8 +367,8 @@
                             </div>
                             <div class="pull-right">
                                 <div class="btn-group pull-right" aria-label="Calendar Options" role="group">
-                                    <asp:button runat="server" UseSubmitBehavior="false" Text="Save" ToolTip="Save calendar to your account" CssClass="btn btn-default disabled" aria-label="Save Calendar For Later Access"></asp:button>
-                                    <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Print" ToolTip="Print calendar" CssClass="btn btn-default" aria-label="Print Calendar" id="btnPrintCalendar" ClientIDMode="Static"></asp:button>
+                                    <asp:button runat="server" UseSubmitBehavior="false" ID="saveBtn" OnClick="saveBtn_Click" OnClientClick="saveCalendar();" Text="Save" ToolTip="Save calendar to your account" CssClass="btn btn-default" aria-label="Save Calendar For Later Access"></asp:button>
+                                    <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Print" ToolTip="Print calendar" CssClass="btn btn-primary" aria-label="Print Calendar" id="btnPrintCalendar" ClientIDMode="Static"></asp:button>
                                     <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Clear" ToolTip="Clear selected dates and options in toolbar" CssClass="btn btn-danger" aria-label="Clear Selected Dates and Toolbar" id="btnClearCalendar" ClientIDMode="Static"></asp:button>
                                 </div>
                             </div>

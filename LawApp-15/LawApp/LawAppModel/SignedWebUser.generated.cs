@@ -120,6 +120,15 @@ namespace LawAppModel
 			}
 		}
 		
+		private IList<TSC_Calendar> _tSC_Calendars = new List<TSC_Calendar>();
+		public virtual IList<TSC_Calendar> TSC_Calendars
+		{
+			get
+			{
+				return this._tSC_Calendars;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

@@ -4,7 +4,11 @@
 }
 
 Date.prototype.getDayFullName = function () {
-    switch (this.getDay()) {
+    return getDayFullName(this.getDay());
+}
+
+function getDayFullName(dow) {
+    switch (dow) {
         case 0: return 'Sunday';
         case 1: return 'Monday';
         case 2: return 'Tuesday';
@@ -13,6 +17,15 @@ Date.prototype.getDayFullName = function () {
         case 5: return 'Friday';
         case 6: return 'Saturday';
         default: 'Unknown';
+    }
+}
+
+function getBreakFullName(breakcode) {
+    switch (breakcode) {
+        case 0: return 'spring';
+        case 1: return 'summer';
+        case 2: return 'winter';
+        default: return 'unknown';
     }
 }
 
@@ -33,6 +46,7 @@ function pageLoad() {
     breakOvernightCheckboxes();
     displayBreakDaysInToolbox();
     caseInformation();
+    LoadCalendar();
 
 	$('td.CalendarDay').on('click', function () {
 	    if(!$(this)) return; // The this selector should never be null, but if it is then just return
@@ -87,13 +101,13 @@ function individualOvernightCheckboxes() {
 
             switch (value) {
                 case '1': // this is every week
-                    $(dateSelection).val('');
+                    $(dateSelection).parent('.input-group.date').datepicker('setDate', '');
                     element.attr('disabled', true);
 
                     break;
 
                 case '2': // this is every other week
-                    $(dateSelection).val('');
+                    $(dateSelection).parent('.input-group.date').datepicker('setDate', '');
                     element.attr('disabled', false);
                     if ($(this).prop('checked')) { $(dateSelection).focus(1, function () { }); }
                     else { element.attr('disabled', true); }
@@ -687,4 +701,107 @@ function caseInformation() {
             $(targetContainer).show();
         }
     }
+}
+
+
+
+/**
+ * Load existing calendar
+ */
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function LoadCalendar() {
+    var calendarId = getParameterByName('cid');
+    if (!calendarId) { return; }
+
+    GetCalendarFromServer(calendarId, DataLoadedCB);
+}
+
+function DataLoadedCB(data) {
+    LoadCaseInformation(data);
+    LoadWeekendOvernights(data);
+    LoadIndividualOvernights(data);
+    LoadFederalHolidays(data);
+    LoadBreaks(data);
+    LoadUniqueDates(data);
+}
+
+function GetCalendarFromServer(cid, cb) {
+    $.ajax({
+        url: '/api/TSC_Calendars/' + cid
+    }).done(function (data) {
+        cb(data);
+    });
+}
+
+function LoadCaseInformation(data) {
+    $('#Exhibit').val(data.Exhibit || '');
+    $('#CaseName').val(data.CaseName || '');
+    $('#CaseNumber').val(data.CaseNumber || '');
+}
+
+function LoadWeekendOvernights(data) {
+    var input1 = $('#criteria-weekend-overnights .checkbox-weekend input[type=checkbox]');
+    input1.prop('checked', data.WeekendsActive || false);
+    if(data.WeekendsActive === true) input1.trigger('change');
+    if(data.WeekendsStart) $('#criteria-weekend-overnights .WeekendDateStart').parent('.input-group.date').datepicker('setDate', $.format.date(data.WeekendsStart, 'MM/dd/yyyy'));
+}
+
+function LoadIndividualOvernights(data) {
+    _.forEach(data.TSC_IndividualOvernights, function (night) {
+        var DayName = getDayFullName(night.DayOfWeek);
+        var block = $('#criteria-individual-overnights .form-horizontal .checkbox-list[data-day=' + DayName + ']');
+        var input1 = block.find('input[type=checkbox][value=1]');
+        var input2 = block.find('input[type=checkbox][value=2]');
+        input1.prop('checked', night.EveryActive || false);
+        input2.prop('checked', night.EveryOtherActive || false);
+        if (night.EveryActive === true) input1.trigger('change');
+        if (night.EveryOtherActive === true) input2.trigger('change');
+        if (night.StartDate) $(block.data('start-date')).parent('.input-group.date').datepicker('setDate', $.format.date(night.StartDate, 'MM/dd/yyyy'));
+    });
+}
+
+function LoadFederalHolidays(data) {
+    $('#criteria-holidays .checkbox-holidays input[type=checkbox]').prop('checked', data.DisplayHolidays || false);
+}
+
+function LoadBreaks(data) {
+    _.forEach(data.TSC_Breaks, function (breakk) {
+        var breakName = getBreakFullName(breakk.Break);
+        var block = $('#criteria-breaks-' + breakName);
+
+        // set dates
+        if (breakk.FirstNight) block.find('.BreakStart').parent('.input-group.date').datepicker('setDate', $.format.date(breakk.FirstNight, 'MM/dd/yyyy'));
+        if (breakk.LastNight) block.find('.BreakEnd').parent('.input-group.date').datepicker('setDate', $.format.date(breakk.LastNight, 'MM/dd/yyyy'));
+
+        // set checkboxes
+        var input1 = block.find('input[type=checkbox][value=1]');
+        var input2 = block.find('input[type=checkbox][value=2]');
+        var input3 = block.find('input[type=checkbox][value=3]');
+        var input4 = block.find('input[type=checkbox][value=4]');
+        var input5 = block.find('input[type=checkbox][value=5]');
+
+        input1.prop('checked', breakk.ShowBreak || false);
+        input2.prop('checked', breakk.ParentBFirst || false);
+        input3.prop('checked', breakk.ParentBSecond || false);
+        input4.prop('checked', breakk.ParentBFull || false);
+        input5.prop('checked', breakk.ClearExisting || false);
+
+        if (breakk.ShowBreak) input1.trigger('change');
+        if (breakk.ParentBFirst) input2.trigger('change');
+        if (breakk.ParentBSecond) input3.trigger('change');
+        if (breakk.ParentBFull) input4.trigger('change');
+        if (breakk.ClearExisting) input5.trigger('change');
+    });
+}
+
+function LoadUniqueDates(data) {
+    _.forEach(data.TSC_UniqueDays, function (day) {
+        $('.CalendarDay.Day' + day.Day).addClass(day.DayClass);
+    });
 }

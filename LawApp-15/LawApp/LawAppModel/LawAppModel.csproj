@@ -73,6 +73,19 @@
     <Compile Include="SignedWebUser.generated.cs">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="TSC_Break.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="TSC_Calendar.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="TSC_IndividualOvernight.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="TSC_UniqueDays.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="TypeCodes\TypeCodes.cs" />
     <Compile Include="UserRole.generated.cs">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
@@ -100,6 +113,18 @@
     <Content Include="LawApp15%282015-04-04 21-25-36%29.rlinq.sql" />
     <Content Include="LawApp15%282015-04-04 21-44-11%29.rlinq.sql" />
     <Content Include="LawApp15%282015-04-04 22-18-00%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-19 11-08-41%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-20 21-04-46%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-20 21-08-31%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-20 21-10-01%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-20 21-11-40%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-20 21-13-17%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-21 21-19-42%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-21 21-21-31%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-21 21-21-47%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-21 21-22-39%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-21 21-25-13%29.rlinq.sql" />
+    <Content Include="LawApp15%282015-04-21 21-27-26%29.rlinq.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />

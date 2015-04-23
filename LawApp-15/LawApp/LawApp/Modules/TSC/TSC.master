@@ -5,7 +5,7 @@
     <link href="<%: ResolveUrl("~/Content/slider.css") %>" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Content/Modules/TSC/Holidays.css") %>" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Content/Modules/TSC/Print.css") %>" rel="stylesheet" />
-
+    <script src="<%: ResolveUrl("~/Scripts/jquery.dateFormat-1.0.js") %>"></script>
 </asp:Content>
 
 <asp:Content ID="TSCProduct_Content" ContentPlaceHolderID="LawAppPlaceHolder" runat="server">
@@ -16,16 +16,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="#">New Calendar</a>
+                    <a href="Default.aspx">New Calendar</a>
                 </li>
                 <li>
-                    <a href="#">Existing Calendars</a>
+                    <a href="Existing.aspx">Existing Calendars</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">LName, FName<strong class="caret"></strong></a>
-                    <ul class="dropdown-menu">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">User, Test<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu" runat="server" visible="false">
                         <li>
                             <a href="#">Action</a>
                         </li>

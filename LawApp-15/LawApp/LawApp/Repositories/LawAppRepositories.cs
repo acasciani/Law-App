@@ -35,6 +35,26 @@ namespace LawAppWeb
 	
     }
 
+	public partial class TSC_BreakRepository : OpenAccessBaseRepository<LawAppModel.TSC_Break, LawAppModel.LawApp>
+    {
+	
+    }
+
+	public partial class TSC_CalendarRepository : OpenAccessBaseRepository<LawAppModel.TSC_Calendar, LawAppModel.LawApp>
+    {
+	
+    }
+
+	public partial class TSC_IndividualOvernightRepository : OpenAccessBaseRepository<LawAppModel.TSC_IndividualOvernight, LawAppModel.LawApp>
+    {
+	
+    }
+
+	public partial class TSC_UniqueDaysRepository : OpenAccessBaseRepository<LawAppModel.TSC_UniqueDays, LawAppModel.LawApp>
+    {
+	
+    }
+
 	public partial class UserRoleRepository : OpenAccessBaseRepository<LawAppModel.UserRole, LawAppModel.LawApp>
     {
 	

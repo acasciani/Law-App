@@ -98,6 +98,38 @@ namespace LawAppModel
 			}
 		}
 		
+		public IQueryable<TSC_Calendar> TSC_Calendars 
+		{
+			get
+			{
+				return this.GetAll<TSC_Calendar>();
+			}
+		}
+		
+		public IQueryable<TSC_UniqueDays> TSC_UniqueDays 
+		{
+			get
+			{
+				return this.GetAll<TSC_UniqueDays>();
+			}
+		}
+		
+		public IQueryable<TSC_IndividualOvernight> TSC_IndividualOvernights 
+		{
+			get
+			{
+				return this.GetAll<TSC_IndividualOvernight>();
+			}
+		}
+		
+		public IQueryable<TSC_Break> TSC_Breaks 
+		{
+			get
+			{
+				return this.GetAll<TSC_Break>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -140,6 +172,22 @@ namespace LawAppModel
 			get;
 		}
 		IQueryable<Permission> Permissions
+		{
+			get;
+		}
+		IQueryable<TSC_Calendar> TSC_Calendars
+		{
+			get;
+		}
+		IQueryable<TSC_UniqueDays> TSC_UniqueDays
+		{
+			get;
+		}
+		IQueryable<TSC_IndividualOvernight> TSC_IndividualOvernights
+		{
+			get;
+		}
+		IQueryable<TSC_Break> TSC_Breaks
 		{
 			get;
 		}
