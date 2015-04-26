@@ -13,6 +13,24 @@ namespace LawAppWeb.Modules.TSC {
     public partial class Existing {
         
         /// <summary>
+        /// MainContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel MainContent;
+        
+        /// <summary>
+        /// AlertBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::LawAppWeb.Controls.AlertBox AlertBox;
+        
+        /// <summary>
         /// Results control.
         /// </summary>
         /// <remarks>

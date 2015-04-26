@@ -3,6 +3,8 @@
 <%@ Register TagPrefix="ui" Assembly="LawApp" Namespace="LawAppWeb.Controls" %>
 
 <asp:Content ID="TSCProduct_Page" ContentPlaceHolderID="TSCProduct_Holder" runat="server">
+    <div class="hidden-print" id="ClientSideAlerts"></div>
+
     <div class="col-md-4 collapsed hidden-print" id="drawer">
         <div class="row clearfix">
             <div class="col-sm-12 days-selected">
@@ -15,26 +17,10 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-case-information">Case Information</a></div>
                 <div id="criteria-case-information" class="panel-collapse collapse ">
                     <div class="panel-body">
-                        The case information is optional. If entered, it will display when the populated calendar is printed.
+                        The case information is optional. If entered, it will display when the calendar is printed.
                         <hr />
                         <div class="form-horizontal">
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <label class="control-label" for="<%=Exhibit.ClientID %>">Exhibit</label>
-                                    <asp:DropDownList runat="server" ID="Exhibit" CssClass="form-control" ClientIDMode="Static">
-                                        <asp:ListItem Text="" Value="" />
-                                        <asp:ListItem Text="A" />
-                                        <asp:ListItem Text="B" />
-                                        <asp:ListItem Text="C" />
-                                        <asp:ListItem Text="D" />
-                                        <asp:ListItem Text="E" />
-                                        <asp:ListItem Text="1" />
-                                        <asp:ListItem Text="2" />
-                                        <asp:ListItem Text="3" />
-                                        <asp:ListItem Text="4" />
-                                        <asp:ListItem Text="5" />
-                                    </asp:DropDownList>
-                                </div>
                                 <div class="col-sm-12">
                                     <label class="control-label" for="<%=CaseName.ClientID %>">Case Name</label>
                                     <asp:TextBox runat="server" ID="CaseName" MaxLength="75" CssClass="form-control" ClientIDMode="Static" />
@@ -42,6 +28,10 @@
                                 <div class="col-sm-12">
                                     <label class="control-label" for="<%=CaseNumber.ClientID %>">Case Number</label>
                                     <asp:TextBox runat="server" ID="CaseNumber" MaxLength="40" CssClass="form-control" ClientIDMode="Static" />
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="<%=Exhibit.ClientID %>">Exhibit Information</label>
+                                    <asp:TextBox runat="server" ID="Exhibit" MaxLength="40" CssClass="form-control" ClientIDMode="Static" />
                                 </div>
                             </div>
                         </div>
@@ -367,7 +357,7 @@
                             </div>
                             <div class="pull-right">
                                 <div class="btn-group pull-right" aria-label="Calendar Options" role="group">
-                                    <asp:button runat="server" UseSubmitBehavior="false" ID="saveBtn" OnClick="saveBtn_Click" OnClientClick="saveCalendar();" Text="Save" ToolTip="Save calendar to your account" CssClass="btn btn-default" aria-label="Save Calendar For Later Access"></asp:button>
+                                    <asp:button runat="server" UseSubmitBehavior="false" ID="saveBtn" OnClick="saveBtn_Click" OnClientClick="if(IsSaveValid()) { saveCalendar(); } else { return false; }" Text="Save" ToolTip="Save calendar to your account" CssClass="btn btn-default" aria-label="Save Calendar For Later Access"></asp:button>
                                     <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Print" ToolTip="Print calendar" CssClass="btn btn-primary" aria-label="Print Calendar" id="btnPrintCalendar" ClientIDMode="Static"></asp:button>
                                     <asp:button runat="server" UseSubmitBehavior="false" OnClientClick="return;" Text="Clear" ToolTip="Clear selected dates and options in toolbar" CssClass="btn btn-danger" aria-label="Clear Selected Dates and Toolbar" id="btnClearCalendar" ClientIDMode="Static"></asp:button>
                                 </div>
@@ -381,9 +371,9 @@
     
                 <div class="row clearfix" id="CalendarsHolder" runat="server"></div>
 
-                <div class="row text-center visible-print-block"><span class="ExhibitDisplay"><strong>Exhibit:</strong> <asp:Label runat="server" id="ExhibitDisplay" CssClass="Value" /></span></div>
                 <div class="row text-center visible-print-block"><span class="CaseNameDisplay"><strong>Case:</strong> <asp:Label runat="server" id="CaseNameDisplay" CssClass="Value" /> </span><span class="CaseNumberDisplay"><strong>Number:</strong> <asp:Label runat="server" id="CaseNumberDisplay" CssClass="Value" /></span></div>
-                <div class="row text-center visible-print-block">This time-sharing calendar was prepared using <strong>TimesharingCalendar.com</strong>.</div>
+                <div class="row text-center visible-print-block"><span class="ExhibitDisplay"><strong>Exhibit:</strong> <asp:Label runat="server" id="ExhibitDisplay" CssClass="Value" /></span></div>
+                <div class="row text-center visible-print-block margin-top-10" runat="server" visible="false">This time-sharing calendar was prepared using <strong>TimesharingCalendar.com</strong>.</div>
             </div>
         </div>
     </div>

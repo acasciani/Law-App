@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawAppWeb.Modules.TSC {
+namespace LawAppWeb.Controls {
     
     
-    public partial class TSC {
+    public partial class Alert {
         
         /// <summary>
-        /// NewCalendarLink control.
+        /// AlertHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NewCalendarLink;
+        protected global::System.Web.UI.WebControls.Panel AlertHolder;
         
         /// <summary>
-        /// SavedCalendarsLink control.
+        /// Content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SavedCalendarsLink;
-        
-        /// <summary>
-        /// TSCProduct_Holder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder TSCProduct_Holder;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Content;
     }
 }

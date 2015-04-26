@@ -64,3 +64,92 @@
 .col-bottom {
     vertical-align:bottom;
 }
+
+
+/** loader style */
+.spinner-wrapper {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  z-index:1050;
+  left: 0;
+  position: absolute;
+  top: 40%;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color:#f7f7f7;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.48s;
+  animation-delay: -0.48s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce3 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.spinner-loading {
+    text-align:center;
+    font-size: .9em;
+    font-weight:bold;
+    color:#b9b9b9;
+}
+
+.spinner-text {
+    text-align:center;
+    font-size: .8em;
+    font-style: italic;
+    color:#909090;
+}
+
+.spinner-cover {
+    position: absolute;
+    z-index: 5000;
+    width: 100%;
+    height:50px;
+}
+
+.loader-cover{
+    position: absolute;
+    background-color:black;
+    opacity: 0.9;
+    filter:alpha(opacity=90);
+    z-index:1040;
+    width:100%;
+    height:100%;
+    top:0px;
+    left: 0px;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}

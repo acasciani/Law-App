@@ -4,7 +4,7 @@
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
-    <title><%: Page.Title %> - Law-App 15</title>
+    <title><%: Page.Title %> - My Law Tools</title>
     <link href="~/Content/Site.css" rel="stylesheet" /> 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" /> 
     <link href="~/Content/datepicker3.css" rel="stylesheet" /> 

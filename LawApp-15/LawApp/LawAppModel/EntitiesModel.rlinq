@@ -151,7 +151,7 @@
           <orm:column name="RequiresLogin" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
         </orm:field>
       </orm:class>
-      <orm:class name="TSC_Calendar" uniqueId="7eb8dad2-ad92-4ff5-ab26-1d57681a20db">
+      <orm:class name="TSC_Calendar" use-cascade-delete="yes" uniqueId="7eb8dad2-ad92-4ff5-ab26-1d57681a20db">
         <orm:table name="TSC_Calendar" />
         <orm:identity>
           <orm:key-generator name="autoinc">
@@ -201,7 +201,7 @@
         <orm:field name="_tSC_Breaks" property="TSC_Breaks" behavior="readwrite" uniqueId="4c2a2cec-7160-48b2-bd7a-3679a6badcb6" type="LawAppModel.TSC_Break" default-fetch-group="true" dependent="true">
           <orm:collection element-class="LawAppModel.TSC_Break" inverse-field="_tSC_Calendar" managed="true" order-by="" uniqueId="4b8a9602-68b6-4633-afdc-4fb099495e2c" />
         </orm:field>
-        <orm:field name="_tSC_UniqueDays" property="TSC_UniqueDays" behavior="readwrite" uniqueId="15cbdff2-c15c-4c57-ba9e-825fc37b5bbd" type="LawAppModel.TSC_UniqueDays" default-fetch-group="true">
+        <orm:field name="_tSC_UniqueDays" property="TSC_UniqueDays" behavior="readwrite" uniqueId="15cbdff2-c15c-4c57-ba9e-825fc37b5bbd" type="LawAppModel.TSC_UniqueDays" default-fetch-group="true" dependent="true">
           <orm:collection element-class="LawAppModel.TSC_UniqueDays" inverse-field="_tSC_Calendar" managed="true" order-by="" uniqueId="293b950c-f54e-4b46-ac7f-6d30fe527e9b" />
         </orm:field>
       </orm:class>
@@ -538,7 +538,7 @@
       <Property Id="7a7d23ef-b033-4125-83ab-b53a3f95b6b3" name="PermissionName" label="PermissionName : String" fieldName="_permissionName" />
       <Property Id="f010b4ad-e9b7-4b99-a6ce-88732474fa1d" name="RequiresLogin" type="bool" label="RequiresLogin : bool" fieldName="_requiresLogin" />
     </DomainClass>
-    <DomainClass Id="7eb8dad2-ad92-4ff5-ab26-1d57681a20db" name="TSC_Calendar" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="CalendarId">
+    <DomainClass Id="7eb8dad2-ad92-4ff5-ab26-1d57681a20db" name="TSC_Calendar" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" showNavigationCompartment="true" showImplementationCompartment="true" useCascadeDelete="Yes" identityMechanismMember="CalendarId">
       <Property Id="d9116399-0a28-41b7-82b1-205b19d696ff" name="CalendarId" type="Int64" label="CalendarId : Int64" identity="true" fieldName="_calendarId" />
       <Property Id="740d9418-0829-4a3b-8a05-21a5fdefee7a" name="Year" type="Int16" label="Year : Int16" fieldName="_year" />
       <Property Id="ddde2a2f-5219-4b0f-84d1-bb8dc96f3444" name="Exhibit" label="Exhibit : String" nullable="true" fieldName="_exhibit" />
@@ -573,7 +573,7 @@
           <NavigationalProperty Id="4c2a2cec-7160-48b2-bd7a-3679a6badcb6" name="TSC_Breaks" type="IList&lt;TSC_Break&gt;" label="TSC_Breaks : IList&lt;TSC_Break&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_tSC_Breaks" isDependent="true" isManaged="true" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="d77ceabd-1ff1-4f63-903a-ca7a255521d6">
-          <NavigationalProperty Id="15cbdff2-c15c-4c57-ba9e-825fc37b5bbd" name="TSC_UniqueDays" type="IList&lt;TSC_UniqueDays&gt;" label="TSC_UniqueDays : IList&lt;TSC_UniqueDays&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_tSC_UniqueDays" isDependent="false" isManaged="true" />
+          <NavigationalProperty Id="15cbdff2-c15c-4c57-ba9e-825fc37b5bbd" name="TSC_UniqueDays" type="IList&lt;TSC_UniqueDays&gt;" label="TSC_UniqueDays : IList&lt;TSC_UniqueDays&gt;" nullable="true" kind="Persistent" loadBehavior="Eager" fieldName="_tSC_UniqueDays" isDependent="true" isManaged="true" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="54660851-d429-403b-8a1b-60818a57226c">
           <NavigationalProperty Id="9dd832bf-c76c-4ddf-afea-968de31490d5" name="SignedWebUser" type="SignedWebUser" label="SignedWebUser : SignedWebUser" nullable="true" kind="Persistent" loadBehavior="Lazy" fieldName="_signedWebUser" isDependent="false" isManaged="false" />

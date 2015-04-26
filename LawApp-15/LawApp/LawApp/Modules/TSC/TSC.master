@@ -15,11 +15,11 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li runat="server" id="NewCalendarLink" class="active">
                     <a href="Default.aspx">New Calendar</a>
                 </li>
-                <li>
-                    <a href="Existing.aspx">Existing Calendars</a>
+                <li runat="server" id="SavedCalendarsLink">
+                    <a href="Existing.aspx">Saved Calendars</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

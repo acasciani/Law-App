@@ -119,3 +119,14 @@ function saveUniqueDays() {
         stageObject('UniqueDays', allUniqueDays);
     }
 }
+
+
+function IsSaveValid() {
+    var CaseName = $('#CaseName').val();
+    if (!CaseName || CaseName === '') {
+        AlertClient('A Case Name must be entered to save the calendar. Enter the Case Name in the "Case Information" toolbox.', true);
+        return false;
+    }
+
+    return true;
+}

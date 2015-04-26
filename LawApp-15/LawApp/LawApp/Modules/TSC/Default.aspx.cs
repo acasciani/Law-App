@@ -11,7 +11,7 @@ using System.Web;
 
 namespace LawAppWeb.Modules.TSC
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : Page
     {
 
         private List<Calendar> calendars = new List<Calendar>();
@@ -19,6 +19,8 @@ namespace LawAppWeb.Modules.TSC
         protected void Page_Init(object sender, EventArgs e)
         {
             this.AuthorizePage(PermissionHelper.AddNew);
+            Module = "TSC";
+            PageName = "NewCalendar";
 
             if (IsPostBack)
             {

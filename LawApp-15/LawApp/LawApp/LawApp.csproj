@@ -248,6 +248,8 @@
     <Content Include="Scripts\Modules\TSC\Main.js" />
     <Content Include="Scripts\Modules\TSC\SaveCalendar.js" />
     <Content Include="Scripts\slider.js" />
+    <Content Include="Source\Controls\Alert.ascx" />
+    <Content Include="Source\Controls\AlertBox.ascx" />
     <Content Include="Source\Controls\Calendar.ascx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -388,10 +390,28 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\OpenAccessBaseRepository.cs" />
+    <Compile Include="Source\BaseClasses\Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Source\Calendar\Day.cs" />
     <Compile Include="Source\Calendar\Month.cs" />
     <Compile Include="Source\Calendar\SaveStruct.cs" />
     <Compile Include="Source\Calendar\Week.cs" />
+    <Compile Include="Source\Controls\Alert.ascx.cs">
+      <DependentUpon>Alert.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\Alert.ascx.designer.cs">
+      <DependentUpon>Alert.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Controls\AlertBox.ascx.cs">
+      <DependentUpon>AlertBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Source\Controls\AlertBox.ascx.designer.cs">
+      <DependentUpon>AlertBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Controls\AlertType.cs" />
     <Compile Include="Source\Controls\Calendar.ascx.cs">
       <DependentUpon>Calendar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -474,6 +494,7 @@
     <Compile Include="Source\Controls\CalendarDay.cs" />
     <Compile Include="Utilities\Authorization.cs" />
     <Compile Include="Utilities\CalendarUtilities.cs" />
+    <Compile Include="Utilities\ExceptionHandler.cs" />
     <Compile Include="Utilities\PageUtilities.cs" />
     <Compile Include="Utilities\UIUtilities.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">

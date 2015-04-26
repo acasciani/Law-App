@@ -567,6 +567,8 @@ function btnClearCalendar() {
             $(dayCheck).removeClass('IndividualSaturdayDate');
         });
 
+        $('.holiday').removeClass('holiday holiday-color-red holiday-color-orange holiday-color-orangeyellow holiday-color-yellow holiday-color-limegreen holiday-color-green holiday-color-aqua holiday-color-teal holiday-color-blue holiday-color-purple holiday-color-pink holiday-color-default');
+
         resetReportingNumbers();
         resetToolbar();
         updateSelectedLabel($('.CalendarDay.day-checked').length);
@@ -582,6 +584,19 @@ function btnClearCalendar() {
         $('.checkbox-breaks input[type="checkbox"]').prop('checked', false);
         $('.BreakStart').val('');
         $('.BreakEnd').val('');
+
+        // Clear out case info
+        $('#Exhibit').val('');
+        $('#CaseName').val('');
+        $('#CaseNumber').val('');
+
+        // clear out weekend overnights
+        $('.checkbox-weekend input[type="checkbox"]').prop('checked', false);
+        $('.WeekendDateStart').parent().datepicker('setDate', '');
+        $('.WeekendDateStart').attr('disabled', true);
+
+        // clear out holidays
+        $('.checkbox-holidays input[type="checkbox"]').prop('checked', false);
     }
 
     function resetReportingNumbers() {
@@ -804,4 +819,10 @@ function LoadUniqueDates(data) {
     _.forEach(data.TSC_UniqueDays, function (day) {
         $('.CalendarDay.Day' + day.Day).addClass(day.DayClass);
     });
+}
+
+function AlertClient(content, isError) {
+    var alertType = isError ? 'alert-danger' : 'alert-success';
+    var alert = '<div class="alert ' + alertType + ' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + content + '</div>';
+    $('#ClientSideAlerts').html($('#ClientSideAlerts').html() + '\n' + alert);
 }

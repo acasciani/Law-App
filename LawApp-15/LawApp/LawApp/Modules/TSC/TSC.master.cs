@@ -17,7 +17,15 @@ namespace LawAppWeb.Modules.TSC
                 {
                     Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "TSC_Drawer", "../../Scripts/slider.js");
                 }
+
+                SetNavigation();
             }
+        }
+
+        private void SetNavigation()
+        {
+            NewCalendarLink.Attributes["class"] = ((Page)Page).PageName == "NewCalendar" ? "active" : "";
+            SavedCalendarsLink.Attributes["class"] = ((Page)Page).PageName == "SavedCalendars" ? "active" : "";
         }
     }
 }
