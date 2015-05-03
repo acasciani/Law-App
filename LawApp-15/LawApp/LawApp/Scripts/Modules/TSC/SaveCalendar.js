@@ -34,9 +34,11 @@ function saveCaseInformation() {
     var Exhibit = $('#Exhibit').val();
     var CaseName = $('#CaseName').val();
     var CaseNumber = $('#CaseNumber').val();
+    var ParentBLabel = $('#ParentBLabel').val();
     stage('CaseInformation', 'Exhibit', Exhibit);
     stage('CaseInformation', 'CaseName', CaseName);
     stage('CaseInformation', 'CaseNumber', CaseNumber);
+    stage('CaseInformation', 'ParentBLabel', ParentBLabel);
 }
 
 

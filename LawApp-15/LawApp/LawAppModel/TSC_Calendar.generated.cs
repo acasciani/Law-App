@@ -167,6 +167,19 @@ namespace LawAppModel
 			}
 		}
 		
+		private string _parentBLabel;
+		public virtual string ParentBLabel
+		{
+			get
+			{
+				return this._parentBLabel;
+			}
+			set
+			{
+				this._parentBLabel = value;
+			}
+		}
+		
 		private SignedWebUser _signedWebUser;
 		public virtual SignedWebUser SignedWebUser
 		{

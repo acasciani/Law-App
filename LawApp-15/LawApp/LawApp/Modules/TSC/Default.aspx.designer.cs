@@ -40,6 +40,15 @@ namespace LawAppWeb.Modules.TSC {
         protected global::System.Web.UI.WebControls.TextBox Exhibit;
         
         /// <summary>
+        /// ParentBLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ParentBLabel;
+        
+        /// <summary>
         /// Monday control.
         /// </summary>
         /// <remarks>

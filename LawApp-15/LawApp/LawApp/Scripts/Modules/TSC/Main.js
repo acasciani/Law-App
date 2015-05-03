@@ -46,6 +46,7 @@ function pageLoad() {
     breakOvernightCheckboxes();
     displayBreakDaysInToolbox();
     caseInformation();
+    helpSection();
     LoadCalendar();
 
 	$('td.CalendarDay').on('click', function () {
@@ -72,7 +73,7 @@ function pageLoad() {
 	        resizeDrawer();
 	    }, 300);
 	});
-
+    
 	$('.input-group.date.sunday-only').datepicker({ daysOfWeekDisabled: [1, 2, 3, 4, 5, 6], clearBtn: true, autoclose: true });
 	$('.input-group.date.monday-only').datepicker({ daysOfWeekDisabled: [0, 2, 3, 4, 5, 6], clearBtn: true, autoclose: true });
 	$('.input-group.date.tuesday-only').datepicker({ daysOfWeekDisabled: [0, 1, 3, 4, 5, 6], clearBtn: true, autoclose: true });
@@ -80,6 +81,11 @@ function pageLoad() {
 	$('.input-group.date.thursday-only').datepicker({ daysOfWeekDisabled: [0, 1, 2, 3, 5, 6], clearBtn: true, autoclose: true });
 	$('.input-group.date.friday-only').datepicker({ daysOfWeekDisabled: [0, 1, 2, 3, 4, 6], clearBtn: true, autoclose: true });
 	$('.input-group.date.saturday-only').datepicker({ daysOfWeekDisabled: [0, 1, 2, 3, 4, 5], clearBtn: true, autoclose: true });
+    
+	$('.input-group.date.march').datepicker({ clearBtn: true, autoclose: true, defaultViewDate: { month: 2 } });
+	$('.input-group.date.june').datepicker({ clearBtn: true, autoclose: true, defaultViewDate: { month: 5 } });
+	$('.input-group.date.august').datepicker({ clearBtn: true, autoclose: true, defaultViewDate: { month: 7 } });
+	$('.input-group.date.december').datepicker({ clearBtn: true, autoclose: true, defaultViewDate: { month: 11 } });
 
 	$('.input-group.date').datepicker({ clearBtn: true, autoclose: true });
 }
@@ -702,8 +708,14 @@ function caseInformation() {
         displayContent(this, '.CaseNumberDisplay');
     });
 
-    $("#Exhibit").change(function () {
+    $("#Exhibit").on("input", function (e) {
         displayContent(this, '.ExhibitDisplay');
+    });
+
+    $("#ParentBLabel").change(function () {
+        var label = $(this).val();
+        // change all labels to use the label selected
+        $('.ParentBLabel').text(label === '' ? 'Parent B' : label);
     });
 
     function displayContent(inputElement, targetContainer) {
@@ -718,6 +730,20 @@ function caseInformation() {
     }
 }
 
+
+
+/**
+ * Handle help section
+ */
+function helpSection() {
+    $('#criteria-help #demo-videos li > a.video').click(function () {
+        var srcvid = $(this).data('src'); // youtube src
+        var srctitle = $(this).data('title');
+        $('#informationVideoModalLabel').text(srctitle);
+        $('#helpVideoIFrame').attr('src', srcvid);
+        $('#informationVideoModal').modal('show');
+    });
+}
 
 
 /**
@@ -758,6 +784,9 @@ function LoadCaseInformation(data) {
     $('#Exhibit').val(data.Exhibit || '');
     $('#CaseName').val(data.CaseName || '');
     $('#CaseNumber').val(data.CaseNumber || '');
+    $('#ParentBLabel').val(data.ParentBLabel || '');
+
+    if (data.ParentBLabel && data.ParentBLabel !== '') { $('.ParentBLabel').text(data.ParentBLabel); }
 }
 
 function LoadWeekendOvernights(data) {

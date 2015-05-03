@@ -10,6 +10,7 @@ namespace LawAppWeb
         public string Exhibit { get; set; }
         public string CaseName { get; set; }
         public string CaseNumber { get; set; }
+        public string ParentBLabel { get; set; }
     }
 
     public class WeekendOvernights

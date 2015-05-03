@@ -33,6 +33,14 @@
                                     <label class="control-label" for="<%=Exhibit.ClientID %>">Exhibit Information</label>
                                     <asp:TextBox runat="server" ID="Exhibit" MaxLength="40" CssClass="form-control" ClientIDMode="Static" />
                                 </div>
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="<%=ParentBLabel.ClientID %>">Parent B Label</label>
+                                    <asp:DropDownList runat="server" ID="ParentBLabel" CssClass="form-control" ClientIDMode="Static">
+                                        <asp:ListItem Text=""></asp:ListItem>
+                                        <asp:ListItem Text="Father">Father</asp:ListItem>
+                                        <asp:ListItem Text="Mother">Mother</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -43,7 +51,7 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-weekend-overnights">Weekend Overnights</a></div>
                 <div id="criteria-weekend-overnights" class="panel-collapse collapse ">
                     <div class="panel-body">
-                        <strong>Weekend overnights</strong> for purposes of this calendar is every other weekend (Friday overnight and Saturday overnight) spent with Parent B.
+                        <strong>Weekend overnights</strong> for purposes of this calendar is every other weekend (Friday overnight and Saturday overnight) spent with <span class="ParentBLabel">Parent B</span>.
                         <hr />
                         <div class="form-horizontal">
                             <div class="col-sm-12 checkbox form-group"><label><asp:CheckBox runat="server" CssClass="checkbox-weekend" data-toggle="radio" /> Every other weekend Choose first Friday</label></div>
@@ -61,7 +69,7 @@
                 <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-individual-overnights">Individual Overnights</a></div>
                 <div id="criteria-individual-overnights" class="panel-collapse collapse">
                     <div class="panel-body">
-                        Select any overnights spent with Parent B that may apply.
+                        Select any overnights spent with <span class="ParentBLabel">Parent B</span> that may apply.
                         <hr />
 
                         <div class="form-horizontal clearfix">
@@ -179,14 +187,14 @@
                             <div class="form-group">
                                 <div class="col-sm-6 col-md-12 col-lg-6">
                                     <label class="control-label" for="<%=SpringBreakStart.ClientID %>">First night</label>
-                                    <div class="input-group date">
+                                    <div class="input-group date march">
                                         <asp:TextBox CssClass="form-control BreakStart" runat="server" ID="SpringBreakStart" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 col-md-12 col-lg-6">
                                     <label class="control-label" for="<%=SpringBreakEnd.ClientID %>">Last night</label>
-                                    <div class="input-group date">
+                                    <div class="input-group date march">
                                         <asp:TextBox CssClass="form-control BreakEnd" runat="server" ID="SpringBreakEnd" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
@@ -211,16 +219,16 @@
                                 <div class="col-xs-12">
                                     <asp:CheckBoxList ID="SpringBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SpringBreakStart" data-end-date="#SpringBreakEnd">
                                         <asp:ListItem Value="5">Clear existing check marks for Spring Break and manually input on calendar</asp:ListItem>
-                                        <asp:ListItem Value="2">Parent B gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
-                                        <asp:ListItem Value="3">Parent B gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
-                                        <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
+                                        <asp:ListItem Value="2"><span class="ParentBLabel">Parent B</span> gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="3"><span class="ParentBLabel">Parent B</span> gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
+                                        <asp:ListItem Value="4"><span class="ParentBLabel">Parent B</span> gets 100%</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         
-                        * Note: If time period is an odd number of nights and the holiday is split in 1/2, then Parent B will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
+                        * Note: If time period is an odd number of nights and the holiday is split in 1/2, then <span class="ParentBLabel">Parent B</span> will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
                     </div>    
                 </div>
             </div>
@@ -236,14 +244,14 @@
                             <div class="form-group">
                                 <div class="col-sm-6 col-md-12 col-lg-6">
                                     <label class="control-label" for="<%=SummerBreakStart.ClientID %>">First night</label>
-                                    <div class="input-group date">
+                                    <div class="input-group date june">
                                         <asp:TextBox CssClass="form-control BreakStart" runat="server" ID="SummerBreakStart" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 col-md-12 col-lg-6">
                                     <label class="control-label" for="<%=SummerBreakEnd.ClientID %>">Last night</label>
-                                    <div class="input-group date">
+                                    <div class="input-group date august">
                                         <asp:TextBox CssClass="form-control BreakEnd" runat="server" ID="SummerBreakEnd" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
@@ -269,16 +277,16 @@
                                 <div class="col-xs-12">
                                     <asp:CheckBoxList ID="SummerBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#SummerBreakStart" data-end-date="#SummerBreakEnd">
                                         <asp:ListItem Value="5">Clear existing check marks for Summer Break and manually input on calendar</asp:ListItem>
-                                        <asp:ListItem Value="2">Parent B gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
-                                        <asp:ListItem Value="3">Parent B gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
-                                        <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
+                                        <asp:ListItem Value="2"><span class="ParentBLabel">Parent B</span> gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="3"><span class="ParentBLabel">Parent B</span> gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
+                                        <asp:ListItem Value="4"><span class="ParentBLabel">Parent B</span> gets 100%</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
 
-                        * Note: If time period is an odd number of nights and the holiday is split in 1/2, then Parent B will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
+                        * Note: If time period is an odd number of nights and the holiday is split in 1/2, then <span class="ParentBLabel">Parent B</span> will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
                     </div>    
                 </div>
             </div>
@@ -294,14 +302,14 @@
                             <div class="form-group">
                                 <div class="col-sm-6 col-md-12 col-lg-6">
                                     <label class="control-label" for="<%=WinterBreakStart.ClientID %>">First night</label>
-                                    <div class="input-group date">
+                                    <div class="input-group date december">
                                         <asp:TextBox CssClass="form-control BreakStart" runat="server" ID="WinterBreakStart" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 col-md-12 col-lg-6">
                                     <label class="control-label" for="<%=WinterBreakEnd.ClientID %>">Last night</label>
-                                    <div class="input-group date">
+                                    <div class="input-group date december">
                                         <asp:TextBox CssClass="form-control BreakEnd" runat="server" ID="WinterBreakEnd" ClientIDMode="Static" /><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
@@ -327,22 +335,38 @@
                                 <div class="col-xs-12">
                                     <asp:CheckBoxList ID="WinterBreakPresentation" runat="server" CssClass="checkbox-breaks" data-toggle="radio" data-start-date="#WinterBreakStart" data-end-date="#WinterBreakEnd">
                                         <asp:ListItem Value="5">Clear existing check marks for Winter Break and manually input on calendar</asp:ListItem>
-                                        <asp:ListItem Value="2">Parent B gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
-                                        <asp:ListItem Value="3">Parent B gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
-                                        <asp:ListItem Value="4">Parent B gets 100%</asp:ListItem>
+                                        <asp:ListItem Value="2"><span class="ParentBLabel">Parent B</span> gets entire 1st ½ and Parent A gets entire 2nd ½</asp:ListItem>
+                                        <asp:ListItem Value="3"><span class="ParentBLabel">Parent B</span> gets entire 2nd ½ and Parent A gets entire 1st ½</asp:ListItem>
+                                        <asp:ListItem Value="4"><span class="ParentBLabel">Parent B</span> gets 100%</asp:ListItem>
                                     </asp:CheckBoxList>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
 
-                         * Note: If time period is an odd number of nights and the holiday is split in 1/2, then Parent B will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
+                         * Note: If time period is an odd number of nights and the holiday is split in 1/2, then <span class="ParentBLabel">Parent B</span> will receive the extra night on the calendar. If this is not the desired outcome, then User must manually deselect the extra night on the calendar.
                     </div>    
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><a class="panel-title" data-toggle="collapse" data-parent="#criteria" href="#criteria-help">Help</a></div>
+                <div id="criteria-help" class="panel-collapse collapse criteria-breaks" data-break-color="red">
+                    <div class="panel-body" id="demo-videos">
+                        <h4>Instruction Videos</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="video" data-src="http://www.youtube.com/embed/gU6hSv14J-Y" data-title="Timesharing Calendar Demo">Demo</a></li>
+                        </ul>
+                        <hr />
+                        <h4>Help Topics</h4>
+                        <ul class="list-unstyled">
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-8 col-print-12" id="workpane">
         <div class="row">
             <div class="col-md-1 col-sm-0 col-xs-0 collapsible hidden-print">
@@ -367,13 +391,33 @@
                 </div>
 
                 <div class="row clearfix text-center visible-print-block"><strong>2015 Time-sharing Calendar</strong></div>
-                <div class="row clearfix text-center visible-print-block margin-bottom-10">Parent B has <span class="tsc-calendar-days-selected-count">0</span> nights (<span class="tsc-calendar-days-selected-percentage">0</span>%) of time-sharing.</div>
+                <div class="row clearfix text-center visible-print-block margin-bottom-10"><span class="ParentBLabel">Parent B</span> has <span class="tsc-calendar-days-selected-count">0</span> nights (<span class="tsc-calendar-days-selected-percentage">0</span>%) of time-sharing.</div>
     
                 <div class="row clearfix" id="CalendarsHolder" runat="server"></div>
 
                 <div class="row text-center visible-print-block"><span class="CaseNameDisplay"><strong>Case:</strong> <asp:Label runat="server" id="CaseNameDisplay" CssClass="Value" /> </span><span class="CaseNumberDisplay"><strong>Number:</strong> <asp:Label runat="server" id="CaseNumberDisplay" CssClass="Value" /></span></div>
                 <div class="row text-center visible-print-block"><span class="ExhibitDisplay"><strong>Exhibit:</strong> <asp:Label runat="server" id="ExhibitDisplay" CssClass="Value" /></span></div>
                 <div class="row text-center visible-print-block margin-top-10" runat="server" visible="false">This time-sharing calendar was prepared using <strong>TimesharingCalendar.com</strong>.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Information Video Modal -->
+    <div class="modal fade" id="informationVideoModal" tabindex="-1" role="dialog" aria-labelledby="informationVideoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="informationVideoModalLabel">Instruction Video</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <iframe id="helpVideoIFrame" class="embed-responsive-item" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

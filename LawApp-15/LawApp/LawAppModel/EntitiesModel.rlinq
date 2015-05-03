@@ -190,6 +190,7 @@
           <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_webUserId" property="WebUserId" uniqueId="c2367252-7446-4870-9100-fcb53d2e50d0" type="System.Int32" />
+        <orm:field name="_parentBLabel" property="ParentBLabel" uniqueId="8c262951-f650-41e9-b50a-513cc4746bdf" type="System.String" />
         <orm:field name="_signedWebUser" property="SignedWebUser" behavior="readwrite" uniqueId="9dd832bf-c76c-4ddf-afea-968de31490d5" type="LawAppModel.SignedWebUser" default-fetch-group="false">
           <orm:reference uniqueId="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" association-name="TSC_CalendarHasSignedWebUser">
             <orm:sharedfield name="_webUserId" target-class="LawAppModel.SignedWebUser" target-field="_webUserId" />
@@ -550,6 +551,7 @@
       <Property Id="3e0aebdc-a77c-4946-bbc7-6b752f1c16d3" name="LastSaved" type="DateTime" label="LastSaved : DateTime" fieldName="_lastSaved" />
       <Property Id="5e47068e-c20b-49c7-bbab-69c62b4dbc72" name="CreateDate" type="DateTime" label="CreateDate : DateTime" fieldName="_createDate" />
       <Property Id="c2367252-7446-4870-9100-fcb53d2e50d0" name="WebUserId" type="System.Int32" label="WebUserId : System.Int32" fieldName="_webUserId" />
+      <Property Id="8c262951-f650-41e9-b50a-513cc4746bdf" name="ParentBLabel" label="ParentBLabel : String" nullable="true" fieldName="_parentBLabel" />
       <AssociationTargets>
         <Association Id="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" SourceMultiplicity="ZeroOne" name="TSC_CalendarHasSignedWebUser">
           <DomainClassMoniker name="/LawApp/SignedWebUser" />

@@ -92,6 +92,7 @@ namespace LawAppWeb.Modules.TSC
             calendar.CaseName = input.CaseInformation == null ? null : input.CaseInformation.CaseName;
             calendar.CaseNumber = input.CaseInformation == null ? null : input.CaseInformation.CaseNumber;
             calendar.Exhibit = input.CaseInformation == null ? null : input.CaseInformation.Exhibit;
+            calendar.ParentBLabel = input.CaseInformation == null ? null : (string.IsNullOrWhiteSpace(input.CaseInformation.ParentBLabel) ? "" : input.CaseInformation.ParentBLabel.Trim());
 
             // Save weekend overnight
             calendar.WeekendsActive = input.WeekendOvernights == null ? false : input.WeekendOvernights.IsSelected;
