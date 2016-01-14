@@ -152,13 +152,19 @@
       <HintPath>..\..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.0\lib\net40\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Telerik.OpenAccess, Version=2014.3.1209.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
+    <Reference Include="Telerik.OpenAccess, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\Data Access\bin\Telerik.OpenAccess.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2014.3.1209.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\Data Access\bin\Telerik.OpenAccess.35.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.OpenAccess.Runtime, Version=2014.3.1209.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\Data Access\bin\Telerik.OpenAccess.Runtime.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +174,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Account\Subscriptions\Default.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />
@@ -176,15 +183,72 @@
     <Content Include="Content\bootstrap-datepicker3.min.css" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="Content\front\css\animate.css" />
+    <Content Include="Content\front\css\colors\custom.css" />
+    <Content Include="Content\front\css\colors\cyan.css" />
+    <Content Include="Content\front\css\colors\dark.css" />
+    <Content Include="Content\front\css\colors\gray.css" />
+    <Content Include="Content\front\css\colors\green.css" />
+    <Content Include="Content\front\css\colors\red.css" />
+    <Content Include="Content\front\css\nivo-lightbox\close%402x.png" />
+    <Content Include="Content\front\css\nivo-lightbox\close.png" />
+    <Content Include="Content\front\css\nivo-lightbox\loading%402x.gif" />
+    <Content Include="Content\front\css\nivo-lightbox\loading.gif" />
+    <Content Include="Content\front\css\nivo-lightbox\next%402x.png" />
+    <Content Include="Content\front\css\nivo-lightbox\next.png" />
+    <Content Include="Content\front\css\nivo-lightbox\nivo-lightbox-theme.css" />
+    <Content Include="Content\front\css\nivo-lightbox\nivo-lightbox.css" />
+    <Content Include="Content\front\css\nivo-lightbox\prev%402x.png" />
+    <Content Include="Content\front\css\nivo-lightbox\prev.png" />
+    <Content Include="Content\front\css\owl.carousel.css" />
+    <Content Include="Content\front\css\owl.theme.css" />
+    <Content Include="Content\front\css\style.css" />
+    <Content Include="Content\front\img\2-iphone-left.png" />
+    <Content Include="Content\front\img\2-iphone-right.png" />
+    <Content Include="Content\front\img\bg.jpg" />
+    <Content Include="Content\front\img\client-four.png" />
+    <Content Include="Content\front\img\client-one.png" />
+    <Content Include="Content\front\img\client-three.png" />
+    <Content Include="Content\front\img\client-two.png" />
+    <Content Include="Content\front\img\dev-1.jpg" />
+    <Content Include="Content\front\img\dev-2.jpg" />
+    <Content Include="Content\front\img\dev-3.jpg" />
+    <Content Include="Content\front\img\dev-4.jpg" />
+    <Content Include="Content\front\img\favicon.ico" />
+    <Content Include="Content\front\img\features_screen.png" />
+    <Content Include="Content\front\img\iphone_hand.png" />
+    <Content Include="Content\front\img\preloader.gif" />
+    <Content Include="Content\front\img\screenshots\1.jpg" />
+    <Content Include="Content\front\img\screenshots\2.jpg" />
+    <Content Include="Content\front\img\screenshots\3.jpg" />
+    <Content Include="Content\front\img\screenshots\4.jpg" />
+    <Content Include="Content\front\img\spark.png" />
+    <Content Include="Content\front\img\stripBG.png" />
+    <Content Include="Content\front\img\subs-bg.jpg" />
+    <Content Include="Content\front\libs\ionicons\css\ionicons.css" />
+    <Content Include="Content\front\libs\ionicons\css\ionicons.min.css" />
+    <Content Include="Content\front\libs\ionicons\fonts\ionicons.svg" />
     <Content Include="Content\Modules\TSC\Holidays.css" />
     <Content Include="Content\Modules\TSC\Print.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Default.aspx" />
     <Content Include="Modules\TSC\Existing.aspx" />
+    <Content Include="Content\front\libs\ionicons\fonts\ionicons.eot" />
+    <Content Include="Content\front\libs\ionicons\fonts\ionicons.ttf" />
+    <Content Include="Content\front\libs\ionicons\fonts\ionicons.woff" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="NewLanding.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\Datepicker.js" />
+    <Content Include="Scripts\front\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Scripts\front\js\modernizr.custom.js" />
+    <Content Include="Scripts\front\js\nivo-lightbox.min.js" />
+    <Content Include="Scripts\front\js\owl.carousel.js" />
+    <Content Include="Scripts\front\js\retina-1.1.0.min.js" />
+    <Content Include="Scripts\front\js\script.js" />
+    <Content Include="Scripts\front\js\smoothscroll.js" />
+    <Content Include="Scripts\front\js\wow.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.dateFormat-1.0.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -362,6 +426,13 @@
     <Compile Include="Account\BetaComplete.aspx.designer.cs">
       <DependentUpon>BetaComplete.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Subscriptions\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Subscriptions\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
@@ -392,6 +463,13 @@
       <DependentUpon>Existing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modules\TSC\PermissionHelper.cs" />
+    <Compile Include="NewLanding.aspx.cs">
+      <DependentUpon>NewLanding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewLanding.aspx.designer.cs">
+      <DependentUpon>NewLanding.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\LawAppRepositories.cs" />
     <Compile Include="Modules\TSC\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -532,6 +610,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -549,6 +630,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:2902/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

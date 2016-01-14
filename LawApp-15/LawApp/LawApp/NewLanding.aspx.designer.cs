@@ -10,7 +10,7 @@
 namespace LawAppWeb {
     
     
-    public partial class Default {
+    public partial class NewLanding {
         
         /// <summary>
         /// lnkLogin control.
