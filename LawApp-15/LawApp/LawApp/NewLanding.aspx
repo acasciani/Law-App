@@ -54,6 +54,10 @@
 <body id="home">
     <form runat="server">
 
+                <asp:ScriptManager runat="server" ID="MainScriptManager" EnablePartialRendering="true" LoadScriptsBeforeUI="true">
+
+        </asp:ScriptManager>
+
 	<!-- ****************************** Preloader ************************** -->
 	<div id="preloader"></div>
 
@@ -104,18 +108,42 @@
                             <div class="panel-heading">
                                 <strong>Existing Members Login</strong>
                             </div>
-                            <div class="panel-body" style="color:black;">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <div class="form-group" style="text-align:right;">
-                                    <asp:LinkButton runat="server" ID="lnkLogin">
-                                        Login
-                                    </asp:LinkButton>
-                                </div>
+                            <div class="panel-body" style="color: black;">
+                                <asp:UpdatePanel runat="server" ChildrenAsTriggers="true" UpdateMode="Always">
+                                    <ContentTemplate>
+                                <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm" OnLoginError="loginForm_LoginError" OnAuthenticate="loginForm_Authenticate">
+                                    <LayoutTemplate>
+                                        <span class="text-danger">
+                                            <asp:Literal runat="server" ID="FailureText" />
+                                        </span>
+                                        
+
+                                        <div class="form-group">
+                                            <asp:TextBox runat="server" ID="UserName" CssClass="form-control" placeholder="Email" />
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" CssClass="field-validation-error text-danger" ErrorMessage="The email field is required." Display="Dynamic" />
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" placeholder="Password" />
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="field-validation-error text-danger" ErrorMessage="The password field is required." Display="Dynamic" />
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:CheckBox runat="server" ID="RememberMe" />
+                                            <asp:Label runat="server" AssociatedControlID="RememberMe" CssClass="checkbox">Remember me?</asp:Label>
+                                        </div>
+
+
+                                        <div class="form-group" style="text-align: right;">
+                                            <asp:LinkButton runat="server" CommandName="Login" Text="Login" />
+                                        </div>
+                                    </LayoutTemplate>
+                                </asp:Login>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+
+
+
+
+
                                 <div>
                                     <a href="#">I Forgot My Password</a>
                                 </div>
@@ -608,43 +636,6 @@
 		</div>
 	</section>
 
-	
-	<!-- ****************************** Subscribe section ************************** -->
-	<section id="subscribe" class="block">
-		<div class="banner-overlay" style="background: rgba(255, 255, 255, 0.8)"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1">
-					<p class="susbcribe-text">
-					<strong>Subscribe to our email list to get the latest update about our amazing app</strong>
-					<br/>Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.</p>
-				</div>
-			</div>
-		</div>
-		<div class="container subscribe-wrap">
-			<div class="row">
-				<div class="col-sm-12 wow animated bounceInUp">
-					<form role="form" class="mailchimp">
-						
-						<div class="input-group">
-						  <input type="email" name="email" id="subscriber-email" class="form-control" placeholder="Your Email Address">
-						  <span class="input-group-btn">
-						    <button class="btn btn-custom" type="submit" id="subscribe-button">GET UPDATES</button>
-						  </span>
-						</div><!-- /input-group -->
-
-						<!-- SUCCESS OR ERROR MESSAGES -->			
-						<span class="subscription-success"></span>
-						<span class="subscription-error"></span>
-
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
-
 
 	<!-- ****************************** Contact section ************************** -->
 	<section id="contact" class="block">
@@ -668,25 +659,25 @@
 						</ul>
 					</div><!-- address -->
 					<div class="col-sm-8 mailbox wow fadeInRight animated">
-						<form name="sentMessage" id="contactForm" novalidate>
+						<div id="contactForm">
 	                        <div class="row">
 	                            <div class="col-md-6">
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required>
+	                                    <input type="text" class="form-control" placeholder="Your Name *" >
 	                                    <p class="help-block text-danger"></p>
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+	                                    <input type="email" class="form-control" placeholder="Your Email *">
 	                                    <p class="help-block text-danger"></p>
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control" placeholder="Your Subject *" id="subject" required data-validation-required-message="Please enter your phone number.">
+	                                    <input type="text" class="form-control" placeholder="Your Subject *">
 	                                    <p class="help-block text-danger"></p>
 	                                </div>
 	                            </div>
 	                            <div class="col-md-6">
 	                                <div class="form-group">
-	                                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+	                                    <textarea class="form-control" placeholder="Your Message *"></textarea>
 	                                    <p class="help-block text-danger"></p>
 	                                    <div id="success"></div>
 		                                <button type="submit" class="polo-btn contact-submit"><i class="ion-paper-airplane"></i></button>
@@ -695,7 +686,7 @@
 	                        </div>
 	                        <div class="alert alert-danger error">Error!  E-mail must be valid and message must be longer than 1 character.</div>
 	                        <div class="alert alert-success success">Your message has been sent successfully.</div>
-	                    </form>
+	                    </div>
 					</div><!--/send mail-->
 				</div><!--/row-->
 			</div>
