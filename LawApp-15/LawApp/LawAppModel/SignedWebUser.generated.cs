@@ -129,6 +129,15 @@ namespace LawAppModel
 			}
 		}
 		
+		private IList<Subscription> _subscriptions = new List<Subscription>();
+		public virtual IList<Subscription> Subscriptions
+		{
+			get
+			{
+				return this._subscriptions;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

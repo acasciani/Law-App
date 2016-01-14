@@ -92,6 +92,9 @@
         <orm:field name="_tSC_Calendars" property="TSC_Calendars" behavior="readwrite" uniqueId="7778c2ee-e579-4093-98a9-341465a48179" type="LawAppModel.TSC_Calendar">
           <orm:collection element-class="LawAppModel.TSC_Calendar" inverse-field="_signedWebUser" order-by="" uniqueId="ce331fd3-5589-45f0-ada1-cae9ecbb03ef" />
         </orm:field>
+        <orm:field name="_subscriptions" property="Subscriptions" behavior="readwrite" uniqueId="e24c6c81-927f-453b-9806-dfed7cc154ff" type="LawAppModel.Subscription">
+          <orm:collection element-class="LawAppModel.Subscription" inverse-field="_signedWebUser" order-by="" uniqueId="e398e832-ff90-46f6-a236-5c01861cbe6c" />
+        </orm:field>
       </orm:class>
       <orm:class name="Holiday" use-default-mapping="true" uniqueId="715dbf03-79f1-4ae8-b29f-2d9d4b799342">
         <orm:identity>
@@ -317,6 +320,120 @@
           </orm:columnMapping>
         </orm:index>
       </orm:class>
+      <orm:class name="Subscription" uniqueId="4e3ce05e-7d46-419f-b9eb-e3287886af8b">
+        <orm:table name="Subscriptions" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="SubscriptionID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_subscriptionID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_subscriptionID" property="SubscriptionID" behavior="readwrite" uniqueId="25f9ef3e-a354-4f11-b5dd-3e34e9300ac3" type="System.Int32">
+          <orm:column name="SubscriptionID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_effectiveFrom" property="EffectiveFrom" behavior="readwrite" uniqueId="e8067227-cf61-4ea1-9126-69c764a95c6c" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="EffectiveFrom" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        </orm:field>
+        <orm:field name="_effectiveTo" property="EffectiveTo" behavior="readwrite" uniqueId="90740b72-8ab1-4bc6-8798-f21d97ac5463" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="EffectiveTo" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        </orm:field>
+        <orm:field name="_subscriptionPlanID" property="SubscriptionPlanID" behavior="readwrite" uniqueId="1fe81f9b-02ef-415e-969d-40e6cdd12c80" type="System.Int32">
+          <orm:column name="SubscriptionPlanID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_active" property="Active" behavior="readwrite" uniqueId="5b59893d-1ed0-4435-a3c4-20744fc6118a" type="System.Boolean">
+          <orm:column name="Active" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_userID" property="UserID" behavior="readwrite" uniqueId="80293696-c9bc-4e1c-b7e5-0d2af9c1f3b7" type="System.Int32">
+          <orm:column name="UserID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_createDate" property="CreateDate" behavior="readwrite" uniqueId="10e81d42-9032-416a-8fdc-4ca0670bb47c" type="System.DateTime">
+          <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_modifyDate" property="ModifyDate" behavior="readwrite" uniqueId="6ebf6dfd-89e6-4a69-8f9c-0d588c31eda0" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ModifyDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_inActiveDate" property="InActiveDate" behavior="readwrite" uniqueId="8a58a226-530c-4003-bbbf-2cc4256044ae" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="InActiveDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_token" property="Token" behavior="readwrite" uniqueId="73b177a5-31ac-4cdf-870c-4e13adb12e2e" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Token" sql-type="uniqueidentifier" nullable="true" length="0" scale="0" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_nextBillDate" property="NextBillDate" behavior="readwrite" uniqueId="459ce627-87c0-4052-a3ac-d38663c7629f" type="System.DateTime">
+          <orm:column name="NextBillDate" sql-type="date" nullable="false" length="0" scale="0" ado-type="Date" />
+        </orm:field>
+        <orm:field name="_payKey" property="PayKey" behavior="readwrite" uniqueId="d9859d24-9716-4904-8048-d7bb1cd90bed" type="System.String">
+          <orm:column name="PayKey" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_subscriptionPlan" property="SubscriptionPlan" behavior="readwrite" uniqueId="6c802553-40f7-4969-9a8a-730b0b2524bc" type="LawAppModel.SubscriptionPlan">
+          <orm:reference uniqueId="65457156-83b7-41f5-8adb-45fe120733b4" association-name="SubscriptionHasSubscriptionPlan">
+            <orm:sharedfield name="_subscriptionPlanID" target-class="LawAppModel.SubscriptionPlan" target-field="_subscriptionPlanID" />
+            <orm:constraint name="FK_Subscriptions_SubscriptionPlans" delete-action="dbdefaultrule" destination-table="SubscriptionPlans" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_signedWebUser" property="SignedWebUser" behavior="readwrite" uniqueId="f07f7cdd-cbeb-43f3-8f2b-15af6efa7cee" type="LawAppModel.SignedWebUser">
+          <orm:reference uniqueId="e398e832-ff90-46f6-a236-5c01861cbe6c" association-name="SubscriptionHasSignedWebUser">
+            <orm:sharedfield name="_userID" target-class="LawAppModel.SignedWebUser" target-field="_webUserId" />
+            <orm:constraint name="FK_Subscriptions_SignedWebUser" delete-action="dbdefaultrule" destination-table="SignedWebUser" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="SubscriptionPlan" uniqueId="f30d799a-c408-4a47-ab1d-5cfc40e1fb98">
+        <orm:table name="SubscriptionPlans" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="SubscriptionPlanID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_subscriptionPlanID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_subscriptionPlanID" property="SubscriptionPlanID" behavior="readwrite" uniqueId="c9325138-b19d-4b34-ba0b-d5b75bfe4492" type="System.Int32">
+          <orm:column name="SubscriptionPlanID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_planName" property="PlanName" behavior="readwrite" uniqueId="e1cbe72d-6067-4732-90a4-cda33bae459f" type="System.String">
+          <orm:column name="PlanName" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_planCost" property="PlanCost" behavior="readwrite" uniqueId="0ca1c3a6-c13b-4b14-977a-ab80ac614c63" type="System.Decimal">
+          <orm:column name="PlanCost" sql-type="decimal" nullable="false" length="6" scale="2" ado-type="Decimal" />
+        </orm:field>
+        <orm:field name="_isActive" property="IsActive" behavior="readwrite" uniqueId="20b20f5e-af51-4780-9910-fa6135029617" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_subscriptionDurationID" property="SubscriptionDurationID" behavior="readwrite" uniqueId="358e1647-6ca4-4ef0-b207-7cd423d0217b" type="System.Int32">
+          <orm:column name="SubscriptionDurationID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_durationLength" property="DurationLength" behavior="readwrite" uniqueId="9a7251f4-41d8-4aa0-8b93-78fa04d7106e" type="System.Int32">
+          <orm:column name="DurationLength" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_subscriptionDuration" property="SubscriptionDuration" behavior="readwrite" uniqueId="4d598bde-6c25-410d-ab8b-a18a757139fd" type="LawAppModel.SubscriptionDuration">
+          <orm:reference uniqueId="56a87c56-d8a2-4017-ac9f-69f2967eb580" association-name="SubscriptionPlanHasSubscriptionDuration">
+            <orm:sharedfield name="_subscriptionDurationID" target-class="LawAppModel.SubscriptionDuration" target-field="_subscriptionDurationID" />
+            <orm:constraint name="FK_SubscriptionPlans_SubscriptionDurations" delete-action="dbdefaultrule" destination-table="SubscriptionDurations" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_subscriptions" property="Subscriptions" behavior="readwrite" uniqueId="3e41ed6b-44ba-45f0-be3f-661f14e1051b" type="LawAppModel.Subscription">
+          <orm:collection element-class="LawAppModel.Subscription" inverse-field="_subscriptionPlan" order-by="" uniqueId="65457156-83b7-41f5-8adb-45fe120733b4" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="SubscriptionDuration" uniqueId="55e5fdf7-bfff-4a57-9578-a4c99fa18e3d">
+        <orm:table name="SubscriptionDurations" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="SubscriptionDurationID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_subscriptionDurationID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_subscriptionDurationID" property="SubscriptionDurationID" behavior="readwrite" uniqueId="f9c8e4ee-c97c-4f9b-82ba-a0b6f0a46fee" type="System.Int32">
+          <orm:column name="SubscriptionDurationID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_subscriptionDurationType" property="SubscriptionDurationType" behavior="readwrite" uniqueId="1fe63a46-1c2c-4790-afb3-d233a2215f62" type="System.String">
+          <orm:column name="SubscriptionDurationType" sql-type="nvarchar" nullable="false" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_subscriptionPlans" property="SubscriptionPlans" behavior="readwrite" uniqueId="69efe4f9-ce0d-4441-b42f-6936007f56f4" type="LawAppModel.SubscriptionPlan">
+          <orm:collection element-class="LawAppModel.SubscriptionPlan" inverse-field="_subscriptionDuration" order-by="" uniqueId="56a87c56-d8a2-4017-ac9f-69f2967eb580" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="UserRole">
@@ -381,6 +498,41 @@
           </orm:columnMapping>
         </orm:index>
       </orm:table>
+      <orm:table name="Subscriptions">
+        <orm:column name="SubscriptionID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="EffectiveFrom" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        <orm:column name="EffectiveTo" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        <orm:column name="SubscriptionPlanID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Active" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="UserID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ModifyDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="InActiveDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="Token" sql-type="uniqueidentifier" nullable="true" length="0" scale="0" ado-type="Guid" />
+        <orm:column name="NextBillDate" sql-type="date" nullable="false" length="0" scale="0" ado-type="Date" />
+        <orm:column name="PayKey" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:constraint name="FK_Subscriptions_SubscriptionPlans" delete-action="dbdefaultrule" destination-table="SubscriptionPlans">
+          <orm:column name="SubscriptionPlanID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_Subscriptions_SignedWebUser" delete-action="dbdefaultrule" destination-table="SignedWebUser">
+          <orm:column name="UserID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="SubscriptionPlans">
+        <orm:column name="SubscriptionPlanID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="PlanName" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PlanCost" sql-type="decimal" nullable="false" length="6" scale="2" ado-type="Decimal" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="SubscriptionDurationID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="DurationLength" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:constraint name="FK_SubscriptionPlans_SubscriptionDurations" delete-action="dbdefaultrule" destination-table="SubscriptionDurations">
+          <orm:column name="SubscriptionDurationID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="SubscriptionDurations">
+        <orm:column name="SubscriptionDurationID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="SubscriptionDurationType" sql-type="nvarchar" nullable="false" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:source-strategy>Property</orm:source-strategy>
@@ -389,7 +541,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>LawApp15</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=ALEX;initial catalog=Core;integrated security=True</AppConfigConnectionString>
+    <AppConfigConnectionString>server=venus.crpuwty08ffp.us-west-2.rds.amazonaws.com,1433;database=Core;user id=alex;password=thinkpositive</AppConfigConnectionString>
     <NamingSettings>
       <ClassRules>
         <CaseMode>PascalCase</CaseMode>
@@ -519,6 +671,9 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="dd225a2d-ebd7-4dd1-a325-a513f056f038">
           <NavigationalProperty Id="7778c2ee-e579-4093-98a9-341465a48179" name="TSC_Calendars" type="IList&lt;TSC_Calendar&gt;" label="TSC_Calendars : IList&lt;TSC_Calendar&gt;" nullable="true" kind="Persistent" fieldName="_tSC_Calendars" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="e92e7eb7-9d57-4190-827f-1fe37fab7b68">
+          <NavigationalProperty Id="e24c6c81-927f-453b-9806-dfed7cc154ff" name="Subscriptions" type="IList&lt;Subscription&gt;" label="Subscriptions : IList&lt;Subscription&gt;" nullable="true" kind="Persistent" fieldName="_subscriptions" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
@@ -680,6 +835,96 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="4e3ce05e-7d46-419f-b9eb-e3287886af8b" name="Subscription" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="SubscriptionID">
+      <Property Id="25f9ef3e-a354-4f11-b5dd-3e34e9300ac3" name="SubscriptionID" type="Int32" label="SubscriptionID : Int32" kind="Persistent" identity="true" fieldName="_subscriptionID" />
+      <Property Id="5b59893d-1ed0-4435-a3c4-20744fc6118a" name="Active" type="Boolean" label="Active : Boolean" kind="Persistent" fieldName="_active" />
+      <Property Id="10e81d42-9032-416a-8fdc-4ca0670bb47c" name="CreateDate" type="DateTime" label="CreateDate : DateTime" kind="Persistent" fieldName="_createDate" />
+      <Property Id="e8067227-cf61-4ea1-9126-69c764a95c6c" name="EffectiveFrom" type="DateTime" label="EffectiveFrom : DateTime" nullable="true" kind="Persistent" fieldName="_effectiveFrom" />
+      <Property Id="90740b72-8ab1-4bc6-8798-f21d97ac5463" name="EffectiveTo" type="DateTime" label="EffectiveTo : DateTime" nullable="true" kind="Persistent" fieldName="_effectiveTo" />
+      <Property Id="8a58a226-530c-4003-bbbf-2cc4256044ae" name="InActiveDate" type="DateTime" label="InActiveDate : DateTime" nullable="true" kind="Persistent" fieldName="_inActiveDate" />
+      <Property Id="6ebf6dfd-89e6-4a69-8f9c-0d588c31eda0" name="ModifyDate" type="DateTime" label="ModifyDate : DateTime" nullable="true" kind="Persistent" fieldName="_modifyDate" />
+      <Property Id="1fe81f9b-02ef-415e-969d-40e6cdd12c80" name="SubscriptionPlanID" type="Int32" label="SubscriptionPlanID : Int32" kind="Persistent" fieldName="_subscriptionPlanID" />
+      <Property Id="80293696-c9bc-4e1c-b7e5-0d2af9c1f3b7" name="UserID" type="Int32" label="UserID : Int32" kind="Persistent" fieldName="_userID" />
+      <Property Id="73b177a5-31ac-4cdf-870c-4e13adb12e2e" name="Token" type="Guid" label="Token : Guid" nullable="true" kind="Persistent" fieldName="_token" />
+      <Property Id="459ce627-87c0-4052-a3ac-d38663c7629f" name="NextBillDate" type="DateTime" label="NextBillDate : DateTime" kind="Persistent" fieldName="_nextBillDate" />
+      <Property Id="d9859d24-9716-4904-8048-d7bb1cd90bed" name="PayKey" label="PayKey : String" kind="Persistent" fieldName="_payKey" />
+      <AssociationTargets>
+        <Association Id="65457156-83b7-41f5-8adb-45fe120733b4" SourceMultiplicity="One" name="SubscriptionHasSubscriptionPlan">
+          <DomainClassMoniker name="/LawApp/SubscriptionPlan" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="f49ab0d0-b8b6-4e45-971a-d9855ea2313c">
+              <NavigationalPropertyMoniker name="/LawApp/SubscriptionPlan/Subscriptions" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="3ef90653-998c-4a66-b134-601199520ddb">
+              <NavigationalPropertyMoniker name="/LawApp/Subscription/SubscriptionPlan" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="e398e832-ff90-46f6-a236-5c01861cbe6c" SourceMultiplicity="One" name="SubscriptionHasSignedWebUser">
+          <DomainClassMoniker name="/LawApp/SignedWebUser" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="5768f30c-5f64-41b5-b2ba-a819bf73c8af">
+              <NavigationalPropertyMoniker name="/LawApp/SignedWebUser/Subscriptions" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="44955af9-d230-4f7d-8fb9-67a6308799a5">
+              <NavigationalPropertyMoniker name="/LawApp/Subscription/SignedWebUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="60e1f1d4-fcbc-4372-b44f-ad7e65e1a6da">
+          <NavigationalProperty Id="6c802553-40f7-4969-9a8a-730b0b2524bc" name="SubscriptionPlan" type="SubscriptionPlan" label="SubscriptionPlan : SubscriptionPlan" nullable="true" kind="Persistent" fieldName="_subscriptionPlan" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="e5ada5bd-759d-40ad-a1cb-93ed4d3449c7">
+          <NavigationalProperty Id="f07f7cdd-cbeb-43f3-8f2b-15af6efa7cee" name="SignedWebUser" type="SignedWebUser" label="SignedWebUser : SignedWebUser" nullable="true" kind="Persistent" fieldName="_signedWebUser" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="f30d799a-c408-4a47-ab1d-5cfc40e1fb98" name="SubscriptionPlan" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="SubscriptionPlanID">
+      <Property Id="c9325138-b19d-4b34-ba0b-d5b75bfe4492" name="SubscriptionPlanID" type="Int32" label="SubscriptionPlanID : Int32" kind="Persistent" identity="true" fieldName="_subscriptionPlanID" />
+      <Property Id="9a7251f4-41d8-4aa0-8b93-78fa04d7106e" name="DurationLength" type="Int32" label="DurationLength : Int32" kind="Persistent" fieldName="_durationLength" />
+      <Property Id="20b20f5e-af51-4780-9910-fa6135029617" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="_isActive" />
+      <Property Id="0ca1c3a6-c13b-4b14-977a-ab80ac614c63" name="PlanCost" type="Decimal" label="PlanCost : Decimal" kind="Persistent" fieldName="_planCost" />
+      <Property Id="e1cbe72d-6067-4732-90a4-cda33bae459f" name="PlanName" label="PlanName : String" kind="Persistent" fieldName="_planName" />
+      <Property Id="358e1647-6ca4-4ef0-b207-7cd423d0217b" name="SubscriptionDurationID" type="Int32" label="SubscriptionDurationID : Int32" kind="Persistent" fieldName="_subscriptionDurationID" />
+      <AssociationTargets>
+        <Association Id="56a87c56-d8a2-4017-ac9f-69f2967eb580" SourceMultiplicity="One" name="SubscriptionPlanHasSubscriptionDuration">
+          <DomainClassMoniker name="/LawApp/SubscriptionDuration" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="eeb1bcfd-10cf-419f-b123-0b6928a94c95">
+              <NavigationalPropertyMoniker name="/LawApp/SubscriptionDuration/SubscriptionPlans" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e43be20d-e827-48c1-8cbc-4cbcc98586c1">
+              <NavigationalPropertyMoniker name="/LawApp/SubscriptionPlan/SubscriptionDuration" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="8ab0a146-0cc8-4617-a19f-9d0b607820dd">
+          <NavigationalProperty Id="3e41ed6b-44ba-45f0-be3f-661f14e1051b" name="Subscriptions" type="IList&lt;Subscription&gt;" label="Subscriptions : IList&lt;Subscription&gt;" nullable="true" kind="Persistent" fieldName="_subscriptions" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="ce8dad96-8a43-4670-a06e-367280103035">
+          <NavigationalProperty Id="4d598bde-6c25-410d-ab8b-a18a757139fd" name="SubscriptionDuration" type="SubscriptionDuration" label="SubscriptionDuration : SubscriptionDuration" nullable="true" kind="Persistent" fieldName="_subscriptionDuration" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="55e5fdf7-bfff-4a57-9578-a4c99fa18e3d" name="SubscriptionDuration" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="SubscriptionDurationID">
+      <Property Id="f9c8e4ee-c97c-4f9b-82ba-a0b6f0a46fee" name="SubscriptionDurationID" type="Int32" label="SubscriptionDurationID : Int32" kind="Persistent" identity="true" fieldName="_subscriptionDurationID" />
+      <Property Id="1fe63a46-1c2c-4790-afb3-d233a2215f62" name="SubscriptionDurationType" label="SubscriptionDurationType : String" kind="Persistent" fieldName="_subscriptionDurationType" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="8d111f11-2819-4eb2-a394-3feaa3915c95">
+          <NavigationalProperty Id="69efe4f9-ce0d-4441-b42f-6936007f56f4" name="SubscriptionPlans" type="IList&lt;SubscriptionPlan&gt;" label="SubscriptionPlans : IList&lt;SubscriptionPlan&gt;" nullable="true" kind="Persistent" fieldName="_subscriptionPlans" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="700b6438-42c2-4324-a582-ef893682055d">
@@ -694,6 +939,9 @@
         <entitySetProperty name="TSC_UniqueDays" namespace="LawAppModel" type="TSC_UniqueDays" label="TSC_UniqueDays : IQueryable&lt;LawAppModel.TSC_UniqueDays&gt;" />
         <entitySetProperty name="TSC_IndividualOvernights" namespace="LawAppModel" type="TSC_IndividualOvernight" label="TSC_IndividualOvernights : IQueryable&lt;LawAppModel.TSC_IndividualOvernight&gt;" />
         <entitySetProperty name="TSC_Breaks" namespace="LawAppModel" type="TSC_Break" label="TSC_Breaks : IQueryable&lt;LawAppModel.TSC_Break&gt;" />
+        <entitySetProperty name="Subscriptions" namespace="LawAppModel" type="Subscription" label="Subscriptions : IQueryable&lt;LawAppModel.Subscription&gt;" />
+        <entitySetProperty name="SubscriptionPlans" namespace="LawAppModel" type="SubscriptionPlan" label="SubscriptionPlans : IQueryable&lt;LawAppModel.SubscriptionPlan&gt;" />
+        <entitySetProperty name="SubscriptionDurations" namespace="LawAppModel" type="SubscriptionDuration" label="SubscriptionDurations : IQueryable&lt;LawAppModel.SubscriptionDuration&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

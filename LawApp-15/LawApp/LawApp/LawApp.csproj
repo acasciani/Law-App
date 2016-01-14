@@ -61,9 +61,21 @@
       <HintPath>..\..\packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPal, Version=1.7.2.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PayPal.1.7.2\lib\net45\PayPal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPalAdaptivePaymentsSDK, Version=2.15.117.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PayPalAdaptivePaymentsSDK.2.15.117\lib\net20\PayPalAdaptivePaymentsSDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPalCoreSDK, Version=1.7.0.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PayPalCoreSDK.1.7.0\lib\net45\PayPalCoreSDK.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -174,6 +186,8 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Account\Subscriptions\CancelPreapproval.aspx" />
+    <Content Include="Account\Subscriptions\CompletePreapproval.aspx" />
     <Content Include="Account\Subscriptions\Default.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
@@ -236,6 +250,7 @@
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.eot" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.ttf" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.woff" />
+    <Content Include="Account\Subscriptions\Web.config" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="NewLanding.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -426,6 +441,20 @@
     <Compile Include="Account\BetaComplete.aspx.designer.cs">
       <DependentUpon>BetaComplete.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Subscriptions\CancelPreapproval.aspx.cs">
+      <DependentUpon>CancelPreapproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Subscriptions\CancelPreapproval.aspx.designer.cs">
+      <DependentUpon>CancelPreapproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Subscriptions\CompletePreapproval.aspx.cs">
+      <DependentUpon>CompletePreapproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Subscriptions\CompletePreapproval.aspx.designer.cs">
+      <DependentUpon>CompletePreapproval.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Subscriptions\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -433,6 +462,7 @@
     <Compile Include="Account\Subscriptions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Subscriptions\SubscriptionsCore.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
@@ -577,6 +607,9 @@
       <DependentUpon>Calendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Source\Controls\CalendarDay.cs" />
+    <Compile Include="Controllers\SubscriptionDurationsController.cs" />
+    <Compile Include="Controllers\SubscriptionPlansController.cs" />
+    <Compile Include="Controllers\SubscriptionsController.cs" />
     <Compile Include="Utilities\Authorization.cs" />
     <Compile Include="Utilities\CalendarUtilities.cs" />
     <Compile Include="Utilities\ExceptionHandler.cs" />

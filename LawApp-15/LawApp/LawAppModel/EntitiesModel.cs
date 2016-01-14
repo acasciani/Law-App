@@ -130,6 +130,30 @@ namespace LawAppModel
 			}
 		}
 		
+		public IQueryable<Subscription> Subscriptions 
+		{
+			get
+			{
+				return this.GetAll<Subscription>();
+			}
+		}
+		
+		public IQueryable<SubscriptionPlan> SubscriptionPlans 
+		{
+			get
+			{
+				return this.GetAll<SubscriptionPlan>();
+			}
+		}
+		
+		public IQueryable<SubscriptionDuration> SubscriptionDurations 
+		{
+			get
+			{
+				return this.GetAll<SubscriptionDuration>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -188,6 +212,18 @@ namespace LawAppModel
 			get;
 		}
 		IQueryable<TSC_Break> TSC_Breaks
+		{
+			get;
+		}
+		IQueryable<Subscription> Subscriptions
+		{
+			get;
+		}
+		IQueryable<SubscriptionPlan> SubscriptionPlans
+		{
+			get;
+		}
+		IQueryable<SubscriptionDuration> SubscriptionDurations
 		{
 			get;
 		}

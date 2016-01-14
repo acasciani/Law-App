@@ -35,6 +35,21 @@ namespace LawAppWeb
 	
     }
 
+    public partial class SubscriptionRepository : OpenAccessBaseRepository<LawAppModel.Subscription, LawAppModel.LawApp>
+    {
+
+    }
+
+    public partial class SubscriptionDurationRepository : OpenAccessBaseRepository<LawAppModel.SubscriptionDuration, LawAppModel.LawApp>
+    {
+
+    }
+
+    public partial class SubscriptionPlanRepository : OpenAccessBaseRepository<LawAppModel.SubscriptionPlan, LawAppModel.LawApp>
+    {
+
+    }
+
 	public partial class TSC_BreakRepository : OpenAccessBaseRepository<LawAppModel.TSC_Break, LawAppModel.LawApp>
     {
 	
