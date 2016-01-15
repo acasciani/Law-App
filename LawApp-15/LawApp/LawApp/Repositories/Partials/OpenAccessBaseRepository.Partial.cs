@@ -11,6 +11,8 @@ namespace LawAppWeb
     {
         IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter);
         IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, params Expression<Func<object, IEnumerable<object>>>[] loadWith);
+        IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, params Expression<Func<object, object>>[] loadWith);
+        IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, FetchStrategy fetch);
     }
 
     public abstract partial class OpenAccessBaseRepository<TEntity, TContext> : IOpenAccessBaseRepository<TEntity, TContext> where TContext : OpenAccessContext, new()
@@ -29,6 +31,21 @@ namespace LawAppWeb
             fetch.LoadWith(loadWith);
 
             List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(GetAllEntities(filter), fetchStrategy);
+            return detachedEntities.AsQueryable();
+        }
+
+        public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, params Expression<Func<object, object>>[] loadWith)
+        {
+            FetchStrategy fetch = new FetchStrategy();
+            fetch.LoadWith(loadWith);
+
+            List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(GetAllEntities(filter), fetchStrategy);
+            return detachedEntities.AsQueryable();
+        }
+
+        public virtual IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> filter, FetchStrategy fetch)
+        {
+            List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(GetAllEntities(filter), fetch);
             return detachedEntities.AsQueryable();
         }
 

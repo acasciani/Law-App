@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CancelPreapproval.aspx.cs" Inherits="LawAppWeb.Account.Subscriptions.CancelPreapproval" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CompleteSubscription.aspx.cs" Inherits="LawAppWeb.Account.Subscriptions.CompleteSubscription" %>
 
 <!DOCTYPE html>
 

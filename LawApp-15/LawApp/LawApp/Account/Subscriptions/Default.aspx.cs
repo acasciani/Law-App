@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using PayPal.AdaptivePayments;
 using PayPal.AdaptivePayments.Model;
 using LawAppModel;
+using Telerik.OpenAccess.FetchOptimization;
 
 namespace LawAppWeb.Account.Subscriptions
 {
@@ -18,7 +19,55 @@ namespace LawAppWeb.Account.Subscriptions
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!string.IsNullOrWhiteSpace(Session["SubscriptionCompleteMessage"] as string))
+            {
+                bool isError = Session["SubscriptionCompleteMessageIsError"] as bool? ?? false;
+                AlertBox.AddAlert(Session["SubscriptionCompleteMessage"] as string, false, isError ? AlertType.Error : AlertType.Success);
+
+                Session.Remove("SubscriptionCompleteMessage");
+                Session.Remove("SubscriptionCompleteMessageIsError");
+            }
+
+            if (IsPostBack)
+            {
+                return;
+            }
+
+            LoadSubscription_TSC();
+        }
+
+        private void LoadSubscription_TSC()
+        {
+            using (SubscriptionsController sc = new SubscriptionsController())
+            {
+                int userID = this.GetCurrentUser().WebUserId;
+                List<int> planIDs = new List<int>() { 1, 3, 5, 6 };
+
+                FetchStrategy fetch = new FetchStrategy();
+                fetch.LoadWith<Subscription>(i => i.SubscriptionPlan);
+
+                Subscription subscription = sc.GetWhere(i => i.UserID == userID && planIDs.Contains(i.SubscriptionPlanID) && i.Active && i.EffectiveTo.HasValue && i.EffectiveFrom.HasValue, fetch).FirstOrDefault();
+
+                if (subscription != null)
+                {
+                    // currently has active TSC calendar
+                    lblSubTSC_Expires.Text = subscription.EffectiveTo.Value.ToString("MMMM dd, yyyy h:mm tt");
+                    lblSubTSC_Plan.Text = subscription.SubscriptionPlan.PlanName;
+                    lblSubTSC_PurchasedOn.Text = subscription.EffectiveFrom.Value.ToString("MMMM dd, yyyy");
+                    divTSCDetails.Visible = true;
+                    divTSCDetails_NoPlan.Visible = false;
+                }
+                else
+                {
+                    bool doesPendingExist = sc.GetWhere(i => i.UserID == userID && planIDs.Contains(i.SubscriptionPlanID) && !i.Active && !i.EffectiveTo.HasValue && !i.EffectiveFrom.HasValue && !i.InActiveDate.HasValue).Count() > 0;
+                    divTSCDetails.Visible = false;
+                    divTSCDetails_NoPlan.Visible = true;
+
+                    divTSCDetails_NoPlan_None.Visible = !doesPendingExist;
+                    divTSCDetails_NoPlan_Pending.Visible = doesPendingExist;
+                }
+
+            }
         }
 
 
@@ -48,7 +97,7 @@ namespace LawAppWeb.Account.Subscriptions
                     Subscription subscription = new Subscription()
                     {
                         Active = false,
-                        NextBillDate = GetNextBillingDate(plan, currBillDate),
+                        NextBillDate = SubscriptionsCore.GetNextBillingDate(plan, currBillDate),
                         CreateDate = currBillDate,
                         SubscriptionPlanID = subscriptionPlanID,
                         UserID = userID,
@@ -73,14 +122,14 @@ namespace LawAppWeb.Account.Subscriptions
             List<Receiver> receivers = new List<Receiver>();
 
             // owner 65 %
-            receivers.Add(new Receiver(totalAmount * 0.65M)
+            receivers.Add(new Receiver(totalAmount)
             {
                 primary = true,
                 email = "lawapp15@gmail.com"
             });
 
             // developer 35%
-            receivers.Add(new Receiver(totalAmount - receivers[0].amount.Value)
+            receivers.Add(new Receiver(totalAmount * .35M)
             {
                 primary = false,
                 email = "lawapp15-facilitator@gmail.com"
@@ -89,30 +138,6 @@ namespace LawAppWeb.Account.Subscriptions
             return new ReceiverList(receivers);
         }
 
-
-        private static DateTime GetNextBillingDate(SubscriptionPlan plan, DateTime currentBillDate)
-        {
-            DateTime nextBillDate;
-
-            switch (plan.SubscriptionDurationID)
-            {
-                case 1:  // year
-                    nextBillDate = currentBillDate.AddYears(plan.DurationLength);
-                    break;
-
-                case 2: // month
-                    nextBillDate = currentBillDate.AddMonths(plan.DurationLength);
-                    break;
-
-                case 3: // day
-                    nextBillDate = currentBillDate.AddDays(plan.DurationLength);
-                    break;
-
-                default: throw new Exception("Specified subscription duration id is invalid");
-            }
-
-            return nextBillDate;
-        }
 
         protected void lnkSubscribe_Click(object sender, EventArgs e)
         {
@@ -147,7 +172,7 @@ namespace LawAppWeb.Account.Subscriptions
                 SubscriptionPlan plan = spc.Get(SubscriptionPlanID);
 
                 lblPlanCost.Text = plan.PlanCost.ToString("C");
-                lblPlanExpires.Text = GetNextBillingDate(plan, DateTime.Today).ToLocalTime().ToString("MMMM dd, yyyy");
+                lblPlanExpires.Text = SubscriptionsCore.GetNextBillingDate(plan, DateTime.Today).ToLocalTime().ToString("MMMM dd, yyyy");
                 lblDescription.Text = plan.PlanName;
             }
         }

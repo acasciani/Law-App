@@ -13,6 +13,42 @@ namespace LawAppWeb.Account.Subscriptions {
     public partial class Default {
         
         /// <summary>
+        /// AlertBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::LawAppWeb.Controls.AlertBox AlertBox;
+        
+        /// <summary>
+        /// divTSCDetails_NoPlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTSCDetails_NoPlan;
+        
+        /// <summary>
+        /// divTSCDetails_NoPlan_Pending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTSCDetails_NoPlan_Pending;
+        
+        /// <summary>
+        /// divTSCDetails_NoPlan_None control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTSCDetails_NoPlan_None;
+        
+        /// <summary>
         /// lnkSubscribeTSC control.
         /// </summary>
         /// <remarks>
@@ -20,6 +56,42 @@ namespace LawAppWeb.Account.Subscriptions {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkSubscribeTSC;
+        
+        /// <summary>
+        /// divTSCDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTSCDetails;
+        
+        /// <summary>
+        /// lblSubTSC_Expires control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubTSC_Expires;
+        
+        /// <summary>
+        /// lblSubTSC_Plan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubTSC_Plan;
+        
+        /// <summary>
+        /// lblSubTSC_PurchasedOn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubTSC_PurchasedOn;
         
         /// <summary>
         /// divSubscribeToProduct control.

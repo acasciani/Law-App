@@ -17,6 +17,8 @@
         <h2>My Subscriptions</h2>
     </div>
 
+    <ui:AlertBox runat="server" Id="AlertBox" />
+
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-primary">
@@ -24,7 +26,22 @@
                     Timesharing Calendar Subscription
                 </div>
                 <div class="panel-body">
-                    <strong>You do not have an active Timesharing Calendar subscription.</strong> <asp:LinkButton runat="server" ID="lnkSubscribeTSC" CommandArgument="1,3,5,6" CommandName="Timesharing Calendar" OnClick="lnkSubscribe_Click">Click here to subscribe</asp:LinkButton>.
+                    <div runat="server" id="divTSCDetails_NoPlan" visible="false">
+                        <div runat="server" id="divTSCDetails_NoPlan_Pending" visible="false">
+                            <strong>You currently have a pending subscription.</strong> Please check back for a progress update. If the subscription is still pending in 24 hours, please contact support.
+                        </div>
+
+                        <div runat="server" id="divTSCDetails_NoPlan_None" visible="false">
+                            <strong>You do not have an active Timesharing Calendar subscription.</strong> <asp:LinkButton runat="server" ID="lnkSubscribeTSC" CommandArgument="1,3,5,6" CommandName="Timesharing Calendar" OnClick="lnkSubscribe_Click">Click here to subscribe</asp:LinkButton>.
+                        </div>
+                    </div>
+
+                    <div runat="server" id="divTSCDetails" visible="false">
+                        <strong>Expires:</strong> <asp:Label runat="server" ID="lblSubTSC_Expires" /><br />
+                        <strong>Plan:</strong> <asp:Label runat="server" ID="lblSubTSC_Plan" /><br />
+                        <strong>Purchased On:</strong> <asp:Label runat="server" ID="lblSubTSC_PurchasedOn" />
+                    </div>
+
                 </div>
             </div>
         </div>

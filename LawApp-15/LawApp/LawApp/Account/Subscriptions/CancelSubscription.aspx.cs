@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace LawAppWeb.Account.Subscriptions
 {
-    public partial class CompletePreapproval : System.Web.UI.Page
+    public partial class CancelSubscription : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

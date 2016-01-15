@@ -186,8 +186,8 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
-    <Content Include="Account\Subscriptions\CancelPreapproval.aspx" />
-    <Content Include="Account\Subscriptions\CompletePreapproval.aspx" />
+    <Content Include="Account\Subscriptions\CancelSubscription.aspx" />
+    <Content Include="Account\Subscriptions\CompleteSubscription.aspx" />
     <Content Include="Account\Subscriptions\Default.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
@@ -441,19 +441,19 @@
     <Compile Include="Account\BetaComplete.aspx.designer.cs">
       <DependentUpon>BetaComplete.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Subscriptions\CancelPreapproval.aspx.cs">
-      <DependentUpon>CancelPreapproval.aspx</DependentUpon>
+    <Compile Include="Account\Subscriptions\CancelSubscription.aspx.cs">
+      <DependentUpon>CancelSubscription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\Subscriptions\CancelPreapproval.aspx.designer.cs">
-      <DependentUpon>CancelPreapproval.aspx</DependentUpon>
+    <Compile Include="Account\Subscriptions\CancelSubscription.aspx.designer.cs">
+      <DependentUpon>CancelSubscription.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Subscriptions\CompletePreapproval.aspx.cs">
-      <DependentUpon>CompletePreapproval.aspx</DependentUpon>
+    <Compile Include="Account\Subscriptions\CompleteSubscription.aspx.cs">
+      <DependentUpon>CompleteSubscription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\Subscriptions\CompletePreapproval.aspx.designer.cs">
-      <DependentUpon>CompletePreapproval.aspx</DependentUpon>
+    <Compile Include="Account\Subscriptions\CompleteSubscription.aspx.designer.cs">
+      <DependentUpon>CompleteSubscription.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Subscriptions\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
