@@ -7,33 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawAppWeb.Account
-{
-
-
-    public partial class RegisterExternalLogin
-    {
-
-
-
+namespace LawAppWeb.Account {
+    
+    
+    public partial class ManagePassword {
+        
         /// <summary>
-        /// userNameForm control.
+        /// AlertBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder userNameForm;
-
+        protected global::LawAppWeb.Controls.AlertBox AlertBox;
+        
         /// <summary>
-        /// userName control.
+        /// changePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox userName;
-
-
+        protected global::System.Web.UI.WebControls.ChangePassword changePassword;
     }
 }

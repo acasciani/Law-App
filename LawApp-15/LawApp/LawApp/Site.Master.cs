@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LawAppWeb.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -67,7 +68,25 @@ namespace LawAppWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                return;
+            }
 
+            if (Authorization.CurrentUser != null)
+            {
+                litPersonName.Text = Authorization.CurrentUser.Person != null ? Authorization.CurrentUser.Person.LName + ", " + Authorization.CurrentUser.Person.FName : Authorization.CurrentUser.Email;
+            }
+            else
+            {
+                litPersonName.Text = "My Account";
+            }
+        }
+
+        protected void lnkLogout_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
     }
 }

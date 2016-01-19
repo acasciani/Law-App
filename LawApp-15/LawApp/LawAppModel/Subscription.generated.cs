@@ -206,6 +206,15 @@ namespace LawAppModel
 			}
 		}
 		
+		private IList<PaymentLog> _paymentLogs = new List<PaymentLog>();
+		public virtual IList<PaymentLog> PaymentLogs
+		{
+			get
+			{
+				return this._paymentLogs;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

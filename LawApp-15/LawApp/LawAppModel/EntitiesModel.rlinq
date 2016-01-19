@@ -377,6 +377,9 @@
             <orm:constraint name="FK_Subscriptions_SignedWebUser" delete-action="dbdefaultrule" destination-table="SignedWebUser" />
           </orm:reference>
         </orm:field>
+        <orm:field name="_paymentLogs" property="PaymentLogs" behavior="readwrite" uniqueId="c44ef7b2-3d8d-4f8e-96ba-b2ff8d41b4fe" type="LawAppModel.PaymentLog">
+          <orm:collection element-class="LawAppModel.PaymentLog" inverse-field="_subscription" order-by="" uniqueId="8f062765-ffd9-4b7e-8ed9-20a7cacec365" />
+        </orm:field>
       </orm:class>
       <orm:class name="SubscriptionPlan" uniqueId="f30d799a-c408-4a47-ab1d-5cfc40e1fb98">
         <orm:table name="SubscriptionPlans" />
@@ -432,6 +435,46 @@
         </orm:field>
         <orm:field name="_subscriptionPlans" property="SubscriptionPlans" behavior="readwrite" uniqueId="69efe4f9-ce0d-4441-b42f-6936007f56f4" type="LawAppModel.SubscriptionPlan">
           <orm:collection element-class="LawAppModel.SubscriptionPlan" inverse-field="_subscriptionDuration" order-by="" uniqueId="56a87c56-d8a2-4017-ac9f-69f2967eb580" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="PaymentLog" uniqueId="fb4275f4-48d0-4a40-9287-270808c3f94c">
+        <orm:table name="PaymentLogs" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="PaymentLogID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_paymentLogID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_paymentLogID" property="PaymentLogID" behavior="readwrite" uniqueId="6be04d15-8a2b-4dbc-9062-97ea57e07709" type="System.Int32">
+          <orm:column name="PaymentLogID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_subscriptionID" property="SubscriptionID" behavior="readwrite" uniqueId="5aa97ff8-505c-4b93-9ecd-24570906957a" type="System.Int32">
+          <orm:column name="SubscriptionID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_txn_id" property="Txn_id" behavior="readwrite" uniqueId="b6a07320-6f0e-4a11-8910-ae81a91a8b9e" type="System.String">
+          <orm:column name="txn_id" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_txn_type" property="Txn_type" behavior="readwrite" uniqueId="5fa4e67c-2137-4098-bf4e-609c180df9b4" type="System.String">
+          <orm:column name="txn_type" sql-type="varchar" nullable="false" length="40" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_receiver_email" property="Receiver_email" behavior="readwrite" uniqueId="4de075d6-fd62-43e3-a666-986bd5b55d24" type="System.String">
+          <orm:column name="receiver_email" sql-type="varchar" nullable="false" length="120" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_payment_status" property="Payment_status" behavior="readwrite" uniqueId="97daff3d-f8ae-48f8-b185-5b753d33e20e" type="System.String">
+          <orm:column name="payment_status" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_payer_email" property="Payer_email" behavior="readwrite" uniqueId="e95872e3-bc26-4d8e-b6ce-b9765379c6cc" type="System.String">
+          <orm:column name="payer_email" sql-type="varchar" nullable="false" length="120" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_createDate" property="CreateDate" behavior="readwrite" uniqueId="4f2cba24-bc88-417e-9194-b7d4791b072d" type="System.DateTime">
+          <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" has-default-value="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_subscription" property="Subscription" behavior="readwrite" uniqueId="10378922-fa11-406d-841f-f43b78b4b3db" type="LawAppModel.Subscription">
+          <orm:reference uniqueId="8f062765-ffd9-4b7e-8ed9-20a7cacec365" association-name="PaymentLogHasSubscription">
+            <orm:sharedfield name="_subscriptionID" target-class="LawAppModel.Subscription" target-field="_subscriptionID" />
+            <orm:constraint name="FK_PaymentLogs_Subscriptions" delete-action="dbdefaultrule" destination-table="Subscriptions" />
+          </orm:reference>
         </orm:field>
       </orm:class>
     </orm:namespace>
@@ -532,6 +575,19 @@
       <orm:table name="SubscriptionDurations">
         <orm:column name="SubscriptionDurationID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         <orm:column name="SubscriptionDurationType" sql-type="nvarchar" nullable="false" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="PaymentLogs">
+        <orm:column name="PaymentLogID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="SubscriptionID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="txn_id" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="txn_type" sql-type="varchar" nullable="false" length="40" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="receiver_email" sql-type="varchar" nullable="false" length="120" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="payment_status" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="payer_email" sql-type="varchar" nullable="false" length="120" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreateDate" sql-type="datetime" nullable="false" length="0" scale="0" has-default-value="true" ado-type="DateTime" />
+        <orm:constraint name="FK_PaymentLogs_Subscriptions" delete-action="dbdefaultrule" destination-table="Subscriptions">
+          <orm:column name="SubscriptionID" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -883,6 +939,9 @@
         <classHasNavigationalProperties Id="e5ada5bd-759d-40ad-a1cb-93ed4d3449c7">
           <NavigationalProperty Id="f07f7cdd-cbeb-43f3-8f2b-15af6efa7cee" name="SignedWebUser" type="SignedWebUser" label="SignedWebUser : SignedWebUser" nullable="true" kind="Persistent" fieldName="_signedWebUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="379433e7-9108-4b83-9b7d-2527855fc3ee">
+          <NavigationalProperty Id="c44ef7b2-3d8d-4f8e-96ba-b2ff8d41b4fe" name="PaymentLogs" type="IList&lt;PaymentLog&gt;" label="PaymentLogs : IList&lt;PaymentLog&gt;" nullable="true" kind="Persistent" fieldName="_paymentLogs" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
     <DomainClass Id="f30d799a-c408-4a47-ab1d-5cfc40e1fb98" name="SubscriptionPlan" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="SubscriptionPlanID">
@@ -925,6 +984,36 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="fb4275f4-48d0-4a40-9287-270808c3f94c" name="PaymentLog" namespace="LawAppModel" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="PaymentLogID">
+      <Property Id="6be04d15-8a2b-4dbc-9062-97ea57e07709" name="PaymentLogID" type="Int32" label="PaymentLogID : Int32" kind="Persistent" identity="true" fieldName="_paymentLogID" />
+      <Property Id="4f2cba24-bc88-417e-9194-b7d4791b072d" name="CreateDate" type="DateTime" label="CreateDate : DateTime" kind="Persistent" fieldName="_createDate" />
+      <Property Id="e95872e3-bc26-4d8e-b6ce-b9765379c6cc" name="Payer_email" label="Payer_email : String" kind="Persistent" fieldName="_payer_email" />
+      <Property Id="97daff3d-f8ae-48f8-b185-5b753d33e20e" name="Payment_status" label="Payment_status : String" kind="Persistent" fieldName="_payment_status" />
+      <Property Id="4de075d6-fd62-43e3-a666-986bd5b55d24" name="Receiver_email" label="Receiver_email : String" kind="Persistent" fieldName="_receiver_email" />
+      <Property Id="5aa97ff8-505c-4b93-9ecd-24570906957a" name="SubscriptionID" type="Int32" label="SubscriptionID : Int32" kind="Persistent" fieldName="_subscriptionID" />
+      <Property Id="b6a07320-6f0e-4a11-8910-ae81a91a8b9e" name="Txn_id" label="Txn_id : String" kind="Persistent" fieldName="_txn_id" />
+      <Property Id="5fa4e67c-2137-4098-bf4e-609c180df9b4" name="Txn_type" label="Txn_type : String" kind="Persistent" fieldName="_txn_type" />
+      <AssociationTargets>
+        <Association Id="8f062765-ffd9-4b7e-8ed9-20a7cacec365" SourceMultiplicity="One" name="PaymentLogHasSubscription">
+          <DomainClassMoniker name="/LawApp/Subscription" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e5d2da65-80db-4618-a8f2-f22fc47a2058">
+              <NavigationalPropertyMoniker name="/LawApp/Subscription/PaymentLogs" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="51da7faf-bfbc-4ba9-befb-7ce081f46cb5">
+              <NavigationalPropertyMoniker name="/LawApp/PaymentLog/Subscription" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="c914d4c4-2c91-4717-be43-ae3b9f909ffe">
+          <NavigationalProperty Id="10378922-fa11-406d-841f-f43b78b4b3db" name="Subscription" type="Subscription" label="Subscription : Subscription" nullable="true" kind="Persistent" fieldName="_subscription" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="700b6438-42c2-4324-a582-ef893682055d">
@@ -942,6 +1031,7 @@
         <entitySetProperty name="Subscriptions" namespace="LawAppModel" type="Subscription" label="Subscriptions : IQueryable&lt;LawAppModel.Subscription&gt;" />
         <entitySetProperty name="SubscriptionPlans" namespace="LawAppModel" type="SubscriptionPlan" label="SubscriptionPlans : IQueryable&lt;LawAppModel.SubscriptionPlan&gt;" />
         <entitySetProperty name="SubscriptionDurations" namespace="LawAppModel" type="SubscriptionDuration" label="SubscriptionDurations : IQueryable&lt;LawAppModel.SubscriptionDuration&gt;" />
+        <entitySetProperty name="PaymentLogs" namespace="LawAppModel" type="PaymentLog" label="PaymentLogs : IQueryable&lt;LawAppModel.PaymentLog&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

@@ -153,3 +153,7 @@
     -webkit-transform: scale(1.0);
   }
 }
+
+body {
+    margin-top: 71px !important;
+}

@@ -44,15 +44,7 @@ namespace LawAppWeb.Account.Subscriptions
                             switch (details.status.ToUpper())
                             {
                                 case "COMPLETED":
-                                    subscription.EffectiveFrom = DateTime.Now;
-                                    subscription.EffectiveTo = SubscriptionsCore.GetNextBillingDate(subscription.SubscriptionPlan, DateTime.Now);
-                                    subscription.Active = true;
-                                    subscription.InActiveDate = null;
-                                    subscription.ModifyDate = DateTime.Now;
-
-                                    sc.Update(subscription);
-
-                                    Session["SubscriptionCompleteMessage"] = "Product subscription completed successfully.";
+                                    Session["SubscriptionCompleteMessage"] = "Product subscription completed successfully. It may take up-to one hour for the subscription process to complete. Please check back.";
                                     Session["SubscriptionCompleteMessageIsError"] = false;
                                     break;
 

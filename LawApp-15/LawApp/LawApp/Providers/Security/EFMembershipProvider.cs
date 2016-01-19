@@ -267,13 +267,14 @@ namespace LawAppProviders.Security
                 SignedWebUser user = swuc.GetWhere(u => u.Email == username).FirstOrDefault();
 
                 user.UserPassword = EncodePassword(newPassword);
+                user.ModificationDate = DateTime.Now;
 
                 try
                 {
-                    swuc.Put(user.WebUserId, user);
+                    swuc.Update(user);
                     return true;
                 }
-                catch
+                catch(Exception ex)
                 {
                     return false;
                 }

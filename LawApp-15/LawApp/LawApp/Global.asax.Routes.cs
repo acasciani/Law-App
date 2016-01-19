@@ -27,6 +27,9 @@ namespace LawAppWeb
                                            routeTemplate: "api/{controller}/{id}",
                                            defaults: new { id = RouteParameter.Optional });
 
+            RouteTable.Routes.MapHttpRoute(name: "IPN",
+                                           routeTemplate: "api/IPN/{action}");
+
             ApplyCustomConfiguration();
         }
 

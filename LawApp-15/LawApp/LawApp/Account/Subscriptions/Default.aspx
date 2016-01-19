@@ -13,7 +13,7 @@
         });
     </script>
 
-    <div style="margin-top: 70px;">
+    <div>
         <h2>My Subscriptions</h2>
     </div>
 

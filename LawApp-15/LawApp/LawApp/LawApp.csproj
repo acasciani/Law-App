@@ -180,12 +180,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\BetaComplete.aspx" />
     <Content Include="Account\Login.aspx" />
-    <Content Include="Account\Manage.aspx" />
+    <Content Include="Account\ManagePassword.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Account\Subscriptions\CancelSubscription.aspx" />
     <Content Include="Account\Subscriptions\CompleteSubscription.aspx" />
     <Content Include="Account\Subscriptions\Default.aspx" />
@@ -434,13 +432,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\BetaComplete.aspx.cs">
-      <DependentUpon>BetaComplete.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\BetaComplete.aspx.designer.cs">
-      <DependentUpon>BetaComplete.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Account\Subscriptions\CancelSubscription.aspx.cs">
       <DependentUpon>CancelSubscription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -467,6 +458,7 @@
     <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
     <Compile Include="Controllers\Partials\HolidaysController.Partial.cs" />
+    <Compile Include="Controllers\Partials\IPNController.cs" />
     <Compile Include="Controllers\Partials\SignedWebUsersController.Partial.cs" />
     <Compile Include="Controllers\Partials\TSC_UniqueDaysController.Partial.cs" />
     <Compile Include="Controllers\Partials\UserRolesController.Partial.cs" />
@@ -539,12 +531,12 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Manage.aspx.cs">
-      <DependentUpon>Manage.aspx</DependentUpon>
+    <Compile Include="Account\ManagePassword.aspx.cs">
+      <DependentUpon>ManagePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\Manage.aspx.designer.cs">
-      <DependentUpon>Manage.aspx</DependentUpon>
+    <Compile Include="Account\ManagePassword.aspx.designer.cs">
+      <DependentUpon>ManagePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\OpenAuthProviders.ascx.cs">
       <DependentUpon>OpenAuthProviders.ascx</DependentUpon>
@@ -559,13 +551,6 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\RegisterExternalLogin.aspx.cs">
-      <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
-      <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Partials\ApplicationsController.Partial.cs" />

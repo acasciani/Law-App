@@ -154,6 +154,14 @@ namespace LawAppModel
 			}
 		}
 		
+		public IQueryable<PaymentLog> PaymentLogs 
+		{
+			get
+			{
+				return this.GetAll<PaymentLog>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -224,6 +232,10 @@ namespace LawAppModel
 			get;
 		}
 		IQueryable<SubscriptionDuration> SubscriptionDurations
+		{
+			get;
+		}
+		IQueryable<PaymentLog> PaymentLogs
 		{
 			get;
 		}

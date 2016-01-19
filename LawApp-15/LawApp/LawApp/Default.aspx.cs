@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LawAppModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,30 @@ using System.Web.UI.WebControls;
 
 namespace LawAppWeb
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                return;
+            }
 
+            LoadPersonInfo();
+        }
+
+        private void LoadPersonInfo()
+        {
+            SignedWebUser user = this.GetCurrentUser();
+
+            if (user.Person == null)
+            {
+                litPersonName.Text = user.Email;
+            }
+            else
+            {
+                litPersonName.Text = user.Person.FName;
+            }
         }
     }
 }

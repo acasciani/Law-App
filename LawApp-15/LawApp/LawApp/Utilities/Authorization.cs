@@ -50,7 +50,7 @@ namespace LawAppWeb.Utilities
         {
             if (!refr.IsCurrentUserAuthorized(permission))
             {
-                HttpContext.Current.Response.Redirect("~/Account/Login.aspx", true);
+                HttpContext.Current.Response.Redirect("~/Default.aspx", true);
             }
         }
     }

@@ -3,8 +3,9 @@
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="LawAppPlaceHolder" runat="server">
-    <div style="margin-top: 70px;">
-        <h2>My Dashboard</h2>
+    <div>
+        <h2>Welcome, <asp:Literal runat="server" ID="litPersonName" />!</h2>
+        <p>This is your personalized dashboard. You can use it to quickly navigate to all the tools you have access to.</p>
     </div>
 
     <div class="row">
@@ -26,7 +27,8 @@
                     My Account
                 </div>
                 <div class="panel-body">
-                    <a href="#">Manage Subscriptions</a>
+                    <a href="/Account/Subscriptions/">Manage Subscriptions</a><br />
+                    <a href="/Account/ManagePassword">Change Password</a>
                 </div>
             </div>
         </div>
