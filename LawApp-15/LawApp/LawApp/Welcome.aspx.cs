@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace LawAppWeb
 {
-    public partial class NewLanding : System.Web.UI.Page
+    public partial class Welcome : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,15 +16,10 @@ namespace LawAppWeb
 
         protected void loginForm_LoggedIn(object sender, EventArgs e)
         {
-            Response.Redirect("~/Modules/TSC/Default.aspx");
+            Response.Redirect("~/Default.aspx");
         }
 
         protected void loginForm_LoginError(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void loginForm_Authenticate(object sender, AuthenticateEventArgs e)
         {
 
         }

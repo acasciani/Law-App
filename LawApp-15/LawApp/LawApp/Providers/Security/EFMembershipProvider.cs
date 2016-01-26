@@ -315,8 +315,7 @@ namespace LawAppProviders.Security
                 try
                 {
                     user.UserPassword = EncodePassword(newPassword);
-
-                    swuc.Put(user.WebUserId, user);
+                    swuc.Update(user);
                     return newPassword;
                 }
                 catch
@@ -514,10 +513,12 @@ namespace LawAppProviders.Security
                 user = swuc.GetWhere(query).Where(MatchApplication()).FirstOrDefault();
             }
 
+            /*
             if (user == null)
             {
                 throw new ProviderException("The requested user could not be found.");
             }
+            */
 
             return user;
         }

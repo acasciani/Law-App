@@ -13,6 +13,14 @@ namespace LawAppWeb.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ((HyperLink)RegisterUser.FindControl("CreateUserStepContainer").FindControl("LoginHyperLink")).NavigateUrl = "Login";
+
+            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+            if (!String.IsNullOrEmpty(returnUrl))
+            {
+                ((HyperLink)RegisterUser.FindControl("CreateUserStepContainer").FindControl("LoginHyperLink")).NavigateUrl += "?ReturnUrl=" + returnUrl;
+            }
+
             RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
         }
 
@@ -33,7 +41,7 @@ namespace LawAppWeb.Account
             {
                 continueUrl = "~/";
             }
-            Response.Redirect("~/Account/BetaComplete.aspx");
+            Response.Redirect("~/");
         }
     }
 }

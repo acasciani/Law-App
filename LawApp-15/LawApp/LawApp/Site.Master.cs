@@ -73,13 +73,18 @@ namespace LawAppWeb
                 return;
             }
 
-            if (Authorization.CurrentUser != null)
+            Literal litPersonName = (Literal)LoginView.FindControl("litPersonName");
+
+            if (litPersonName != null)
             {
-                litPersonName.Text = Authorization.CurrentUser.Person != null ? Authorization.CurrentUser.Person.LName + ", " + Authorization.CurrentUser.Person.FName : Authorization.CurrentUser.Email;
-            }
-            else
-            {
-                litPersonName.Text = "My Account";
+                if (Authorization.CurrentUser != null)
+                {
+                    litPersonName.Text = Authorization.CurrentUser.Person != null ? Authorization.CurrentUser.Person.LName + ", " + Authorization.CurrentUser.Person.FName : Authorization.CurrentUser.Email;
+                }
+                else
+                {
+                    litPersonName.Text = "My Account";
+                }
             }
         }
 

@@ -10,15 +10,15 @@
 namespace LawAppWeb.Account {
     
     
-    public partial class Login {
+    public partial class ResetPassword {
         
         /// <summary>
-        /// loginForm control.
+        /// PasswordRecovery control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login loginForm;
+        protected global::System.Web.UI.WebControls.PasswordRecovery PasswordRecovery;
     }
 }

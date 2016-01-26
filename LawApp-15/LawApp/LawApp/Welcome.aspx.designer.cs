@@ -10,7 +10,7 @@
 namespace LawAppWeb {
     
     
-    public partial class NewLanding {
+    public partial class Welcome {
         
         /// <summary>
         /// MainScriptManager control.

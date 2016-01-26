@@ -184,6 +184,7 @@
     <Content Include="Account\ManagePassword.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Account\ResetPassword.aspx" />
     <Content Include="Account\Subscriptions\CancelSubscription.aspx" />
     <Content Include="Account\Subscriptions\CompleteSubscription.aspx" />
     <Content Include="Account\Subscriptions\Default.aspx" />
@@ -244,13 +245,14 @@
     <Content Include="Content\Modules\TSC\Print.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Emails\Account\ResetPassword.aspx" />
     <Content Include="Modules\TSC\Existing.aspx" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.eot" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.ttf" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.woff" />
     <Content Include="Account\Subscriptions\Web.config" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="NewLanding.aspx" />
+    <Content Include="Welcome.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\Datepicker.js" />
@@ -432,6 +434,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Subscriptions\CancelSubscription.aspx.cs">
       <DependentUpon>CancelSubscription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -477,6 +486,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Emails\Account\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Account\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\TSC\Existing.aspx.cs">
       <DependentUpon>Existing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -485,12 +501,12 @@
       <DependentUpon>Existing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modules\TSC\PermissionHelper.cs" />
-    <Compile Include="NewLanding.aspx.cs">
-      <DependentUpon>NewLanding.aspx</DependentUpon>
+    <Compile Include="Welcome.aspx.cs">
+      <DependentUpon>Welcome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NewLanding.aspx.designer.cs">
-      <DependentUpon>NewLanding.aspx</DependentUpon>
+    <Compile Include="Welcome.aspx.designer.cs">
+      <DependentUpon>Welcome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\LawAppRepositories.cs" />
     <Compile Include="Modules\TSC\Default.aspx.designer.cs">

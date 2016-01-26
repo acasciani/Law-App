@@ -66,19 +66,19 @@
           <orm:single-field field-name="_webUserId" />
         </orm:identity>
         <orm:field name="_email" property="Email" uniqueId="4fa9bc0c-9ed7-456b-ab8f-8c976b1a36b7" type="System.String">
-          <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+          <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_userPassword" property="UserPassword" uniqueId="dfea40de-c79c-4dbb-94a1-4094d1cc603f" type="System.String">
-          <orm:column name="UserPassword" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
+          <orm:column name="UserPassword" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="_webUserId" property="WebUserId" uniqueId="02676b3f-a195-43de-a9c5-fc87fe7aa00c" type="System.Int32">
-          <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
+          <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_creationDate" property="CreationDate" uniqueId="f4461513-29ea-4ee2-a566-c52b3dddb85d" type="System.DateTime">
-          <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+          <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_modificationDate" property="ModificationDate" uniqueId="6723770d-a197-4cca-9ec2-c5e82e4dd419" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
+          <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
         <orm:field name="_person" property="Person" behavior="readwrite" uniqueId="511eea25-c3b5-46f7-b71c-a82cc60c7696" type="LawAppModel.Person" default-fetch-group="true">
           <orm:reference uniqueId="0daff697-c58c-48d1-9049-220975779c68" association-name="SignedWebUserHasPerson" />
@@ -493,12 +493,15 @@
         </orm:constraint>
       </orm:table>
       <orm:table name="SignedWebUser">
-        <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
-        <orm:column name="UserPassword" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthAnsiStringConverter" ado-type="StringVariableLength" />
-        <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />
-        <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
-        <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.MssqlMinDateConverter" ado-type="DateTime" />
-        <orm:column name="PersonId" sql-type="int" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+        <orm:column name="Email" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="UserPassword" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="WebUserId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="PersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:constraint name="ref_SignedWebUser_Person" delete-action="dbdefaultrule">
+          <orm:column name="PersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
       </orm:table>
       <orm:table name="Permission">
         <orm:column name="PermissionId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.IntConverter" backend-calculated="true" ado-type="Int32" />

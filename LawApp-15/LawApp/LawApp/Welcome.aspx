@@ -1,4 +1,4 @@
-﻿<%@ Page Title="My Law Tools - Next Generation Attorney Tools" Language="C#" AutoEventWireup="true" CodeBehind="NewLanding.aspx.cs" Inherits="LawAppWeb.NewLanding" %>
+﻿<%@ Page Title="My Law Tools - Next Generation Attorney Tools" Language="C#" AutoEventWireup="true" CodeBehind="Welcome.aspx.cs" Inherits="LawAppWeb.Welcome" %>
 
 
 <!DOCTYPE html>
@@ -49,6 +49,12 @@
 	    <script src="/Scripts/front/js/script.js"></script>
     </asp:PlaceHolder>
     <meta name="viewport" content="width=device-width" />
+
+    <style type="text/css">
+        body {
+            margin-top: 0px !important;
+        }
+    </style>
 </head>
 
 <body id="home">
@@ -109,14 +115,12 @@
                                 <strong>Existing Members Login</strong>
                             </div>
                             <div class="panel-body" style="color: black;">
-                                <asp:UpdatePanel runat="server" ChildrenAsTriggers="true" UpdateMode="Always">
-                                    <ContentTemplate>
-                                <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm" OnLoginError="loginForm_LoginError" OnAuthenticate="loginForm_Authenticate">
+                                <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm" OnLoginError="loginForm_LoginError">
                                     <LayoutTemplate>
                                         <span class="text-danger">
                                             <asp:Literal runat="server" ID="FailureText" />
                                         </span>
-                                        
+
 
                                         <div class="form-group">
                                             <asp:TextBox runat="server" ID="UserName" CssClass="form-control" placeholder="Email" />
@@ -127,26 +131,23 @@
                                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="field-validation-error text-danger" ErrorMessage="The password field is required." Display="Dynamic" />
                                         </div>
                                         <div class="form-group">
-                                            <asp:CheckBox runat="server" ID="RememberMe" />
-                                            <asp:Label runat="server" AssociatedControlID="RememberMe" CssClass="checkbox">Remember me?</asp:Label>
+                                            <div class="row">
+                                                <div class="col-xs-8 text-left">
+                                                    <asp:Label runat="server" AssociatedControlID="RememberMe" CssClass="checkbox-inline">
+                                                        <asp:CheckBox runat="server" ID="RememberMe" />
+                                                        Remember me?
+                                                    </asp:Label>
+                                                </div>
+                                                <div class="col-xs-4 text-right">
+                                                    <asp:Button runat="server" CommandName="Login" Text="Login" CssClass="btn btn-default" />
+                                                </div>
+                                            </div>
                                         </div>
-
-
-                                        <div class="form-group" style="text-align: right;">
-                                            <asp:LinkButton runat="server" CommandName="Login" Text="Login" />
+                                        <div class="text-center">
+                                            <a href="/Account/Register">Create New Account</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<a href="#">Reset Password</a>
                                         </div>
                                     </LayoutTemplate>
                                 </asp:Login>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-
-
-
-
-
-                                <div>
-                                    <a href="#">I Forgot My Password</a>
-                                </div>
                             </div>
                         </div>
 					</div>

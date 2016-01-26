@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LawAppModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,19 +13,18 @@ namespace LawAppWeb.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+            ((HyperLink)loginForm.FindControl("RegisterHyperLink")).NavigateUrl = "Register";
 
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
             if (!String.IsNullOrEmpty(returnUrl))
             {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+                ((HyperLink)loginForm.FindControl("RegisterHyperLink")).NavigateUrl += "?ReturnUrl=" + returnUrl;
             }
         }
 
-        protected void Unnamed_LoggedIn(object sender, EventArgs e)
+        protected void loginForm_LoggedIn(object sender, EventArgs e)
         {
-            Response.Redirect("~/Modules/TSC/Default.aspx");
+            Response.Redirect("~/");
         }
     }
 }
