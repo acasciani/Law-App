@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawAppWeb.Emails.Account {
+namespace LawAppWeb.Emails {
     
     
-    public partial class ResetPassword {
+    public partial class Email {
         
         /// <summary>
-        /// litName control.
+        /// MessageBody control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litName;
-        
-        /// <summary>
-        /// litPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litPassword;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MessageBody;
     }
 }

@@ -510,7 +510,7 @@ namespace LawAppProviders.Security
 
             using (SignedWebUsersController swuc = new SignedWebUsersController())
             {
-                user = swuc.GetWhere(query).Where(MatchApplication()).FirstOrDefault();
+                user = swuc.GetWhere(query).FirstOrDefault();
             }
 
             /*

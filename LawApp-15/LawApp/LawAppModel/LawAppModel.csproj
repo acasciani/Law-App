@@ -58,6 +58,7 @@
     <Compile Include="Application.generated.cs">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Custom\AdaptivePaymentsPayIPN.cs" />
     <Compile Include="Custom\PayPalIPNModel.cs" />
     <Compile Include="EntitiesModel.cs">
       <AutoGen>True</AutoGen>

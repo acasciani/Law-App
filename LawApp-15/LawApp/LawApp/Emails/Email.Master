@@ -1,0 +1,11 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Email.master.cs" Inherits="LawAppWeb.Emails.Email" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+</head>
+<body style="margin: 0px; padding: 0px;">
+    <asp:ContentPlaceHolder ID="MessageBody" runat="server"></asp:ContentPlaceHolder>
+</body>
+</html>

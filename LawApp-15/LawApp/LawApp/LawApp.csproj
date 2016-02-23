@@ -246,11 +246,14 @@
     <Content Include="Content\slider.css" />
     <Content Include="Default.aspx" />
     <Content Include="Emails\Account\ResetPassword.aspx" />
+    <Content Include="IPN\Notify.aspx" />
     <Content Include="Modules\TSC\Existing.aspx" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.eot" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.ttf" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.woff" />
     <Content Include="Account\Subscriptions\Web.config" />
+    <Content Include="Emails\Email.Master" />
+    <Content Include="Emails\Web.config" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Welcome.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -467,7 +470,6 @@
     <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
     <Compile Include="Controllers\Partials\HolidaysController.Partial.cs" />
-    <Compile Include="Controllers\Partials\IPNController.cs" />
     <Compile Include="Controllers\Partials\SignedWebUsersController.Partial.cs" />
     <Compile Include="Controllers\Partials\TSC_UniqueDaysController.Partial.cs" />
     <Compile Include="Controllers\Partials\UserRolesController.Partial.cs" />
@@ -492,6 +494,21 @@
     </Compile>
     <Compile Include="Emails\Account\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Email.Master.cs">
+      <DependentUpon>Email.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Email.Master.designer.cs">
+      <DependentUpon>Email.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\EmailHandler.cs" />
+    <Compile Include="IPN\Notify.aspx.cs">
+      <DependentUpon>Notify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IPN\Notify.aspx.designer.cs">
+      <DependentUpon>Notify.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modules\TSC\Existing.aspx.cs">
       <DependentUpon>Existing.aspx</DependentUpon>

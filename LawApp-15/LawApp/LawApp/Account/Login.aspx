@@ -37,7 +37,7 @@
             </div>
             <div class="text-left">
                 Don't have an account yet? <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Click here to create a new account</asp:HyperLink><br />
-                Forgot your password? <a href="#">Click here to reset your password</a>
+                Forgot your password? <a href="/Account/ResetPassword">Click here to reset your password</a>
             </div>
         </LayoutTemplate>
     </asp:Login>

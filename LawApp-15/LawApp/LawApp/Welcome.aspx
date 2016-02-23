@@ -64,7 +64,10 @@
 
         </asp:ScriptManager>
 
+        <a href="/Account/Login">Website is current under construction, please click here to login.</a>
+
 	<!-- ****************************** Preloader ************************** -->
+        <asp:Panel runat="server" Visible="false">
 	<div id="preloader"></div>
 
 
@@ -144,7 +147,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <a href="/Account/Register">Create New Account</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<a href="#">Reset Password</a>
+                                            <a href="/Account/Register">Create New Account</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<a href="/Account/ResetPassword">Reset Password</a>
                                         </div>
                                     </LayoutTemplate>
                                 </asp:Login>
@@ -723,7 +726,7 @@
 	<!-- ****************************** Back to top ************************** -->
 	<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 
-
+        </asp:Panel>
 
 	<!-- All the scripts -->
 

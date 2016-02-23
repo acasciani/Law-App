@@ -34,5 +34,29 @@ namespace LawAppWeb.Account.Subscriptions
 
             return nextBillDate;
         }
+
+        public static DateTime GetEffectiveEndDate(SubscriptionPlan plan, DateTime effectiveStartDate)
+        {
+            DateTime effectiveEnd;
+
+            switch (plan.SubscriptionDurationID)
+            {
+                case 1:  // year
+                    effectiveEnd = effectiveStartDate.AddYears(plan.DurationLength);
+                    break;
+
+                case 2: // month
+                    effectiveEnd = effectiveStartDate.AddMonths(plan.DurationLength);
+                    break;
+
+                case 3: // day
+                    effectiveEnd = effectiveStartDate.AddDays(plan.DurationLength);
+                    break;
+
+                default: throw new Exception("Specified subscription duration id is invalid");
+            }
+
+            return effectiveEnd;
+        }
     }
 }

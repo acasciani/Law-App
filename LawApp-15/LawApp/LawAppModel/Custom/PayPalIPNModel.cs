@@ -28,7 +28,7 @@ namespace LawAppModel
         /// Encrypted string used to validate the authenticity of the transaction
         public string verify_sign { get; set; }
 
-        public Guid AppToken { get; set; }
+        public Guid? AppToken { get; set; }
         #endregion
 
         #region "Buyer Information Variables"
@@ -247,7 +247,8 @@ namespace LawAppModel
             this.txn_type = form["txn_type"];
             this.verify_sign = form["verify_sign"];
 
-            this.AppToken = Guid.Parse(form["app_token"]);
+            Guid tryGuid;
+            this.AppToken = Guid.TryParse(form["custom"], out tryGuid) ? tryGuid : (Guid?)null;
         }
     }
 }

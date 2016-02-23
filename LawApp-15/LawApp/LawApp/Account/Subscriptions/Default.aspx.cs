@@ -8,6 +8,7 @@ using PayPal.AdaptivePayments;
 using PayPal.AdaptivePayments.Model;
 using LawAppModel;
 using Telerik.OpenAccess.FetchOptimization;
+using System.Configuration;
 
 namespace LawAppWeb.Account.Subscriptions
 {
@@ -75,22 +76,24 @@ namespace LawAppWeb.Account.Subscriptions
         {
             Guid token = Guid.NewGuid();
 
-                            using (SubscriptionPlansController spc = new SubscriptionPlansController())
-                using (SubscriptionsController sc = new SubscriptionsController())
-                {
-                    SubscriptionPlan plan = spc.Get(subscriptionPlanID);
-
-            AdaptivePaymentsService service = new AdaptivePaymentsService();
-
-            RequestEnvelope envelope = new RequestEnvelope("en-US");
-
-            PayRequest req = new PayRequest(envelope, "PAY", new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(CancelSubscription, token))).AbsoluteUri, "USD", GetReceivers(plan.PlanCost), new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(FinishSubscription, token))).AbsoluteUri);
-            PayResponse response = service.Pay(req);
-
-            if (response.error.Count() == 0)
+            using (SubscriptionPlansController spc = new SubscriptionPlansController())
+            using (SubscriptionsController sc = new SubscriptionsController())
             {
-                // we have a response, now let's add it to the database
-                    
+                SubscriptionPlan plan = spc.Get(subscriptionPlanID);
+
+                AdaptivePaymentsService service = new AdaptivePaymentsService();
+
+                RequestEnvelope envelope = new RequestEnvelope("en-US");
+
+                PayRequest req = new PayRequest(envelope, "PAY", new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(CancelSubscription, token))).AbsoluteUri, "USD", GetReceivers(plan.PlanCost), new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(FinishSubscription, token))).AbsoluteUri);
+                req.ipnNotificationUrl = ConfigurationManager.AppSettings["PayIPNEndpiont"].Trim();
+
+                PayResponse response = service.Pay(req);
+
+                if (response.error.Count() == 0)
+                {
+                    // we have a response, now let's add it to the database
+
 
                     DateTime currBillDate = DateTime.Now;
 
@@ -108,13 +111,13 @@ namespace LawAppWeb.Account.Subscriptions
                     sc.AddNew(subscription);
 
                     Response.Redirect(string.Format("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey={0}", response.payKey));
-            }
-            else
-            {
-                throw new Exception("Error occurred generating preapproval key");
-            }
-
                 }
+                else
+                {
+                    throw new Exception("Error occurred generating preapproval key");
+                }
+
+            }
         }
 
         private static ReceiverList GetReceivers(decimal totalAmount)
@@ -150,7 +153,8 @@ namespace LawAppWeb.Account.Subscriptions
 
             using (SubscriptionPlansController spc = new SubscriptionPlansController())
             {
-                var plans = spc.GetWhere(i => planIDs.Contains(i.SubscriptionPlanID) && i.IsActive).Select(i=> new {
+                var plans = spc.GetWhere(i => planIDs.Contains(i.SubscriptionPlanID) && i.IsActive).Select(i => new
+                {
                     SubscriptionPlanID = i.SubscriptionPlanID,
                     Text = i.PlanName + " - " + i.PlanCost,
                     Price = i.PlanCost

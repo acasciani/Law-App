@@ -7,19 +7,15 @@ using System.Web.UI.WebControls;
 
 namespace LawAppWeb.Emails.Account
 {
-    public partial class ResetPassword : System.Web.UI.Page
+    public partial class ResetPassword : Page
     {
-        public string GetResetPath
-        {
-            get
-            {
-                return new System.Uri(Page.Request.Url, ResolveUrl("~/Account/ManagePassword.aspx")).AbsoluteUri;
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            string name = HttpUtility.UrlDecode(Request.Form.Get("name"));
+            string password = HttpUtility.UrlDecode(Request.Form.Get("newpw"));
 
+            litName.Text = name;
+            litPassword.Text = password;
         }
     }
 }
