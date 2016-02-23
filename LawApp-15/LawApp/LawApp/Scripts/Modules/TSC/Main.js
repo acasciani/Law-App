@@ -770,6 +770,7 @@ function DataLoadedCB(data) {
     LoadFederalHolidays(data);
     LoadBreaks(data);
     LoadUniqueDates(data);
+    updateSelectedLabel($('.CalendarDay.day-checked').length);
 }
 
 function GetCalendarFromServer(cid, cb) {

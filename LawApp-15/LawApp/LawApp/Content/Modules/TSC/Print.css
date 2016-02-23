@@ -64,4 +64,12 @@
     .margin-top-10 {
         margin-top: 10px;
     }
+
+    body {
+        margin-top: 0px !important;
+    }
+
+    #workpane > .row > .col-print-12 {
+        overflow: hidden;
+    }
 }
