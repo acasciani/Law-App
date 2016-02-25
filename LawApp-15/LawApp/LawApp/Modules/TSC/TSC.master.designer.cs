@@ -31,6 +31,24 @@ namespace LawAppWeb.Modules.TSC {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl SavedCalendarsLink;
         
         /// <summary>
+        /// litPersonName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litPersonName;
+        
+        /// <summary>
+        /// lnkLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLogout;
+        
+        /// <summary>
         /// TSCProduct_Holder control.
         /// </summary>
         /// <remarks>

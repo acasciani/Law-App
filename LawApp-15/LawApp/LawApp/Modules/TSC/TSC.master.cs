@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LawAppWeb.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,6 +21,18 @@ namespace LawAppWeb.Modules.TSC
                 }
 
                 SetNavigation();
+
+                if (litPersonName != null)
+                {
+                    if (Authorization.CurrentUser != null)
+                    {
+                        litPersonName.Text = Authorization.CurrentUser.Person != null ? Authorization.CurrentUser.Person.LName + ", " + Authorization.CurrentUser.Person.FName : Authorization.CurrentUser.Email;
+                    }
+                    else
+                    {
+                        litPersonName.Text = "My Account";
+                    }
+                }
             }
         }
 
@@ -26,6 +40,12 @@ namespace LawAppWeb.Modules.TSC
         {
             NewCalendarLink.Attributes["class"] = ((Page)Page).PageName == "NewCalendar" ? "active" : "";
             SavedCalendarsLink.Attributes["class"] = ((Page)Page).PageName == "SavedCalendars" ? "active" : "";
+        }
+
+        protected void lnkLogout_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
     }
 }
