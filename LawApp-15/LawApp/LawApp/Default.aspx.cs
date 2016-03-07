@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using LawAppWeb.Utilities;
 
 namespace LawAppWeb
 {
@@ -12,15 +13,20 @@ namespace LawAppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            if (!HttpContext.Current.User.Identity.IsAuthenticated || this.GetCurrentUser() == null)
             {
-                Response.Redirect("~/Welcome");
+                Response.Redirect("~/Welcome", true);
             }
 
             if (IsPostBack)
             {
                 return;
             }
+
+            bool hasTSCAccess = this.IsCurrentUserAuthorized(LawAppWeb.Modules.TSC.PermissionHelper.AddNew);
+
+            pnlTSCLinks.Visible = hasTSCAccess;
+            pnlTSCNoAccess.Visible = !hasTSCAccess;
 
             LoadPersonInfo();
         }

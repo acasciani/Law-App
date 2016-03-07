@@ -188,6 +188,7 @@
     <Content Include="Account\Subscriptions\CancelSubscription.aspx" />
     <Content Include="Account\Subscriptions\CompleteSubscription.aspx" />
     <Content Include="Account\Subscriptions\Default.aspx" />
+    <Content Include="Account\Verify.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />
@@ -245,6 +246,7 @@
     <Content Include="Content\Modules\TSC\Print.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Emails\Account\RegisterSuccess.aspx" />
     <Content Include="Emails\Account\ResetPassword.aspx" />
     <Content Include="IPN\Notify.aspx" />
     <Content Include="Modules\TSC\Existing.aspx" />
@@ -465,6 +467,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Subscriptions\SubscriptionsCore.cs" />
+    <Compile Include="Account\Verify.aspx.cs">
+      <DependentUpon>Verify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Verify.aspx.designer.cs">
+      <DependentUpon>Verify.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\OpenAccessBaseApiController.cs" />
@@ -486,6 +495,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Account\RegisterSuccess.aspx.cs">
+      <DependentUpon>RegisterSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Account\RegisterSuccess.aspx.designer.cs">
+      <DependentUpon>RegisterSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Account\ResetPassword.aspx.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>

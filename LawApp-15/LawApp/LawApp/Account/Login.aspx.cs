@@ -26,5 +26,20 @@ namespace LawAppWeb.Account
         {
             Response.Redirect("~/");
         }
+
+        protected void loginForm_LoginError(object sender, EventArgs e)
+        {
+            TextBox txtUsername = loginForm.FindControl("UserName") as TextBox;
+
+            using (SignedWebUsersController swuc = new SignedWebUsersController())
+            {
+                SignedWebUser user = swuc.GetWhere(i => i.Email == txtUsername.Text).FirstOrDefault();
+
+                if (user != null && !user.AccountVerifyDate.HasValue && user.AccountVerifyToken.HasValue)
+                {
+                    AlertBox.AddAlert("This account requires verification. Please see your email for further instructions.", false, AlertType.Warning);
+                }
+            }
+        }
     }
 }

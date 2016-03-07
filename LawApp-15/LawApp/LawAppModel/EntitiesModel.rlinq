@@ -80,6 +80,15 @@
         <orm:field name="_modificationDate" property="ModificationDate" uniqueId="6723770d-a197-4cca-9ec2-c5e82e4dd419" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
+        <orm:field name="_imported" property="Imported" behavior="readwrite" uniqueId="b5158d1e-0869-4cf4-b9b0-6e6ed6eb951a" type="System.Boolean">
+          <orm:column name="Imported" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_accountVerifyToken" property="AccountVerifyToken" behavior="readwrite" uniqueId="f9c523fb-b9c3-4d0b-acfc-f87cde924204" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="AccountVerifyToken" sql-type="uniqueidentifier" nullable="true" length="0" scale="0" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_accountVerifyDate" property="AccountVerifyDate" behavior="readwrite" uniqueId="c945ee04-f723-42bb-ae10-7dc2347f6804" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="AccountVerifyDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
         <orm:field name="_person" property="Person" behavior="readwrite" uniqueId="511eea25-c3b5-46f7-b71c-a82cc60c7696" type="LawAppModel.Person" default-fetch-group="true">
           <orm:reference uniqueId="0daff697-c58c-48d1-9049-220975779c68" association-name="SignedWebUserHasPerson" />
         </orm:field>
@@ -499,7 +508,10 @@
         <orm:column name="CreationDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
         <orm:column name="ModificationDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         <orm:column name="PersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:constraint name="ref_SignedWebUser_Person" delete-action="dbdefaultrule">
+        <orm:column name="Imported" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="AccountVerifyToken" sql-type="uniqueidentifier" nullable="true" length="0" scale="0" ado-type="Guid" />
+        <orm:column name="AccountVerifyDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:constraint name="ref_SignedWebUser_Person" delete-action="dbdefaultrule" destination-table="Person">
           <orm:column name="PersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:constraint>
       </orm:table>
@@ -704,6 +716,9 @@
       <Property Id="dfea40de-c79c-4dbb-94a1-4094d1cc603f" name="UserPassword" label="UserPassword : String" fieldName="_userPassword" />
       <Property Id="f4461513-29ea-4ee2-a566-c52b3dddb85d" name="CreationDate" type="DateTime" label="CreationDate : DateTime" fieldName="_creationDate" />
       <Property Id="6723770d-a197-4cca-9ec2-c5e82e4dd419" name="ModificationDate" type="DateTime" label="ModificationDate : DateTime" nullable="true" fieldName="_modificationDate" />
+      <Property Id="b5158d1e-0869-4cf4-b9b0-6e6ed6eb951a" name="Imported" type="Boolean" label="Imported : Boolean" kind="Persistent" fieldName="_imported" />
+      <Property Id="f9c523fb-b9c3-4d0b-acfc-f87cde924204" name="AccountVerifyToken" type="Guid" label="AccountVerifyToken : Guid" nullable="true" kind="Persistent" fieldName="_accountVerifyToken" />
+      <Property Id="c945ee04-f723-42bb-ae10-7dc2347f6804" name="AccountVerifyDate" type="DateTime" label="AccountVerifyDate : DateTime" nullable="true" kind="Persistent" fieldName="_accountVerifyDate" />
       <AssociationTargets>
         <Association Id="0daff697-c58c-48d1-9049-220975779c68" SourceMultiplicity="ZeroOne" name="SignedWebUserHasPerson">
           <DomainClassMoniker name="/LawApp/Person" />

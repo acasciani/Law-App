@@ -130,13 +130,16 @@ namespace LawAppWeb.IPN
                         }
                     }
                 }
-
-                ServicePointManager.SecurityProtocol = originalProtocolType;
             }
             catch (Exception ex)
             {
                 ServicePointManager.SecurityProtocol = originalProtocolType;
                 ex.HandleException();
+            }
+
+            finally
+            {
+                ServicePointManager.SecurityProtocol = originalProtocolType;
             }
         }
     }

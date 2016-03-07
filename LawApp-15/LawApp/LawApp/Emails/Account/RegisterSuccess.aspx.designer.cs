@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LawAppWeb.Account {
+namespace LawAppWeb.Emails.Account {
     
     
-    public partial class Login {
+    public partial class RegisterSuccess {
         
         /// <summary>
-        /// AlertBox control.
+        /// litName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LawAppWeb.Controls.AlertBox AlertBox;
+        protected global::System.Web.UI.WebControls.Literal litName;
         
         /// <summary>
-        /// loginForm control.
+        /// lnkVerify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login loginForm;
+        protected global::System.Web.UI.WebControls.HyperLink lnkVerify;
     }
 }

@@ -7,7 +7,9 @@
         <h2>Login</h2>
     </div>
 
-    <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm">
+    <ui:AlertBox runat="server" ID="AlertBox" />
+
+    <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm" OnLoginError="loginForm_LoginError">
         <LayoutTemplate>
             <span class="text-danger">
                 <asp:Literal runat="server" ID="FailureText" />

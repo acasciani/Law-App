@@ -15,8 +15,13 @@
                     Timesharing Calendar
                 </div>
                 <div class="panel-body">
-                    <a href="/Modules/TSC/">Create a New Calendar</a><br />
-                    <a href="/Modules/TSC/Existing">Manage Saved Calendars</a>
+                    <asp:Panel runat="server" ID="pnlTSCLinks" Visible="false">
+                        <a href="/Modules/TSC/">Create a New Calendar</a><br />
+                        <a href="/Modules/TSC/Existing">Manage Saved Calendars</a>
+                    </asp:Panel>
+                    <asp:Panel runat="server" ID="pnlTSCNoAccess" Visible="false">
+                        <span class="text-danger">You do not have access to the Timesharing Calendar tool.</span> <a href="/Account/Subscriptions">Please click here to order a subscription.</a>
+                    </asp:Panel>
                 </div>
             </div>
         </div>

@@ -89,6 +89,45 @@ namespace LawAppModel
 			}
 		}
 		
+		private bool _imported;
+		public virtual bool Imported
+		{
+			get
+			{
+				return this._imported;
+			}
+			set
+			{
+				this._imported = value;
+			}
+		}
+		
+		private Guid? _accountVerifyToken;
+		public virtual Guid? AccountVerifyToken
+		{
+			get
+			{
+				return this._accountVerifyToken;
+			}
+			set
+			{
+				this._accountVerifyToken = value;
+			}
+		}
+		
+		private DateTime? _accountVerifyDate;
+		public virtual DateTime? AccountVerifyDate
+		{
+			get
+			{
+				return this._accountVerifyDate;
+			}
+			set
+			{
+				this._accountVerifyDate = value;
+			}
+		}
+		
 		private Person _person;
 		public virtual Person Person
 		{

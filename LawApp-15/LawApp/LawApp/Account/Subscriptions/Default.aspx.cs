@@ -76,47 +76,55 @@ namespace LawAppWeb.Account.Subscriptions
         {
             Guid token = Guid.NewGuid();
 
-            using (SubscriptionPlansController spc = new SubscriptionPlansController())
-            using (SubscriptionsController sc = new SubscriptionsController())
+            try
             {
-                SubscriptionPlan plan = spc.Get(subscriptionPlanID);
-
-                AdaptivePaymentsService service = new AdaptivePaymentsService();
-
-                RequestEnvelope envelope = new RequestEnvelope("en-US");
-
-                PayRequest req = new PayRequest(envelope, "PAY", new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(CancelSubscription, token))).AbsoluteUri, "USD", GetReceivers(plan.PlanCost), new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(FinishSubscription, token))).AbsoluteUri);
-                req.ipnNotificationUrl = ConfigurationManager.AppSettings["PayIPNEndpiont"].Trim();
-
-                PayResponse response = service.Pay(req);
-
-                if (response.error.Count() == 0)
+                using (SubscriptionPlansController spc = new SubscriptionPlansController())
+                using (SubscriptionsController sc = new SubscriptionsController())
                 {
-                    // we have a response, now let's add it to the database
+                    SubscriptionPlan plan = spc.Get(subscriptionPlanID);
 
+                    AdaptivePaymentsService service = new AdaptivePaymentsService();
 
-                    DateTime currBillDate = DateTime.Now;
+                    RequestEnvelope envelope = new RequestEnvelope("en-US");
 
-                    Subscription subscription = new Subscription()
+                    PayRequest req = new PayRequest(envelope, "PAY", new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(CancelSubscription, token))).AbsoluteUri, "USD", GetReceivers(plan.PlanCost), new System.Uri(Page.Request.Url, ResolveClientUrl(string.Format(FinishSubscription, token))).AbsoluteUri);
+                    req.feesPayer = "EACHRECEIVER";//each receiver pays fees
+                    req.ipnNotificationUrl = ConfigurationManager.AppSettings["PayIPNEndpiont"].Trim();
+
+                    PayResponse response = service.Pay(req);
+
+                    if (response.error.Count() == 0)
                     {
-                        Active = false,
-                        NextBillDate = SubscriptionsCore.GetNextBillingDate(plan, currBillDate),
-                        CreateDate = currBillDate,
-                        SubscriptionPlanID = subscriptionPlanID,
-                        UserID = userID,
-                        PayKey = response.payKey,
-                        Token = token
-                    };
+                        // we have a response, now let's add it to the database
 
-                    sc.AddNew(subscription);
 
-                    Response.Redirect(string.Format("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey={0}", response.payKey));
+                        DateTime currBillDate = DateTime.Now;
+
+                        Subscription subscription = new Subscription()
+                        {
+                            Active = false,
+                            NextBillDate = SubscriptionsCore.GetNextBillingDate(plan, currBillDate),
+                            CreateDate = currBillDate,
+                            SubscriptionPlanID = subscriptionPlanID,
+                            UserID = userID,
+                            PayKey = response.payKey,
+                            Token = token
+                        };
+
+                        sc.AddNew(subscription);
+
+                        Response.Redirect(string.Format("https://www.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey={0}", response.payKey));
+                    }
+                    else
+                    {
+                        throw new Exception("Error occurred generating preapproval key: " +  string.Join(", ", response.error));
+                    }
                 }
-                else
-                {
-                    throw new Exception("Error occurred generating preapproval key");
-                }
 
+            }
+            catch (Exception ex)
+            {
+                ex.HandleException();
             }
         }
 
@@ -124,18 +132,18 @@ namespace LawAppWeb.Account.Subscriptions
         {
             List<Receiver> receivers = new List<Receiver>();
 
-            // owner 65 %
+            // developer 35%
             receivers.Add(new Receiver(totalAmount)
             {
                 primary = true,
                 email = "lawapp15@gmail.com"
             });
 
-            // developer 35%
-            receivers.Add(new Receiver(totalAmount * .35M)
+            // owner 65 %
+            receivers.Add(new Receiver(totalAmount * .65M)
             {
                 primary = false,
-                email = "lawapp15-facilitator@gmail.com"
+                email = "leitman@gmail.com"
             });
 
             return new ReceiverList(receivers);

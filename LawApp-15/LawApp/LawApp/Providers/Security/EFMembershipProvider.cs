@@ -337,7 +337,7 @@ namespace LawAppProviders.Security
 
         public override bool ValidateUser(string username, string password)
         {
-            SignedWebUser user = GetUser(u => (u.Email == username && u.UserPassword == EncodePassword(password)));
+            SignedWebUser user = GetUser(u => (u.Email == username && u.UserPassword == EncodePassword(password)) && u.AccountVerifyDate.HasValue);
             return user != null;
         }
 

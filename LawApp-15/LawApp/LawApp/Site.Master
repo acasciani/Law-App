@@ -51,7 +51,7 @@
                                     <li class="divider">
                                     </li>
                                     <li>
-                                        <asp:LinkButton runat="server" ID="lnkLogout" OnClick="lnkLogout_Click">Logout</asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="lnkLogout" OnClick="lnkLogout_Click" CausesValidation="false">Logout</asp:LinkButton>
                                     </li>
                                 </ul>
                             </li>

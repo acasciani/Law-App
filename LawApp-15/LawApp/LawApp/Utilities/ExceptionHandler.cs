@@ -79,6 +79,7 @@ namespace LawAppWeb
             catch (Exception ex2)
             {
                 // gracefully fail
+                throw new Exception("second expcetion fail");
             }
         }
     }
