@@ -15,6 +15,7 @@ namespace LawAppWeb.Modules.TSC
     {
 
         private List<Calendar> calendars = new List<Calendar>();
+        public int CalendarYear { get; private set; }
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -27,10 +28,34 @@ namespace LawAppWeb.Modules.TSC
                 return;
             }
 
+            int calendarID;
+            if (int.TryParse(Request.QueryString["cid"], out calendarID))
+            {
+                // existing, make sure this user is scoped otherwise bounce to create new calendar
+                using (TSC_CalendarsController tcc = new TSC_CalendarsController())
+                {
+                    int userId = this.GetCurrentUser().WebUserId;
+                    var calendars = tcc.GetWhere(i => i.CalendarId == calendarID && i.WebUserId == userId);
+                    if (calendars.Count() == 0)
+                    {
+                        Response.Redirect("Default.aspx", true);
+                        return;
+                    }
+                    else
+                    {
+                        CalendarYear = (int)calendars.First().Year;
+                    }
+                }
+            }
+            else
+            {
+                CalendarYear = DateTime.Today.Year;
+            }
+
             for (int i = 1; i <= 12; i++)
             {
                 Calendar control = (Calendar)LoadControl("~/Source/Controls/Calendar.ascx");
-                control.MonthReference = new DateTime(DateTime.Today.Year, i, 1);
+                control.MonthReference = new DateTime(CalendarYear, i, 1);
                 calendars.Add(control);
                 CalendarsHolder.Controls.Add(control);
             }

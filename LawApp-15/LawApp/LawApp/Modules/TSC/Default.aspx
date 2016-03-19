@@ -390,7 +390,7 @@
                     </div>
                 </div>
 
-                <div class="row clearfix text-center visible-print-block"><strong>2015 Time-sharing Calendar</strong></div>
+                <div class="row clearfix text-center visible-print-block"><strong><%=CalendarYear %> Time-sharing Calendar</strong></div>
                 <div class="row clearfix text-center visible-print-block margin-bottom-10"><span class="ParentBLabel">Parent B</span> has <span class="tsc-calendar-days-selected-count">0</span> nights (<span class="tsc-calendar-days-selected-percentage">0</span>%) of time-sharing.</div>
     
                 <div class="row clearfix" id="CalendarsHolder" runat="server"></div>
