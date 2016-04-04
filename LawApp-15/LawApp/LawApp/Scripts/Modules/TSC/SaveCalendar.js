@@ -107,18 +107,23 @@ function saveUniqueDays() {
     elements('.day-checked:not(.holiday), .holiday:not(.day-checked)');
 
     function elements(selector) {
-        var allUniqueDays = []; // this allows us to pre-stage so we can overwrite duplicates
+        var allUniqueDays = ""; // this allows us to pre-stage so we can overwrite duplicates
 
         _.forEach($(selector), function (day) {
             var obj = {};
             var element = $(day);
             var doy = element.data("doy");
-            obj.Day = doy;
-            obj.DayClass = element.attr('class');
-            allUniqueDays.push(obj);
+
+            if (allUniqueDays != '') {
+                allUniqueDays += ',';
+            }
+
+            allUniqueDays += doy + '|' + element.attr('class');
         });
 
-        stageObject('UniqueDays', allUniqueDays);
+        $('#hdnUniqueDays').val(allUniqueDays);
+
+        //stageObject('UniqueDays', allUniqueDays);
     }
 }
 

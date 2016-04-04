@@ -39,4 +39,8 @@
         </div>
     </div>
 
+    <div>
+        <p>For technical support, please email: <a href="mailto:lawapp15+Support@gmail.com">lawapp15+Support@gmail.com</a></p>
+    </div>
+
 </asp:Content>

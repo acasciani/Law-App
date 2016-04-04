@@ -113,6 +113,27 @@ namespace LawAppWeb.Modules.TSC
             HttpCookie cookie = Request.Cookies["StagedCalendar"];
             SaveObject input = (SaveObject)Newtonsoft.Json.JsonConvert.DeserializeObject(HttpUtility.UrlDecode(cookie.Value), typeof(SaveObject));
 
+            // do special hack for unique days using hidden input field
+            string uniqueDays = hdnUniqueDays.Value.Trim();
+            if (!string.IsNullOrWhiteSpace(uniqueDays))
+            {
+                if(input.UniqueDays == null){
+                    input.UniqueDays = new List<UniqueDay>();
+                }
+
+                // it's a csv then a pipe for doy/class
+                string[] days = uniqueDays.Split(',');
+                foreach (string day in days)
+                {
+                    string[] components = day.Trim().Split('|');
+                    input.UniqueDays.Add(new UniqueDay()
+                    {
+                        Day = short.Parse(components[0].Trim()),
+                        DayClass = components[1].Trim()
+                    });
+                }
+            }
+
             // Save Case information
             calendar.CaseName = input.CaseInformation == null ? null : input.CaseInformation.CaseName;
             calendar.CaseNumber = input.CaseInformation == null ? null : input.CaseInformation.CaseNumber;

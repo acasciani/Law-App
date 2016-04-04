@@ -5,6 +5,8 @@
 <asp:Content ID="TSCProduct_Page" ContentPlaceHolderID="TSCProduct_Holder" runat="server">
     <div class="hidden-print" id="ClientSideAlerts"></div>
 
+    <asp:HiddenField runat="server" ID="hdnUniqueDays" ClientIDMode="Static" />
+
     <div class="col-md-4 collapsed hidden-print" id="drawer">
         <div class="row clearfix">
             <div class="col-sm-12 days-selected">
@@ -355,11 +357,13 @@
                     <div class="panel-body" id="demo-videos">
                         <h4>Instruction Videos</h4>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="video" data-src="http://www.youtube.com/embed/gU6hSv14J-Y" data-title="Timesharing Calendar Demo">Demo</a></li>
+                            <li><a href="#" class="video" data-src="https://www.youtube.com/embed/954JJRlg1io" data-title="Timesharing Calendar Demo">Demo</a></li>
                         </ul>
                         <hr />
-                        <h4>Help Topics</h4>
-                        <ul class="list-unstyled">
+                        <p>For technical support, please email: <a href="mailto:lawapp15+TSC-Support@gmail.com">lawapp15+TSC-Support@gmail.com</a></p>
+                        <p>In your email, please provide instructions on how to duplicate any issues. Please also provide your login email address.</p>
+                        <h4 runat="server" visible="false">Help Topics</h4>
+                        <ul runat="server" visible="false" class="list-unstyled">
                         </ul>
                     </div>
                 </div>
