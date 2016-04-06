@@ -12,8 +12,8 @@ namespace LawAppWeb.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = HttpUtility.UrlDecode(Request.QueryString["email"] ?? "");
-            string tokenIn = HttpUtility.UrlDecode(Request.QueryString["token"] ?? "");
+            string email = Request.QueryString["email"] ?? "";
+            string tokenIn = Request.QueryString["token"] ?? "";
 
             Guid token;
             if (!Guid.TryParse(tokenIn, out token))
