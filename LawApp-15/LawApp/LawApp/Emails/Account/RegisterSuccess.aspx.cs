@@ -11,8 +11,8 @@ namespace LawAppWeb.Emails.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = HttpUtility.UrlDecode(Request.Form.Get("email"));
-            string token = HttpUtility.UrlDecode(Request.Form.Get("token"));
+            string email = Request.Form.Get("email");
+            string token = Request.Form.Get("token");
 
             litName.Text = email;
             lnkVerify.NavigateUrl = string.Format(lnkVerify.NavigateUrl, HttpUtility.UrlEncode(email), HttpUtility.UrlEncode(token));

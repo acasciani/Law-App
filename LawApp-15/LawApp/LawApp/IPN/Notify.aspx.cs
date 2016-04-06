@@ -1,4 +1,5 @@
 ﻿using LawAppModel;
+using LawAppWeb.Emails;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -66,6 +67,8 @@ namespace LawAppWeb.IPN
                             {
                                 FetchStrategy fetch = new FetchStrategy();
                                 fetch.LoadWith<Subscription>(i => i.SubscriptionPlan);
+                                fetch.LoadWith<Subscription>(i => i.SignedWebUser);
+                                fetch.LoadWith<SignedWebUser>(i => i.Person);
 
                                 Subscription subscription = sc.GetWhere(i => i.PayKey == ipn.pay_key, fetch).First();
                                 PaymentLog log = new PaymentLog()
@@ -80,6 +83,8 @@ namespace LawAppWeb.IPN
                                 la.Add(log);
                                 la.SaveChanges();
 
+                                string emailTemplate;
+
                                 switch (ipn.status)
                                 {
                                     case AdaptivePaymentsPayIPN.Status.COMPLETED:
@@ -88,6 +93,7 @@ namespace LawAppWeb.IPN
                                         subscription.EffectiveTo = LawAppWeb.Account.Subscriptions.SubscriptionsCore.GetEffectiveEndDate(subscription.SubscriptionPlan, subscription.EffectiveFrom.Value);
                                         subscription.InActiveDate = null;
                                         subscription.ModifyDate = DateTime.Now;
+                                        emailTemplate = "SubscriptionCompleted.aspx";
                                         break;
 
                                     default:
@@ -96,10 +102,31 @@ namespace LawAppWeb.IPN
                                         subscription.EffectiveTo = null;
                                         subscription.InActiveDate = DateTime.Now;
                                         subscription.ModifyDate = DateTime.Now;
+                                        emailTemplate = "SubscriptionFailed.aspx";
                                         break;
                                 }
 
                                 sc.Update(subscription);
+
+                                // send email notification
+                                string email = subscription.SignedWebUser.Email.Trim();
+                                string name = email;
+
+                                if(subscription.SignedWebUser.Person != null){
+                                    string assembleName = ((subscription.SignedWebUser.Person.FName ?? "").Trim() + " " + (subscription.SignedWebUser.Person.LName ?? "").Trim()).Trim();
+                                    name = string.IsNullOrWhiteSpace(assembleName) ? name : assembleName;
+                                }
+
+                                Dictionary<string, string> recipients = new Dictionary<string, string>();
+                                recipients.Add(email, name);
+
+                                Dictionary<string, string> variables = new Dictionary<string, string>();
+                                variables.Add("name", name);
+                                variables.Add("product", subscription.SubscriptionPlan.PlanName);
+                                variables.Add("effectivefrom", (subscription.EffectiveFrom.HasValue ? subscription.EffectiveFrom.Value : DateTime.MinValue).ToString());
+                                variables.Add("effectiveto", (subscription.EffectiveTo.HasValue ? subscription.EffectiveTo.Value : DateTime.MinValue).ToString());
+
+                                EmailHandler.SendEmail("~/Emails/Account/" + emailTemplate, true, "Account Support", "lawapp15+Support@gmail.com", recipients, variables);
                             }
                         }
                         else if (strResponse == "INVALID")

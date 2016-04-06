@@ -68,7 +68,7 @@ namespace LawAppWeb.Account
                     variables.Add("email", txtUsername.Text.Trim());
                     variables.Add("token", verifyToken.ToString());
 
-                    EmailHandler.SendEmail("~/Emails/Account/RegisterSuccess.aspx", true, "Account Support", "support@mylawtools.com", recipients, variables);
+                    EmailHandler.SendEmail("~/Emails/Account/RegisterSuccess.aspx", true, "Account Support", "lawapp15@gmail.com", recipients, variables);
 
                     AlertBox.AddAlert(string.Format("Your account must be verified before logging in. An email was sent to {0} with instructions on how to verify your new account. The verification process will expire in 24 hours.", txtUsername.Text.Trim()), false, AlertType.Warning);
                     txtPassword.Text = "";

@@ -61,8 +61,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PayPal, Version=1.7.2.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
@@ -248,6 +248,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Emails\Account\RegisterSuccess.aspx" />
     <Content Include="Emails\Account\ResetPassword.aspx" />
+    <Content Include="Emails\Account\SubscriptionCompleted.aspx" />
+    <Content Include="Emails\Account\SubscriptionFailed.aspx" />
     <Content Include="IPN\Notify.aspx" />
     <Content Include="Modules\TSC\Existing.aspx" />
     <Content Include="Content\front\libs\ionicons\fonts\ionicons.eot" />
@@ -509,6 +511,20 @@
     </Compile>
     <Compile Include="Emails\Account\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Account\SubscriptionCompleted.aspx.cs">
+      <DependentUpon>SubscriptionCompleted.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Account\SubscriptionCompleted.aspx.designer.cs">
+      <DependentUpon>SubscriptionCompleted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Emails\Account\SubscriptionFailed.aspx.cs">
+      <DependentUpon>SubscriptionFailed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Emails\Account\SubscriptionFailed.aspx.designer.cs">
+      <DependentUpon>SubscriptionFailed.aspx</DependentUpon>
     </Compile>
     <Compile Include="Emails\Email.Master.cs">
       <DependentUpon>Email.Master</DependentUpon>

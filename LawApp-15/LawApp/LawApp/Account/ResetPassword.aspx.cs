@@ -61,7 +61,7 @@ namespace LawAppWeb.Account
 
                     //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                    EmailHandler.SendEmail("~/Emails/Account/ResetPassword.aspx", true, "Account Support", "support@mylawtools.com", recipients, variables);
+                    EmailHandler.SendEmail("~/Emails/Account/ResetPassword.aspx", true, "Account Support", "lawapp15@gmail.com", recipients, variables);
 
                     AlertBox.AddAlert("Successfully reset your password. Please check your email with instructions on how to continue.");
                 }
