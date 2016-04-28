@@ -128,6 +128,19 @@ namespace LawAppModel
 			}
 		}
 		
+		private DateTime? _lastLogin;
+		public virtual DateTime? LastLogin
+		{
+			get
+			{
+				return this._lastLogin;
+			}
+			set
+			{
+				this._lastLogin = value;
+			}
+		}
+		
 		private Person _person;
 		public virtual Person Person
 		{

@@ -41,5 +41,41 @@ namespace LawAppWeb.Account
                 }
             }
         }
+
+        protected void loginForm_Authenticate(object sender, AuthenticateEventArgs e)
+        {
+            System.Web.UI.WebControls.Login loginControl = (System.Web.UI.WebControls.Login)sender;
+
+            try
+            {
+                bool validates = Membership.ValidateUser(loginControl.UserName, loginControl.Password);
+
+                e.Authenticated = validates;
+
+                if (validates)
+                {
+                    try
+                    {
+                        int userID = (int)Membership.GetUser(loginControl.UserName).ProviderUserKey;
+                        // update last login field
+                        using (SignedWebUsersController swuc = new SignedWebUsersController())
+                        {
+                            SignedWebUser user = swuc.Get(userID);
+                            user.LastLogin = DateTime.Now.ToUniversalTime();
+                            swuc.Update(user);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.HandleException(ExceptionPriority.Low);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                e.Authenticated = false;
+                ex.HandleException(ExceptionPriority.Urgent);
+            }
+        }
     }
 }

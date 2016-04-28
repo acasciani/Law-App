@@ -104,7 +104,7 @@ function saveBreaks() {
 function saveUniqueDays() {
     // default css classes: CalendarDay [dayofweek] Day[day of year]
     // want to select all that are day-checked or holiday (more for future... just add them here)
-    elements('.day-checked:not(.holiday), .holiday:not(.day-checked)');
+    elements('.day-checked');
 
     function elements(selector) {
         var allUniqueDays = ""; // this allows us to pre-stage so we can overwrite duplicates

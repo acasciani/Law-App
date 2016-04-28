@@ -9,7 +9,7 @@
 
     <ui:AlertBox runat="server" ID="AlertBox" />
 
-    <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm" OnLoginError="loginForm_LoginError">
+    <asp:Login runat="server" ViewStateMode="Disabled" RenderOuterTable="false" OnLoggedIn="loginForm_LoggedIn" ID="loginForm" OnLoginError="loginForm_LoginError" OnAuthenticate="loginForm_Authenticate">
         <LayoutTemplate>
             <span class="text-danger">
                 <asp:Literal runat="server" ID="FailureText" />

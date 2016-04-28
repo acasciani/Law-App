@@ -89,6 +89,9 @@
         <orm:field name="_accountVerifyDate" property="AccountVerifyDate" behavior="readwrite" uniqueId="c945ee04-f723-42bb-ae10-7dc2347f6804" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="AccountVerifyDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
+        <orm:field name="_lastLogin" property="LastLogin" behavior="readwrite" uniqueId="674d3f62-fb40-460d-86fb-717f7de96fa1" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="LastLogin" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
         <orm:field name="_person" property="Person" behavior="readwrite" uniqueId="511eea25-c3b5-46f7-b71c-a82cc60c7696" type="LawAppModel.Person" default-fetch-group="true">
           <orm:reference uniqueId="0daff697-c58c-48d1-9049-220975779c68" association-name="SignedWebUserHasPerson" />
         </orm:field>
@@ -261,7 +264,7 @@
         <orm:field name="_individualOvernightId" property="IndividualOvernightId" uniqueId="b3a16129-4172-49d5-a3c0-4d69af2bbcd9" type="System.Int64">
           <orm:column name="IndividualOvernightId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
         </orm:field>
-        <orm:field name="_dayOfWeek" property="DayOfWeek" uniqueId="ac6c76db-d75e-440d-bfef-c187d367be19" type="LawAppModel.DayOfWeek, LawAppModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <orm:field name="_dayOfWeek" property="DayOfWeek" uniqueId="ac6c76db-d75e-440d-bfef-c187d367be19" type="LawAppModel.DayOfWeek">
           <orm:column name="DayOfWeek" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
         </orm:field>
         <orm:field name="_everyActive" property="EveryActive" uniqueId="1db771f5-dc8b-440a-bba4-f7672da2334b" type="System.Boolean">
@@ -293,7 +296,7 @@
         <orm:field name="_breakId" property="BreakId" uniqueId="2cfe3e3a-eb30-406e-a9c3-1510e0a5a32f" type="System.Int64">
           <orm:column name="BreakId" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.BigIntConverter" backend-calculated="true" ado-type="Int64" />
         </orm:field>
-        <orm:field name="_break" property="Break" uniqueId="7ced1fac-e741-4f6e-87ec-0e4e934fd754" type="LawAppModel.HolidayBreak, LawAppModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <orm:field name="_break" property="Break" uniqueId="7ced1fac-e741-4f6e-87ec-0e4e934fd754" type="LawAppModel.HolidayBreak">
           <orm:column name="brak" sql-type="int" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
         </orm:field>
         <orm:field name="_firstNight" property="FirstNight" uniqueId="d624dde9-07fa-491f-b1a9-c254e4b56d28" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
@@ -511,6 +514,7 @@
         <orm:column name="Imported" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         <orm:column name="AccountVerifyToken" sql-type="uniqueidentifier" nullable="true" length="0" scale="0" ado-type="Guid" />
         <orm:column name="AccountVerifyDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="LastLogin" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         <orm:constraint name="ref_SignedWebUser_Person" delete-action="dbdefaultrule" destination-table="Person">
           <orm:column name="PersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:constraint>
@@ -719,6 +723,7 @@
       <Property Id="b5158d1e-0869-4cf4-b9b0-6e6ed6eb951a" name="Imported" type="Boolean" label="Imported : Boolean" kind="Persistent" fieldName="_imported" />
       <Property Id="f9c523fb-b9c3-4d0b-acfc-f87cde924204" name="AccountVerifyToken" type="Guid" label="AccountVerifyToken : Guid" nullable="true" kind="Persistent" fieldName="_accountVerifyToken" />
       <Property Id="c945ee04-f723-42bb-ae10-7dc2347f6804" name="AccountVerifyDate" type="DateTime" label="AccountVerifyDate : DateTime" nullable="true" kind="Persistent" fieldName="_accountVerifyDate" />
+      <Property Id="674d3f62-fb40-460d-86fb-717f7de96fa1" name="LastLogin" type="DateTime" label="LastLogin : DateTime" nullable="true" kind="Persistent" fieldName="_lastLogin" />
       <AssociationTargets>
         <Association Id="0daff697-c58c-48d1-9049-220975779c68" SourceMultiplicity="ZeroOne" name="SignedWebUserHasPerson">
           <DomainClassMoniker name="/LawApp/Person" />
