@@ -15,7 +15,12 @@ namespace LawAppWeb.Modules.TSC
     {
 
         private List<Calendar> calendars = new List<Calendar>();
-        public int CalendarYear { get; private set; }
+        private int _CalendarYear { get; set; }
+
+        public int CalendarYear {
+            get { return ViewState["CalendarYear"] as int? ?? DateTime.Today.Year; }
+            private set { ViewState["CalendarYear"] = value; } 
+        }
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -43,19 +48,28 @@ namespace LawAppWeb.Modules.TSC
                     }
                     else
                     {
-                        CalendarYear = (int)calendars.First().Year;
+                        _CalendarYear = (int)calendars.First().Year;
                     }
                 }
             }
             else
             {
-                CalendarYear = DateTime.Today.Year;
+                // try create new with year
+                int year;
+                if (int.TryParse(Request.QueryString["year"], out year))
+                {
+                    _CalendarYear = year;
+                }
+                else
+                {
+                    _CalendarYear = DateTime.Today.Year;
+                }
             }
 
             for (int i = 1; i <= 12; i++)
             {
                 Calendar control = (Calendar)LoadControl("~/Source/Controls/Calendar.ascx");
-                control.MonthReference = new DateTime(CalendarYear, i, 1);
+                control.MonthReference = new DateTime(_CalendarYear, i, 1);
                 calendars.Add(control);
                 CalendarsHolder.Controls.Add(control);
             }
@@ -65,6 +79,8 @@ namespace LawAppWeb.Modules.TSC
         {
             if (!IsPostBack)
             {
+                CalendarYear = _CalendarYear;
+
                 if (!Page.ClientScript.IsClientScriptIncludeRegistered(this.GetType(), "TSC_Main"))
                 {
                     Page.ClientScript.RegisterClientScriptInclude(this.GetType(), "TSC_Main", "../../Scripts/Modules/TSC/Main.js");
@@ -94,7 +110,7 @@ namespace LawAppWeb.Modules.TSC
             if(calendar == null){
                 calendar = new TSC_Calendar()
                 {
-                    Year = Convert.ToInt16(DateTime.Today.Year),
+                    Year = Convert.ToInt16(CalendarYear),
                     CreateDate = DateTime.Now,
                     WebUserId = this.GetCurrentUser().WebUserId
                 };
@@ -288,6 +304,21 @@ namespace LawAppWeb.Modules.TSC
             existing.DayClass = input.DayClass;
             existing.WebUserId = this.GetCurrentUser().WebUserId;
             return existing;
+        }
+
+        public System.Collections.IEnumerable rptCalendarYears_GetData()
+        {
+            int startYear = DateTime.Today.Year - 1;
+            int endYear = DateTime.Today.Year + 2;
+
+            List<int> years = new List<int>();
+
+            for (int i = startYear; i <= endYear; i++)
+            {
+                years.Add(i);
+            }
+
+            return years.OrderBy(i => i).AsQueryable();
         }
     }
 }

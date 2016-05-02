@@ -3,7 +3,22 @@
 <%@ Register TagPrefix="ui" Assembly="LawApp" Namespace="LawAppWeb.Controls" %>
 
 <asp:Content ID="TSCProduct_Page" ContentPlaceHolderID="TSCProduct_Holder" runat="server">
+    <script type="text/javascript">
+        var currentYear = '<%= CalendarYear %>';
+    </script>
+
     <div class="hidden-print" id="ClientSideAlerts"></div>
+
+    <div>
+        <ol class="breadcrumb" style="text-align: center">
+            <asp:Repeater runat="server" ID="rptCalendarYears" SelectMethod="rptCalendarYears_GetData">
+                <ItemTemplate>
+                    <li runat="server" visible="<%#(int)Container.DataItem == CalendarYear %>" class="active"><%#(int)Container.DataItem %></li>
+                    <li runat="server" visible="<%#(int)Container.DataItem != CalendarYear %>"><a href="Default.aspx?year=<%#(int)Container.DataItem %>"><%#(int)Container.DataItem %></a></li>
+                </ItemTemplate>
+            </asp:Repeater>
+        </ol>
+    </div>
 
     <asp:HiddenField runat="server" ID="hdnUniqueDays" ClientIDMode="Static" />
 

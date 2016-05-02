@@ -1,5 +1,15 @@
-﻿Date.prototype.getDOY = function () {
-    var onejan = new Date(this.getFullYear(), 0, 1);
+﻿Date.prototype.getCalendarYear = function () {
+    var year = currentYear || this.getFullYear();
+
+    if (isNaN(year)) {
+        return this.getFullYear();
+    } else {
+        return parseInt(year);
+    }
+}
+
+Date.prototype.getDOY = function () {
+    var onejan = new Date(this.getCalendarYear(), 0, 1);
     return Math.ceil((this - onejan) / 86400000) + 1;
 }
 
@@ -481,7 +491,7 @@ function breakOvernightCheckboxes() {
  * Holidays toolbar logic
  */
 function getHolidaysFromServer() {
-    var inyear = (new Date()).getFullYear();
+    var inyear = (new Date()).getCalendarYear();
     $.ajax({
         url: '/api/Holidays?inyear=' + inyear
     }).done(function (data) {
@@ -813,6 +823,7 @@ function LoadIndividualOvernights(data) {
 
 function LoadFederalHolidays(data) {
     $('#criteria-holidays .checkbox-holidays input[type=checkbox]').prop('checked', data.DisplayHolidays || false);
+    $('#criteria-holidays .checkbox-holidays input[type=checkbox]').trigger('change');
 }
 
 function LoadBreaks(data) {
