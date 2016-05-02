@@ -805,8 +805,8 @@ function LoadIndividualOvernights(data) {
         var input2 = block.find('input[type=checkbox][value=2]');
         input1.prop('checked', night.EveryActive || false);
         input2.prop('checked', night.EveryOtherActive || false);
-        if (night.EveryActive === true) input1.trigger('change');
-        if (night.EveryOtherActive === true) input2.trigger('change');
+        //if (night.EveryActive === true) input1.trigger('change'); // we let the unique days do its work
+        //if (night.EveryOtherActive === true) input2.trigger('change'); // we let the unique days do its work
         if (night.StartDate) $(block.data('start-date')).parent('.input-group.date').datepicker('setDate', $.format.date(night.StartDate, 'MM/dd/yyyy'));
     });
 }
