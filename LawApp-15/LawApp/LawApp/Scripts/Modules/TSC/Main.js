@@ -803,8 +803,9 @@ function LoadCaseInformation(data) {
 function LoadWeekendOvernights(data) {
     var input1 = $('#criteria-weekend-overnights .checkbox-weekend input[type=checkbox]');
     input1.prop('checked', data.WeekendsActive || false);
-    if(data.WeekendsActive === true) input1.trigger('change');
-    if(data.WeekendsStart) $('#criteria-weekend-overnights .WeekendDateStart').parent('.input-group.date').datepicker('setDate', $.format.date(data.WeekendsStart, 'MM/dd/yyyy'));
+    //if(data.WeekendsActive === true) input1.trigger('change'); // same thing as individual overnights, let unique days popualte checks
+    //if(data.WeekendsStart) $('#criteria-weekend-overnights .WeekendDateStart').parent('.input-group.date').datepicker('setDate', $.format.date(data.WeekendsStart, 'MM/dd/yyyy'));
+    if(data.WeekendsStart) $('#criteria-weekend-overnights .WeekendDateStart').val($.format.date(data.WeekendsStart, 'MM/dd/yyyy'));
 }
 
 function LoadIndividualOvernights(data) {
@@ -849,10 +850,10 @@ function LoadBreaks(data) {
         input5.prop('checked', breakk.ClearExisting || false);
 
         if (breakk.ShowBreak) input1.trigger('change');
-        if (breakk.ParentBFirst) input2.trigger('change');
-        if (breakk.ParentBSecond) input3.trigger('change');
-        if (breakk.ParentBFull) input4.trigger('change');
-        if (breakk.ClearExisting) input5.trigger('change');
+        //if (breakk.ParentBFirst) input2.trigger('change'); // same thing as individual overnights, let the unique days data check mark them
+        //if (breakk.ParentBSecond) input3.trigger('change');
+        //if (breakk.ParentBFull) input4.trigger('change');
+        //if (breakk.ClearExisting) input5.trigger('change');
     });
 }
 

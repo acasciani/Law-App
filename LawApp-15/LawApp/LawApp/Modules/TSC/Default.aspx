@@ -9,7 +9,7 @@
 
     <div class="hidden-print" id="ClientSideAlerts"></div>
 
-    <div>
+    <div class="hidden-print">
         <ol class="breadcrumb" style="text-align: center">
             <asp:Repeater runat="server" ID="rptCalendarYears" SelectMethod="rptCalendarYears_GetData">
                 <ItemTemplate>
